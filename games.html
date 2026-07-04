@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Zone | 50+ Free Games</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #121212; color: #ffffff; padding: 20px; }
+        header { text-align: center; margin-bottom: 30px; }
+        h1 { color: #ff4757; font-size: 2.5rem; margin-bottom: 10px; }
+        
+        /* Search Bar */
+        .search-container { max-width: 500px; margin: 0 auto 30px auto; }
+        #searchBar { width: 100%; padding: 12px 20px; background: #1e1e1e; border: 2px solid #333; border-radius: 25px; color: #fff; font-size: 1rem; outline: none; transition: 0.3s; }
+        #searchBar:focus { border-color: #ff4757; }
+
+        /* Games Grid */
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .game-card { background: #1e1e1e; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: transform 0.3s, border-color: 0.3s; border: 2px solid transparent; cursor: pointer; text-align: center; display: flex; flex-direction: column; }
+        .game-card:hover { transform: translateY(-5px); border-color: #ff4757; }
+        .game-card img { width: 100%; height: 140px; object-fit: cover; background: #2c2c2c; }
+        .game-info { padding: 12px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .game-title { font-size: 1rem; font-weight: 600; margin-bottom: 8px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+        .play-btn { background: #ff4757; color: white; border: none; padding: 8px 15px; border-radius: 6px; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 0.9rem; }
+        .play-btn:hover { background: #e84118; }
+
+        /* Game Modal/Player */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { position: relative; width: 90%; max-width: 800px; height: 80%; background: #000; border-radius: 10px; overflow: hidden; }
+        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 30px; color: white; cursor: pointer; z-index: 1001; font-weight: bold; }
+        .close-btn:hover { color: #ff4757; }
+        iframe { width: 100%; height: 100%; border: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🎮 ABYU GAME ZONE 🎮</h1>
+        <p>Play 50+ Awesome Free HTML5 Games Instantly!</p>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search your favorite game..." onkeyup="filterGames()">
+    </div>
+
+    <!-- Games Grid -->
+    <div class="games-grid" id="gamesGrid">
+        <!-- Games will be injected here via JavaScript -->
+    </div>
+
+    <!-- Game Player Modal -->
+    <div class="modal" id="gameModal">
+        <span class="close-btn" onclick="closeGame()">&times;</span>
+        <div class="modal-content">
+            <iframe id="gameFrame" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        // 50+ Top HTML5 Games Data (Legally embeddable via Cloudflare/GameDistribution/Famobi clones)
+        const gamesList = [
+            { name: "8 Ball Billiards Classic", id: "8-ball-billiards-classic" },
+            { name: "Subway Surfers Clone", id: "subway-surfers" },
+            { name: "Moto X3M Bike Race", id: "moto-x3m" },
+            { name: "2048", id: "2048" },
+            { name: "Flappy Bird", id: "flappy-bird" },
+            { name: "Table Tennis Pro", id: "table-tennis-world-tour" },
+            { name: "Archery World Tour", id: "archery-world-tour" },
+            { name: "Bubble Shooter", id: "bubble-shooter" },
+            { name: "Knife Rain", id: "knife-rain" },
+            { name: "Classic Snake", id: "snake" },
+            { name: "Tetris Arcade", id: "tetris" },
+            { name: "Ludo Legend", id: "ludo-legend" },
+            { name: "Chess Classic", id: "master-chess" },
+            { name: "Penalty Challenge", id: "penalty-challenge" },
+            { name: "Drift Boss", id: "drift-boss" },
+            { name: "Crossy Road", id: "crossy-road" },
+            { name: "Fruit Ninja Classic", id: "fruit-ninja" },
+            { name: "Pac-Man Retro", id: "pacman" },
+            { name: "Geometry Dash Neon", id: "geometry-dash-neon" },
+            { name: "Candy Riddle", id: "candy-riddles" },
+            { name: "Block Champ", id: "block-champ" },
+            { name: "Solitaire Classic", id: "classic-solitaire" },
+            { name: "Sudoku Village", id: "sudoku-village" },
+            { name: "Gold Miner", id: "gold-miner" },
+            { name: "Temple Run Lite", id: "tomb-runner" },
+            { name: "Tic Tac Toe", id: "tic-tac-toe" },
+            { name: "Jewel Blocks", id: "jewel-blocks" },
+            { name: "Cut The Rope", id: "cut-the-rope" },
+            { name: "Unblock That", id: "unblock-that" },
+            { name: "Traffic Tom", id: "traffic-tom" },
+            { name: "Street Racing 3D", id: "street-racing-3d" },
+            { name: "Color Tunnel", id: "color-tunnel" },
+            { name: "Stack Smash", id: "stack-smash" },
+            { name: "Piano Tiles", id: "magic-tiles-3" },
+            { name: "Helix Jump Pro", id: "helix-jump" },
+            { name: "Among Us Online", id: "among-us-online" },
+            { name: "Stickman Hook", id: "stickman-hook" },
+            { name: "Fireboy and Watergirl", id: "fireboy-and-watergirl" },
+            { name: "Slither.io", id: "slither-io" },
+            { name: "Paper.io 2", id: "paper-io-2" },
+            { name: "Zombs Royale", id: "zombs-royale" },
+            { name: "Shell Shockers", id: "shell-shockers" },
+            { name: "Krunker.io", id: "krunker-io" },
+            { name: "Skateboard Hero", id: "skateboard-hero" },
+            { name: "Badland", id: "badland" },
+            { name: "Basketball Stars", id: "basketball-stars" },
+            { name: "Bad Ice Cream", id: "bad-ice-cream" },
+            { name: "Mine Clone (Minecraft)", id: "mine-clone" },
+            { name: "Monster Tracks", id: "monster-tracks" },
+            { name: "Vex 7", id: "vex-7" },
+            { name: "Dunk Shot", id: "dunk-shot" },
+            { name: "Cyber Cars Punk", id: "cyber-cars-punk-racing" }
+        ];
+
+        const grid = document.getElementById('gamesGrid');
+
+        // Load Games Dynamically
+        function loadGames() {
+            grid.innerHTML = '';
+            gamesList.forEach(game => {
+                // Generates placeholder thumbnails from free high-quality gaming image URLs
+                const thumbUrl = `https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?w=200&auto=format&fit=crop&q=60`;
+                
+                // Using standard open game distribution iframe hub format
+                const gameUrl = `https://html5.gamedistribution.com/${game.id}/?gd_sdk_referrer_url=https://yugankvishnoi-spec.github.io/`;
+
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.innerHTML = `
+                    <img src="${thumbUrl}" alt="${game.name}">
+                    <div class="game-info">
+                        <div class="game-title">${game.name}</div>
+                        <button class="play-btn" onclick="playGame('${gameUrl}')">Play Now</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Open Game Modal
+        function playGame(url) {
+            document.getElementById('gameFrame').src = url;
+            document.getElementById('gameModal').style.display = 'flex';
+        }
+
+        // Close Game Modal
+        function closeGame() {
+            document.getElementById('gameModal').style.display = 'none';
+            document.getElementById('gameFrame').src = '';
+        }
+
+        // Search/Filter Function
+        function filterGames() {
+            const query = document.getElementById('searchBar').value.toLowerCase();
+            const cards = document.getElementsByClassName('game-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].querySelector('.game-title').innerText.toLowerCase();
+                if (title.includes(query)) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // Run on load
+        loadGames();
+    </script>
+</body>
+</html>
