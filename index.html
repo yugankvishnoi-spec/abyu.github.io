@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,24 +7,24 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #0a0a0a; color: #fff; font-family: Arial, sans-serif; }
-    .header { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 40px 20px; text-align: center; border-bottom: 3px solid #00ff88; }
-    .logo { font-size: 3rem; font-weight: 900; color: #00ff88; margin-bottom: 10px; }
-    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-    .stats { text-align: center; color: #00ffff; font-size: 1.3rem; margin: 20px 0; }
-    .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin: 30px 0; }
-    .game-card { background: #1a1a2e; border: 2px solid #00ff8844; border-radius: 15px; padding: 20px; text-align: center; cursor: pointer; transition: 0.3s; }
-    .game-card:hover { transform: translateY(-5px); border-color: #00ff88; box-shadow: 0 5px 20px #00ff8855; }
-    .game-emoji { font-size: 3rem; margin-bottom: 10px; }
-    .game-name { color: #00ffff; font-weight: bold; font-size: 1rem; }
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 9999; align-items: center; justify-content: center; }
-    .modal.active { display: flex; }
-    .game-window { width: 95%; height: 90%; max-width: 800px; background: #0a0a0a; border: 3px solid #00ff88; border-radius: 15px; position: relative; padding: 20px; overflow-y: auto; }
-    .close-btn { position: absolute; top: 15px; right: 15px; background: #ff0080; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; z-index: 10001; }
+        .header { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 40px 20px; text-align: center; border-bottom: 3px solid #00ff88; }
+        .logo { font-size: 3rem; font-weight: 900; color: #00ff88; margin-bottom: 10px; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .stats { text-align: center; color: #00ffff; font-size: 1.3rem; margin: 20px 0; }
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin: 30px 0; }
+        .game-card { background: #1a1a2e; border: 2px solid #00ff8844; border-radius: 15px; padding: 20px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .game-card:hover { transform: translateY(-5px); border-color: #00ff88; box-shadow: 0 5px 20px #00ff8855; }
+        .game-emoji { font-size: 3rem; margin-bottom: 10px; }
+        .game-name { color: #00ffff; font-weight: bold; font-size: 1rem; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 9999; align-items: center; justify-content: center; }
+        .modal.active { display: flex; }
+        .game-window { width: 95%; height: 90%; max-width: 800px; background: #0a0a0a; border: 3px solid #00ff88; border-radius: 15px; position: relative; padding: 20px; overflow-y: auto; }
+        .close-btn { position: absolute; top: 15px; right: 15px; background: #ff0080; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; z-index: 10001; }
         canvas { border: 2px solid #00ffff; background: #000; display: block; margin: 20px auto; max-width: 100%; touch-action: none; }
-    .controls { text-align: center; margin: 15px 0; }
-    .btn { background: #00ff88; color: #000; border: none; padding: 12px 25px; font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer; margin: 5px; }
-    .score { font-size: 1.5rem; color: #ff00ff; text-align: center; margin: 10px 0; }
-    .about { background: #1a1a2e; margin: 50px 20px; padding: 30px; border-radius: 15px; border: 2px solid #ff00ff; text-align: center; }
+        .controls { text-align: center; margin: 15px 0; }
+        .btn { background: #00ff88; color: #000; border: none; padding: 12px 25px; font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer; margin: 5px; }
+        .score { font-size: 1.5rem; color: #ff00ff; text-align: center; margin: 10px 0; }
+        .about { background: #1a1a2e; margin: 50px 20px; padding: 30px; border-radius: 15px; border: 2px solid #ff00ff; text-align: center; }
         input { padding: 10px; font-size: 1.2rem; width: 100px; text-align: center; background: #1a1a2e; color: #00ff88; border: 2px solid #00ff88; border-radius: 8px; }
     </style>
 </head>
@@ -33,12 +33,10 @@
         <div class="logo">ABYU GAME</div>
         <p>99+ Original Games | 100% Apna Code | Zero External Links</p>
     </div>
-
     <div class="container">
         <div class="stats">🎮 Total Games: <span id="totalGames">20</span> | More Coming Soon</div>
         <div class="games-grid" id="gamesList"></div>
     </div>
-
     <div class="about">
         <h2 style="color: #ff00ff; margin-bottom: 20px;">ABOUT US</h2>
         <p style="color: #00ffff; font-size: 1.2rem; margin: 8px 0;">Founder & Developer: Yugank Vishnoi</p>
@@ -46,14 +44,11 @@
         <p style="color: #00ffff; font-size: 1.2rem; margin: 8px 0;">Investor: Akshat Sharma</p>
         <p style="margin-top: 20px; color: #888;">Made in India 🇮🇳 | All Games Original | No Ads Yet</p>
     </div>
-
     <div class="modal" id="gameModal">
         <div class="game-window">
             <button class="close-btn" onclick="closeGame()">×</button>
             <div id="gameContainer"></div>
         </div>
-    </div>
-
     <script>
         const games = [
             {id: 1, name: "Abyu Snake", emoji: "🐍", type: "snake"},
@@ -200,21 +195,4 @@
         }
 
         function loadRPSGame(container) {
-            container.innerHTML=`<h2 style="color:#00ffff;text-align:center;">ABYU ROCK PAPER SCISSORS</h2><div class="score">You: <span id="rpsPlayer">0</span> | Computer: <span id="rpsComp">0</span></div><div style="text-align:center;font-size:4rem;margin:30px 0;"><span id="rpsYou">❓</span> VS <span id="rpsComputer">❓</span></div><div class="controls"><button class="btn" onclick="playRPS('rock')">🗿 ROCK</button><button class="btn" onclick="playRPS('paper')">📄 PAPER</button><button class="btn" onclick="playRPS('scissors')">✂️ SCISSORS</button></div><p id="rpsResult" style="text-align:center;color:#00ff88;font-size:1.3rem;margin-top:20px;"></p>`;
-            let pScore=0,cScore=0; const choices={rock:'🗿',paper:'📄',scissors:'✂️'};
-            window.playRPS=(player)=>{ const comp=['rock','paper','scissors'][Math.floor(Math.random()*3)]; document.getElementById('rpsYou').innerText=choices[player]; document.getElementById('rpsComputer').innerText=choices; let result=''; if(player===comp)result='Draw!'; else if((player==='rock'&&comp==='scissors')||(player==='paper'&&comp==='rock')||(player==='scissors'&&comp==='paper')){result='You Win!';pScore++;} else{result='Computer Wins!';cScore++;} document.getElementById('rpsResult').innerText=result; document.getElementById('rpsPlayer').innerText=pScore; document.getElementById('rpsComp').innerText=cScore; };
-        }
-
-        function loadFlappyGame(container) {
-            container.innerHTML=`<h2 style="color:#00ffff;text-align:center;">ABYU FLAPPY BIRD</h2><div class="score">Score: <span id="flappyScore">0</span></div><canvas id="flappyCanvas" width="400" height="500"></canvas><div class="controls"><button class="btn" onclick="startFlappy()">START</button><p style="color:#888;">Tap to Jump</p></div>`;
-            window.startFlappy=()=>{ const c=document.getElementById('flappyCanvas'),x=c.getContext('2d'); let b={x:80,y:250,v:0},p=[],s=0,g=0.5,game=true; c.ontouchstart=()=>b.v=-8; c.onclick=()=>b.v=-8; function draw(){ if(!game)return; x.fillStyle='#1a1a2e';x.fillRect(0,0,400,500); b.v+=g;b.y+=b.v; x.fillStyle='#00ff88';x.beginPath();x.arc(b.x,b.y,15,0,7);x.fill(); if(Math.random()<0.02)p.push({x:400,h:Math.random()*200+100}); x.fillStyle='#ff0080'; p=p.filter(o=>{o.x-=3;x.fillRect(o.x,0,50,o.h);x.fillRect(o.x,o.h+150,50,500); if(b.x+15>o.x&&b.x-15<o.x+50&&(b.y-15<o.h||b.y+15>o.h+150)){game=false;alert('Game Over! Score: '+s);return false;} return o.x>-50;}); s++;document.getElementById('flappyScore').innerText=s; if(b.y>485||b.y<15){game=false;alert('Game Over! Score: '+s);return;} } clearInterval(currentGame); game=true;b={x:80,y:250,v:0};p=[];s=0; currentGame=setInterval(draw,20); };
-        }
-
-        function loadBreakoutGame(container) {
-            container.innerHTML=`<h2 style="color:#00ffff;text-align:center;">ABYU BREAKOUT</h2><div class="score">Score: <span id="breakScore">0</span></div><canvas id="breakCanvas" width="400" height="500"></canvas><div class="controls"><button class="btn" onclick="startBreakout()">START</button><p style="color:#888;">Drag to Move</p></div>`;
-            window.startBreakout=()=>{ const c=document.getElementById('breakCanvas'),x=c.getContext('2d'); let ball={x:200,y:400,vx:3,vy:-3},paddle={x:150,y:470,w:100},bricks=[],score=0,game=true; for(let i=0;i<5;i++)for(let j=0;j<8;j++)bricks.push({x:j*50+5,y:i*30+50,w:45,h:25,hit:false}); c.ontouchmove=e=>{let rect=c.getBoundingClientRect();paddle.x=e.touches[0].clientX-rect.left-paddle.w/2;e.preventDefault();}; function draw(){ if(!game)return; x.fillStyle='#000';x.fillRect(0,0,400,500); x.fillStyle='#00ff88';x.fillRect(paddle.x,paddle.y,paddle.w,15); x.beginPath();x.arc(ball.x,ball.y,10,0,7);x.fill(); ball.x+=ball.vx;ball.y+=ball.vy; if(ball.x<10||ball.x>390)ball.vx*=-1; if(ball.y<10)ball.vy*=-1; if(ball.y>480){game=false;alert('Game Over! Score: '+score);return;} if(ball.y>460&&ball.x>paddle.x&&ball.x<paddle.x+paddle.w)ball.vy=-Math.abs(ball.vy); x.fillStyle='#ff0080'; bricks.forEach(b=>{if(!b.hit){x.fillRect(b.x,b.y,b.w,b.h); if(ball.x>b.x&&ball.x<b.x+b.w&&ball.y>b.y&&ball.y<b.y+b.h){b.hit=true;ball.vy*=-1;score+=10;document.getElementById('breakScore').innerText=score;}}}); if(bricks.every(b=>b.hit)){game=false;alert('You Win! Score: '+score);} } clearInterval(currentGame); game=true;ball={x:200,y:400,vx:3,vy:-3};score=0;bricks=[];for(let i=0;i<5;i++)for(let j=0;j<8;j++)bricks.push({x:j*50+5,y:i*30+50,w:45,h:25,hit:false}); currentGame=setInterval(draw,20); };
-        }
-
-        function loadPongGame(container) {
-            container.innerHTML=`<h2 style="color:#00ffff;text-align:center;">ABYU PONG</h2><div class="score">You: <span id="pongPlayer">0</span> | CPU: <span id="pongCPU">0</span></div><canvas id="pongCanvas" width="400" height="400"></canvas><div class="controls"><button class="btn" onclick="startPong()">START</button><p style="color:#888;">Drag to Move</p></div>`;
-            window.startPong=()=>{ const c=document.getElementById('pongCanvas'),x=c.getContext('2d'); let ball={x:200,y:200,vx:3,vy:3},player={y:150},cpu={y:150},pScore=0,cScore=0,game=true; c.ontouchmove        
+            container.innerHTML=`<h2 style="color:#00ffff;text-align:center;">ABYU ROCK PAPER SCISSORS</h2><div class="score">You: <span id="rpsPlayer">0</span> | Computer: <span id="rpsComp">0</span></div><div style="text-align:center;font-size:4rem;margin:30px 0;"><span id="rpsYou">❓</span> VS <span id="rpsComputer">❓</span></div><div class="controls"><button class="btn" onclick="playRPS('rock')">🗿 ROCK</button><button class="btn" onclick
