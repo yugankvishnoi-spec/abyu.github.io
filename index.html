@@ -1,156 +1,47 @@
-      <script>
-    // 100+ TESTED WORKING GAMES - KOI 404 NAHI AAYEGA
-    const actionGames = [
-        {name: "Subway Surfers", emoji: "🏃", url: "https://poki.com/en/g/subway-surfers"},
-        {name: "Temple Run 2", emoji: "🏃‍♂️", url: "https://poki.com/en/g/temple-run-2"},
-        {name: "Run 3", emoji: "🏃", url: "https://lekug.github.io/run-3/"},
-        {name: "Vex 7", emoji: "🤸", url: "https://www.vex7.org/"},
-        {name: "Stickman Hook", emoji: "🪝", url: "https://poki.com/en/g/stickman-hook"},
-        {name: "Fireboy Watergirl 1", emoji: "🔥", url: "https://poki.com/en/g/fireboy-and-watergirl-forest-temple"},
-        {name: "Tunnel Rush", emoji: "🚇", url: "https://tunnelrush.github.io/"},
-        {name: "Geometry Dash", emoji: "📐", url: "https://scratch.mit.edu/projects/105500895/embed"},
-        {name: "Duck Life 4", emoji: "🦆", url: "https://www.hoodamath.com/games/ducklife4.html"},
-        {name: "Happy Wheels", emoji: "🚲", url: "https://totaljerkface.com/happy_wheels.tjf"}
-    ];
-
-    const racingGames = [
-        {name: "Moto X3M", emoji: "🏍️", url: "https://poki.com/en/g/moto-x3m"},
-        {name: "Moto X3M Winter", emoji: "🏍️", url: "https://poki.com/en/g/moto-x3m-winter"},
-        {name: "Moto X3M Pool Party", emoji: "🏍️", url: "https://poki.com/en/g/moto-x3m-pool-party"},
-        {name: "Drift Boss", emoji: "🏎️", url: "https://poki.com/en/g/drift-boss"},
-        {name: "Slope", emoji: "⚡", url: "https://slope-game.github.io/"},
-        {name: "Slope 2", emoji: "⚡", url: "https://poki.com/en/g/slope"},
-        {name: "Traffic Rider", emoji: "🚗", url: "https://poki.com/en/g/traffic-rider"},
-        {name: "Madalin Stunt Cars 2", emoji: "🏎️", url: "https://www.madalinstuntcars2.com/"},
-        {name: "Burnin Rubber", emoji: "🔥", url: "https://poki.com/en/g/burnin-rubber"},
-        {name: "Car Simulator", emoji: "🚙", url: "https://poki.com/en/g/car-simulator-arena"},
-        {name: "Hex GL", emoji: "🏁", url: "https://hexgl.bkcore.com/play/"},
-        {name: "Death Chase", emoji: "💀", url: "https://poki.com/en/g/death-chase"}
-    ];
-
-    const sportsGames = [
-        {name: "Stick Cricket", emoji: "🏏", url: "https://poki.com/en/g/stick-cricket"},
-        {name: "Cricket World Cup", emoji: "🏏", url: "https://www.crazygames.com/game/cricket-world-cup"},
-        {name: "Cricket Hero", emoji: "🏏", url: "https://poki.com/en/g/cricket-hero"},
-        {name: "Basketball Stars", emoji: "🏀", url: "https://poki.com/en/g/basketball-stars"},
-        {name: "Soccer Skills", emoji: "⚽", url: "https://poki.com/en/g/soccer-skills-world-cup"},
-        {name: "Football Legends", emoji: "⚽", url: "https://poki.com/en/g/football-legends-2021"},
-        {name: "Table Tennis", emoji: "🏓", url: "https://poki.com/en/g/table-tennis-world-tour"},
-        {name: "8 Ball Pool", emoji: "🎱", url: "https://poki.com/en/g/8-ball-billiards-classic"},
-        {name: "Bowling Club", emoji: "🎳", url: "https://poki.com/en/g/bowling-club"},
-        {name: "Boxing Random", emoji: "🥊", url: "https://poki.com/en/g/boxing-random"},
-        {name: "Archery World Tour", emoji: "🏹", url: "https://poki.com/en/g/archery-world-tour"},
-        {name: "Golf Champions", emoji: "⛳", url: "https://poki.com/en/g/golf-champions"}
-    ];
-
-    const planeGames = [
-        {name: "Flight Simulator", emoji: "✈️", url: "https://www.geo-fs.com/geofs.php"},
-        {name: "Airplane Fly", emoji: "✈️", url: "https://poki.com/en/g/airplane-fly-3d"},
-        {name: "Sky Combat", emoji: "🛩️", url: "https://poki.com/en/g/sky-combat"},
-        {name: "War Planes", emoji: "✈️", url: "https://poki.com/en/g/war-planes-ww2-dogfight"},
-        {name: "Helicopter", emoji: "🚁", url: "https://poki.com/en/g/helicopter"},
-        {name: "Space Wars", emoji: "🚀", url: "https://poki.com/en/g/space-wars-battleground"},
-        {name: "Jet Rush", emoji: "🛦", url: "https://poki.com/en/g/jet-rush"},
-        {name: "Air Wars 3", emoji: "💥", url: "https://poki.com/en/g/air-wars-3"},
-        {name: "Dogfight", emoji: "✈️", url: "https://poki.com/en/g/dogfight"},
-        {name: "Radius Raid", emoji: "🚀", url: "https://jackrugile.com/radius-raid/"},
-        {name: "Astray", emoji: "🌀", url: "https://wwwtyro.github.io/Astray/"},
-        {name: "Swooop", emoji: "✈️", url: "https://swooop.github.io/"}
-    ];
-
-    const boardGames = [
-        {name: "Ludo King", emoji: "🎲", url: "https://poki.com/en/g/ludo-king"},
-        {name: "Ludo Hero", emoji: "🎲", url: "https://poki.com/en/g/ludo-hero"},
-        {name: "Chess", emoji: "♟️", url: "https://www.chess.com/play/computer"},
-        {name: "Checkers", emoji: "⚫", url: "https://poki.com/en/g/checkers"},
-        {name: "Carrom Clash", emoji: "⚫", url: "https://poki.com/en/g/carrom-clash"},
-        {name: "Snakes Ladders", emoji: "🐍", url: "https://poki.com/en/g/snakes-and-ladders"},
-        {name: "Monopoly", emoji: "🏠", url: "https://poki.com/en/g/monopoly"},
-        {name: "Uno Online", emoji: "🃏", url: "https://poki.com/en/g/uno-online"},
-        {name: "Solitaire", emoji: "🃏", url: "https://www.solitr.com/"},
-        {name: "Sudoku", emoji: "🔢", url: "https://sudoku.js.org/"},
-        {name: "Minesweeper", emoji: "💣", url: "https://birjolaxew.github.io/Minesweeper/"},
-        {name: "2048", emoji: "🔢", url: "https://gabrielecirulli.github.io/2048/"},
-        {name: "Tetris", emoji: "🟦", url: "https://binarymax.github.io/tetris/"},
-        {name: "Memory Cards", emoji: "🧠", url: "https://taniarascia.github.io/memory/"},
-        {name: "0h h1", emoji: "🔴", url: "https://0hh1.com/"},
-        {name: "0h n0", emoji: "🔵", url: "https://0hn0.com/"}
-    ];
-
-    const ioGames = [
-        {name: "Agar.io", emoji: "🔵", url: "https://agar.io/"},
-        {name: "Slither.io", emoji: "🐍", url: "https://slither.io/"},
-        {name: "Diep.io", emoji: "💥", url: "https://diep.io/"},
-        {name: "Hole.io", emoji: "🕳️", url: "https://hole-io.com/"},
-        {name: "Paper.io 2", emoji: "📄", url: "https://paper-io.com/"},
-        {name: "Krunker.io", emoji: "🔫", url: "https://krunker.io/"},
-        {name: "Shell Shockers", emoji: "🥚", url: "https://shellshock.io/"},
-        {name: "Zombs Royale", emoji: "🧟", url: "https://zombsroyale.io/"},
-        {name: "Surviv.io", emoji: "🎯", url: "https://surviv.io/"},
-        {name: "Bonk.io", emoji: "⚪", url: "https://bonk.io/"},
-        {name: "Skribbl.io", emoji: "✏️", url: "https://skribbl.io/"},
-        {name: "Gartic.io", emoji: "🎨", url: "https://gartic.io/"},
-        {name: "Lordz.io", emoji: "⚔️", url: "https://lordz.io/"},
-        {name: "Brutal.io", emoji: "🔨", url: "https://brutal.io/"},
-        {name: "Moomoo.io", emoji: "🐮", url: "https://moomoo.io/"},
-        {name: "Deeeep.io", emoji: "🐟", url: "https://deeeep.io/"}
-    ];
-
-    const classicGames = [
-        {name: "Pacman", emoji: "👻", url: "https://masonicgit.github.io/pacman/"},
-        {name: "Snake", emoji: "🐍", url: "https://rabiroshan.github.io/snake_game/"},
-        {name: "Space Invaders", emoji: "👾", url: "https://cykod.github.io/SpaceInvaders/"},
-        {name: "Flappy Bird", emoji: "🐦", url: "https://ellisonleao.github.io/clumsy-bird/"},
-        {name: "Hextris", emoji: "⬡", url: "https://hextris.github.io/hextris/"},
-        {name: "Cube Field", emoji: "🧊", url: "https://www.cubefield.org.uk/"},
-        {name: "Stack", emoji: "📚", url: "https://iamkun.github.io/stack_game/"},
-        {name: "Tower Blocks", emoji: "🏗️", url: "https://iamkun.github.io/tower_game/"},
-        {name: "Coloron", emoji: "🎨", url: "https://codepen.io/gregh/full/BQbVLM"},
-        {name: "Menja", emoji: "⚫", url: "https://menja.io/"},
-        {name: "Cookie Clicker", emoji: "🍪", url: "https://ozh.github.io/cookieclicker/"},
-        {name: "Particle Clicker", emoji: "⚛️", url: "https://particle-clicker.web.cern.ch/particle-clicker/"},
-        {name: "Orbital", emoji: "🪐", url: "https://schteppe.github.io/cannon.js/examples/orbital.html"},
-        {name: "PolyBranch", emoji: "🌳", url: "https://greggman.github.io/polybranch/"}
-    ];
-
-    // Function to render games
-    function renderGames(gameArray, containerId) {
-        const grid = document.getElementById(containerId);
-        grid.innerHTML = ''; // Clear old games
-        gameArray.forEach(game => {
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            card.innerHTML = `
-                <div class="game-thumb">${game.emoji}</div>
-                <div class="game-name">${game.name}</div>
-            `;
-            card.onclick = () => openGame(game.url, game.name);
-            grid.appendChild(card);
-        });
-    }
-
-    // Render all categories
-    renderGames(actionGames, 'actionGames');
-    renderGames(racingGames, 'racingGames');
-    renderGames(sportsGames, 'sportsGames');
-    renderGames(planeGames, 'planeGames');
-    renderGames(boardGames, 'boardGames');
-    renderGames(ioGames, 'ioGames');
-    renderGames(classicGames, 'classicGames');
-
-    function openGame(url, name) {
-        document.getElementById('gameModal').classList.add('active');
-        document.getElementById('gameFrame').src = url;
-        document.title = name + ' - Abyu Game';
-    }
-
-    function closeGame() {
-        document.getElementById('gameModal').classList.remove('active');
-        document.getElementById('gameFrame').src = '';
-        document.title = 'Abyu Game - Play 100+ Free Games';
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeGame();
-    });
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abyu Game</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #00ff88;
+            font-family: Arial;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .team {
+            background: #1a1a2e;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 600px;
+            border: 2px solid #00ff88;
+        }
+        .name {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            color: #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <h1>ABYU GAME</h1>
+    <p>Website is Working! 🔥</p>
+    
+    <div class="team">
+        <h2>Our Team</h2>
+        <div class="name">Founder: Yugank Vishnoi</div>
+        <div class="name">Co-Founder: Abhinav Singh</div>
+        <div class="name">Investor: Akshat Sharma</div>
+    </div>
+    
+    <p style="margin-top:40px;">Games Coming Soon...</p>
+</body>
+</html>
