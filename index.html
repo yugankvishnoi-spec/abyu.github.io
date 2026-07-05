@@ -7,24 +7,24 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #0a0a0a; color: #fff; font-family: Arial, sans-serif; }
-      .header { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 40px 20px; text-align: center; border-bottom: 3px solid #00ff88; }
-      .logo { font-size: 3rem; font-weight: 900; color: #00ff88; margin-bottom: 10px; }
-      .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-      .stats { text-align: center; color: #00ffff; font-size: 1.3rem; margin: 20px 0; }
-      .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin: 30px 0; }
-      .game-card { background: #1a1a2e; border: 2px solid #00ff8844; border-radius: 15px; padding: 20px; text-align: center; cursor: pointer; transition: 0.3s; }
-      .game-card:hover { transform: translateY(-5px); border-color: #00ff88; box-shadow: 0 5px 20px #00ff8855; }
-      .game-emoji { font-size: 3rem; margin-bottom: 10px; }
-      .game-name { color: #00ffff; font-weight: bold; font-size: 1rem; }
-      .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 9999; align-items: center; justify-content: center; }
-      .modal.active { display: flex; }
-      .game-window { width: 95%; height: 90%; max-width: 800px; background: #0a0a0a; border: 3px solid #00ff88; border-radius: 15px; position: relative; padding: 20px; overflow-y: auto; }
-      .close-btn { position: absolute; top: 15px; right: 15px; background: #ff0080; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; z-index: 10001; }
+    .header { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 40px 20px; text-align: center; border-bottom: 3px solid #00ff88; }
+    .logo { font-size: 3rem; font-weight: 900; color: #00ff88; margin-bottom: 10px; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+    .stats { text-align: center; color: #00ffff; font-size: 1.3rem; margin: 20px 0; }
+    .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin: 30px 0; }
+    .game-card { background: #1a1a2e; border: 2px solid #00ff8844; border-radius: 15px; padding: 20px; text-align: center; cursor: pointer; transition: 0.3s; }
+    .game-card:hover { transform: translateY(-5px); border-color: #00ff88; box-shadow: 0 5px 20px #00ff8855; }
+    .game-emoji { font-size: 3rem; margin-bottom: 10px; }
+    .game-name { color: #00ffff; font-weight: bold; font-size: 1rem; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 9999; align-items: center; justify-content: center; }
+    .modal.active { display: flex; }
+    .game-window { width: 95%; height: 90%; max-width: 800px; background: #0a0a0a; border: 3px solid #00ff88; border-radius: 15px; position: relative; padding: 20px; overflow-y: auto; }
+    .close-btn { position: absolute; top: 15px; right: 15px; background: #ff0080; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; z-index: 10001; }
         canvas { border: 2px solid #00ffff; background: #000; display: block; margin: 20px auto; max-width: 100%; touch-action: none; }
-      .controls { text-align: center; margin: 15px 0; }
-      .btn { background: #00ff88; color: #000; border: none; padding: 12px 25px; font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer; margin: 5px; }
-      .score { font-size: 1.5rem; color: #ff00ff; text-align: center; margin: 10px 0; }
-      .about { background: #1a1a2e; margin: 50px 20px; padding: 30px; border-radius: 15px; border: 2px solid #ff00ff; text-align: center; }
+    .controls { text-align: center; margin: 15px 0; }
+    .btn { background: #00ff88; color: #000; border: none; padding: 12px 25px; font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer; margin: 5px; }
+    .score { font-size: 1.5rem; color: #ff00ff; text-align: center; margin: 10px 0; }
+    .about { background: #1a1a2e; margin: 50px 20px; padding: 30px; border-radius: 15px; border: 2px solid #ff00ff; text-align: center; }
         input { padding: 10px; font-size: 1.2rem; width: 100px; text-align: center; background: #1a1a2e; color: #00ff88; border: 2px solid #00ff88; border-radius: 8px; }
     </style>
 </head>
@@ -105,7 +105,7 @@
         }
 
         function loadSnakeGame(container) {
-            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU SNAKE</h2><div class="score">Score: <span id="snakeScore">0</span></div><canvas id="snakeCanvas" width="400" height="400"></canvas><div class="controls"><button class="btn" onclick="startSnake()">START</button><p style="color:#888;margin-top:10px;">Swipe / Arrow Keys</p></div>`;
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU SNAKE</h2><div class="score">Score: <span id="snakeScore">0</span></div><canvas id="snakeCanvas" width="400" height="400"></canvas><div class="controls"><button class="btn" onclick="startSnake()">START</button><p style="color:#888;margin-top:10px;">Swipe to Move</p></div>`;
             window.startSnake = function() {
                 const canvas = document.getElementById('snakeCanvas'), ctx = canvas.getContext('2d'), box = 20;
                 let snake = [{x: 9*box, y: 10*box}], food = {x: Math.floor(Math.random()*19+1)*box, y: Math.floor(Math.random()*19+1)*box}, d, score = 0, touchStartX, touchStartY;
@@ -125,3 +125,43 @@
                 }
                 clearInterval(currentGame); currentGame = setInterval(draw,100);
             };
+        }
+
+        function loadTicTacToe(container) {
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU TIC TAC TOE</h2><div id="tttBoard" style="display:grid;grid-template-columns:repeat(3,100px);gap:10px;justify-content:center;margin:20px 0;"></div><div class="controls"><button class="btn" onclick="resetTTT()">RESET</button></div><p id="tttStatus" style="text-align:center;color:#00ff88;font-size:1.2rem;"></p>`;
+            let board=['','','','','','','','',''], currentPlayer='X', gameActive=true;
+            const winConditions=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]], boardDiv=document.getElementById('tttBoard');
+            boardDiv.innerHTML=''; for(let i=0;i<9;i++){ const cell=document.createElement('div'); cell.style.cssText='width:100px;height:100px;background:#1a1a2e;border:2px solid #00ff88;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;cursor:pointer;color:#00ffff;'; cell.onclick=()=>makeMove(i); boardDiv.appendChild(cell); }
+            function makeMove(i){ if(board[i]!==''||!gameActive)return; board[i]=currentPlayer; boardDiv.children[i].innerText=currentPlayer; if(checkWin()){document.getElementById('tttStatus').innerText=`Player ${currentPlayer} Wins!`;gameActive=false;} else if(board.every(c=>c!=='')){document.getElementById('tttStatus').innerText='Draw!';gameActive=false;} else{currentPlayer=currentPlayer==='X'?'O':'X';document.getElementById('tttStatus').innerText=`Player ${currentPlayer}'s Turn`;} }
+            function checkWin(){return winConditions.some(c=>c.every(i=>board[i]===currentPlayer));}
+            window.resetTTT=()=>{board=['','','','','','','','',''];currentPlayer='X';gameActive=true;Array.from(boardDiv.children).forEach(c=>c.innerText='');document.getElementById('tttStatus').innerText=`Player X's Turn`;}
+            resetTTT();
+        }
+
+        function loadClickerGame(container) {
+            container.innerHTML=`<h2 style="color:#00ffff;text-align:center;">ABYU CLICKER</h2><div class="score">Score: <span id="clickScore">0</span></div><div class="controls"><button class="btn" style="font-size:2rem;padding:30px 50px;" onclick="clickBtn()">TAP ME!</button></div><p style="text-align:center;color:#888;">Tap as fast as you can!</p>`;
+            let clickScore=0; window.clickBtn=()=>{clickScore++;document.getElementById('clickScore').innerText=clickScore;};
+        }
+
+        function loadMemoryGame(container) {
+            container.innerHTML=`<h2 style="color:#00ffff;text-align:center;">ABYU MEMORY</h2><div id="memoryBoard" style="display:grid;grid-template-columns:repeat(4,80px);gap:10px;justify-content:center;margin:20px 0;"></div><div class="controls"><button class="btn" onclick="startMemory()">NEW GAME</button></div>`;
+            window.startMemory=()=>{ const emojis=['🎮','🎯','🎲','🎪','🎨','🎭','🎸','🎺']; let cards=[...emojis,...emojis].sort(()=>Math.random()-0.5),flipped=[],matched=[]; const board=document.getElementById('memoryBoard'); board.innerHTML=''; cards.forEach((emoji,i)=>{ const card=document.createElement('div'); card.style.cssText='width:80px;height:80px;background:#1a1a2e;border:2px solid #00ff88;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:2rem;cursor:pointer;'; card.dataset.index=i; card.onclick=function(){flipCard(i,emoji,this)}; board.appendChild(card); }); function flipCard(i,emoji,el){ if(flipped.length===2||flipped.includes(i)||matched.includes(i))return; el.innerText=emoji; flipped.push(i); if(flipped.length===2){ setTimeout(()=>{ const [a,b]=flipped; if(cards[a]===cards[b]){matched.push(a,b);} else{board.children[a].innerText='';board.children[b].innerText='';} flipped=[]; if(matched.length===16)alert('You Win!'); },500); } } }; startMemory();
+        }
+
+        function loadGuessGame(container) {
+            let target=Math.floor(Math.random()*100)+1, attempts=0;
+            container.innerHTML=`<h2 style="color:#00ffff;text-align:center;">ABYU GUESS NUMBER</h2><p style="text-align:center;color:#888;margin:20px 0;">I'm thinking of a number 1-100</p><div class="controls"><input type="number" id="guessInput" placeholder="?"><button class="btn" onclick="checkGuess()">GUESS</button></div><p id="guessResult" style="text-align:center;color:#00ff88;font-size:1.2rem;margin-top:15px;"></p><p style="text-align:center;color:#888;">Attempts: <span id="attempts">0</span></p>`;
+            window.checkGuess=()=>{ const guess=parseInt(document.getElementById('guessInput').value); attempts++; document.getElementById('attempts').innerText=attempts; const result=document.getElementById('guessResult'); if(guess===target){result.innerText=`Correct! It was ${target}. New game!`;target=Math.floor(Math.random()*100)+1;attempts=0;} else if(guess<target)result.innerText='Too Low!'; else result.innerText='Too High!'; document.getElementById('guessInput').value=''; };
+        }
+
+        function loadDodgeGame(container) {
+            container.innerHTML=`<h2 style="color:#00ffff;text-align:center;">ABYU DODGE CAR</h2><div class="score">Score: <span id="dodgeScore">0</span></div><canvas id="dodgeCanvas" width="400" height="500"></canvas><div class="controls"><button class="btn" onclick="startDodge()">START</button><p style="color:#888;">Drag to Move</p></div>`;
+            window.startDodge=()=>{ const canvas=document.getElementById('dodgeCanvas'),ctx=canvas.getContext('2d'); let car={x:175,y:400,w:50,h:80},obstacles=[],score=0,speed=3; canvas.ontouchmove=e=>{let rect=canvas.getBoundingClientRect();car.x=e.touches[0].clientX-rect.left-car.w/2;e.preventDefault();};
+            function draw(){ ctx.fillStyle='#1a1a1a';ctx.fillRect(0,0,400,500); ctx.fillStyle='#00ff88';ctx.fillRect(car.x,car.y,car.w,car.h); if(Math.random()<0.03)obstacles.push({x:Math.random()*350,y:-50,w:50,h:50}); ctx.fillStyle='#ff0080'; obstacles=obstacles.filter(o=>{o.y+=speed;ctx.fillRect(o.x,o.y,o.w,o.h); if(o.x<car.x+car.w&&o.x+o.w>car.x&&o.y<car.y+car.h&&o.y+o.h>car.y){clearInterval(currentGame);alert('Crash! Score: '+score);return false;} return o.y<500; }); score++; document.getElementById('dodgeScore').innerText=score; if(score%500===0)speed+=0.5; }
+            clearInterval(currentGame); car={x:175,y:400,w:50,h:80}; obstacles=[]; score=0; speed=3; currentGame=setInterval(draw,20); };
+        }
+
+        function loadColorGame(container) {
+            container.innerHTML=`<h2 style="color:#00ffff;text-align:center;">ABYU COLOR MATCH</h2><div class="score">Score: <span id="colorScore">0</span></div><div id="colorBox" style="width:200px;height:200px;margin:20px auto;border:3px solid #00ff88;border-radius:15px;"></div><div class="controls" id="colorBtns"></div><p id="colorMsg" style="text-align:center;color:#00ff88;font-size:1.2rem;"></p>`;
+            const colors=['#ff0080','#00ff88','#00ffff','#ff00ff','#ffff00','#ff8800']; let targetColor,score=0;
+            function newRound(){ targetColor=colors[Math.floor(Math.random()*colors.length)]; document.getElementById('colorBox').style.background=targetColor; const btns=document.getElementById('colorBtns'); btns.innerHTML=''; colors.forEach(c=>{const b=document.createElement('button');b.className='btn';b.style.background=c;b.style.width='60px';b.style.height='60px';b.onclick=()=>checkColor(c);btns.append
