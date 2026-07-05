@@ -3,388 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABYU - Innovation & Technology Solutions</title>
+    <title>Abyu Game - Play 50+ Free Games Online</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            background: #0a0a0a;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
             overflow-x: hidden;
         }
-
-        /* Navigation */
-        nav {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        
+        /* Neon Background Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 20% 50%, #ff00ff22 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, #00ffff22 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, #ff008022 0%, transparent 50%);
+            z-index: -1;
         }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-        }
-
-        nav a:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 100px 2rem;
+        
+        /* Header Neon Banner */
+        .header {
             text-align: center;
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-bottom: 3px solid #00ff88;
+            box-shadow: 0 0 30px #00ff8855;
         }
-
-        .hero h1 {
+        
+        .logo {
             font-size: 4rem;
-            margin-bottom: 1rem;
-            animation: fadeInDown 0.8s ease;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ff88, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px #00ff88aa;
+            animation: glow 2s ease-in-out infinite alternate;
         }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease;
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px #00ff88); }
+            to { filter: drop-shadow(0 0 25px #00ffff); }
         }
-
-        .cta-btn {
-            background: white;
-            color: #667eea;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
+        
+        .tagline {
+            color: #00ffff;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            text-shadow: 0 0 10px #00ffff88;
+        }
+        
+        /* Ad Banner Space */
+        .ad-banner {
+            background: linear-gradient(90deg, #ff0080, #ff8c00);
+            text-align: center;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 10px;
             font-weight: bold;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin: 0.5rem;
+            box-shadow: 0 0 20px #ff008055;
         }
-
-        .cta-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        /* About Section */
-        .about {
-            padding: 80px 2rem;
-            background: #f8f9fa;
-            text-align: center;
-        }
-
-        .about h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #667eea;
-        }
-
-        .about-intro {
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-        }
-
-        .team-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
+        
+        /* Games Grid */
+        .games-container {
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 20px;
         }
-
-        .team-member {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            transform: translateY(0);
+        
+        .section-title {
+            font-size: 2rem;
+            color: #ff00ff;
+            text-shadow: 0 0 15px #ff00ff88;
+            margin: 30px 0 20px 10px;
+            border-left: 5px solid #00ff88;
+            padding-left: 15px;
         }
-
-        .team-member:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
-        }
-
-        .team-member h3 {
-            color: #667eea;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .role {
-            color: #764ba2;
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .description {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* Services Section */
-        .services {
-            padding: 80px 2rem;
-            background: white;
-        }
-
-        .services h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            color: #667eea;
-        }
-
-        .services-container {
+        
+        .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
-
-        .service-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
+        
+        .game-card {
+            background: linear-gradient(145deg, #1a1a2e, #0f0f1e);
+            border: 2px solid #00ff8833;
             border-radius: 15px;
-            text-align: center;
+            overflow: hidden;
             transition: all 0.3s ease;
             cursor: pointer;
+            box-shadow: 0 5px 15px #00000088;
         }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: #00ff88;
+            box-shadow: 0 0 30px #00ff8866, 0 10px 30px #000;
         }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+        
+        .game-thumb {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
         }
-
+        
+        .game-name {
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff66;
+        }
+        
         /* Footer */
-        footer {
-            background: #333;
-            color: white;
+        .footer {
             text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
+            padding: 30px;
+            background: #0f0f1e;
+            border-top: 2px solid #ff00ff;
+            color: #888;
+            margin-top: 50px;
         }
-
-        footer p {
-            margin: 0.5rem 0;
-        }
-
-        .social-links {
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            color: #667eea;
-            text-decoration: none;
-            margin: 0 1rem;
-            font-weight: bold;
-        }
-
-        .social-links a:hover {
-            color: #764ba2;
-        }
-
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
+        
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            nav ul {
-                gap: 1rem;
-            }
-
-            .about h2,
-            .services h2 {
-                font-size: 2rem;
-            }
-
-            .team-container {
-                grid-template-columns: 1fr;
-            }
+            .logo { font-size: 2.5rem; }
+            .games-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <div class="header">
+        <div class="logo">ABYU GAME</div>
+        <div class="tagline">PLAY 50+ FREE GAMES • NO DOWNLOAD • INSTANT FUN</div>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <h1>Welcome to ABYU</h1>
-        <p>Innovation, Technology & Enterprise Solutions</p>
-        <button class="cta-btn" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">Learn More</button>
-        <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get In Touch</button>
-    </section>
+    <!-- Ad Space 1 - Yaha AdSense ya koi ad network ka code daalna -->
+    <div class="ad-banner">
+        🔥 AD SPACE - Yaha AdSense Ka Code Aayega 🔥
+    </div>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <h2>About Us</h2>
-        <div class="about-intro">
-            <p>ABYU is a forward-thinking organization dedicated to delivering innovative solutions in technology and enterprise development. Our team brings together diverse expertise to drive success and create lasting impact in the digital landscape.</p>
+    <div class="games-container">
+        <h2 class="section-title">🔥 TRENDING GAMES</h2>
+        <div class="games-grid" id="gamesGrid">
+            <!-- Games JS se load honge -->
         </div>
+    </div>
 
-        <div class="team-container">
-            <!-- Founder & Developer -->
-            <div class="team-member">
-                <h3>Yugank Vishnoi</h3>
-                <div class="role">Founder & Developer</div>
-                <div class="description">
-                    Leading the technical vision with expertise in software development and system architecture. Yugank drives innovation and ensures cutting-edge technology implementation across all projects.
-                </div>
-            </div>
+    <!-- Ad Space 2 -->
+    <div class="ad-banner">
+        🔥 AD SPACE - Game Ke Beech Mein Bhi Ad Laga Sakte Ho 🔥
+    </div>
 
-            <!-- Co-founder -->
-            <div class="team-member">
-                <h3>Abhinav Singh</h3>
-                <div class="role">Co-founder</div>
-                <div class="description">
-                    Strategic co-founder focused on business development and operational excellence. Abhinav ensures seamless execution and scalability of our initiatives while maintaining quality standards.
-                </div>
-            </div>
-
-            <!-- Investor & Entrepreneur -->
-            <div class="team-member">
-                <h3>Akshat Sharma</h3>
-                <div class="role">Investor & Entrepreneur</div>
-                <div class="description">
-                    Visionary investor and entrepreneur bringing capital, market insights, and business acumen. Akshat connects us with strategic opportunities and helps scale our ventures to new heights.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <h2>Our Services</h2>
-        <div class="services-container">
-            <div class="service-card">
-                <h3>💻 Technology Solutions</h3>
-                <p>Custom software development, cloud infrastructure, and digital transformation services tailored to your business needs.</p>
-            </div>
-            <div class="service-card">
-                <h3>🚀 Business Growth</h3>
-                <p>Strategic planning and execution to accelerate your business growth and market penetration.</p>
-            </div>
-            <div class="service-card">
-                <h3>📊 Consulting</h3>
-                <p>Expert consulting services for enterprise solutions, innovation strategy, and digital transformation.</p>
-            </div>
-            <div class="service-card">
-                <h3>🤝 Partnership</h3>
-                <p>Building long-term partnerships to create sustainable value and mutual growth opportunities.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="about" id="contact">
-        <h2>Get In Touch</h2>
-        <div class="about-intro">
-            <p style="margin-bottom: 2rem;">We'd love to hear from you! Whether you have a project in mind or just want to connect, feel free to reach out.</p>
-            <a href="mailto:contact@abyu.com" class="cta-btn">Send Email</a>
-            <a href="#" class="cta-btn">Schedule Call</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 ABYU - All Rights Reserved</p>
-        <p>Innovation | Technology | Enterprise</p>
-        <div class="social-links">
-            <a href="#">LinkedIn</a>
-            <a href="#">Twitter</a>
-            <a href="#">GitHub</a>
-        </div>
-    </footer>
+    <div class="footer">
+        <p>© 2026 Abyu Game | Play Free, Have Fun | Made with 💚</p>
+        <p>50+ Games | No Login Required | Mobile Friendly</p>
+    </div>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
+        // 50+ FREE GAMES LIST - Sab embeddable games hain
+        const games = [
+            {name: "2048 Classic", emoji: "🔢", url: "https://play2048.co/"},
+            {name: "Snake Game", emoji: "🐍", url: "https://playsnake.org/"},
+            {name: "Tetris", emoji: "🟦", url: "https://tetris.com/play-tetris"},
+            {name: "Pacman", emoji: "👻", url: "https://freepacman.org/"},
+            {name: "Flappy Bird", emoji: "🐦", url: "https://flappybird.io/"},
+            {name: "Minesweeper", emoji: "💣", url: "https://minesweeperonline.com/"},
+            {name: "Chess", emoji: "♟️", url: "https://www.chess.com/play/computer"},
+            {name: "Sudoku", emoji: "🔢", url: "https://sudoku.com/"},
+            {name: "Solitaire", emoji: "🃏", url: "https://www.solitr.com/"},
+            {name: "Uno Online", emoji: "🃏", url: "https://www.crazygames.com/game/uno-online"},
+            {name: "Moto X3M", emoji: "🏍️", url: "https://www.crazygames.com/game/moto-x3m"},
+            {name: "Slope", emoji: "⚡", url: "https://www.crazygames.com/game/slope"},
+            {name: "Run 3", emoji: "🏃", url: "https://www.crazygames.com/game/run-3"},
+            {name: "Basketball Stars", emoji: "🏀", url: "https://www.crazygames.com/game/basketball-stars"},
+            {name: "Soccer Random", emoji: "⚽", url: "https://www.crazygames.com/game/soccer-random"},
+            {name: "Fireboy Watergirl", emoji: "🔥", url: "https://www.crazygames.com/game/fireboy-and-watergirl-1-forest-temple"},
+            {name: "Vex 6", emoji: "🤸", url: "https://www.crazygames.com/game/vex-6"},
+            {name: "Stickman Hook", emoji: "🪝", url: "https://www.crazygames.com/game/stickman-hook"},
+            {name: "Paper.io 2", emoji: "📄", url: "https://www.crazygames.com/game/paper-io-2"},
+            {name: "Hole.io", emoji: "🕳️", url: "https://www.crazygames.com/game/hole-io"},
+            {name: "Shell Shockers", emoji: "🥚", url: "https://www.crazygames.com/game/shell-shockers"},
+            {name: "Krunker", emoji: "🔫", url: "https://krunker.io/"},
+            {name: "Slither.io", emoji: "🐍", url: "http://slither.io/"},
+            {name: "Agar.io", emoji: "🔵", url: "https://agar.io/"},
+            {name: "Diep.io", emoji: "💥", url: "https://diep.io/"},
+            {name: "Skribbl.io", emoji: "✏️", url: "https://skribbl.io/"},
+            {name: "Gartic Phone", emoji: "📞", url: "https://garticphone.com/"},
+            {name: "Among Us", emoji: "🚀", url: "https://www.crazygames.com/game/among-us"},
+            {name: "Subway Surfers", emoji: "🏃", url: "https://www.crazygames.com/game/subway-surfers"},
+            {name: "Temple Run 2", emoji: "🏃‍♂️", url: "https://www.crazygames.com/game/temple-run-2"},
+            {name: "Cut The Rope", emoji: "🍬", url: "https://www.crazygames.com/game/cut-the-rope"},
+            {name: "Angry Birds", emoji: "🐦", url: "https://www.crazygames.com/game/angry-birds"},
+            {name: "Fruit Ninja", emoji: "🍉", url: "https://www.crazygames.com/game/fruit-ninja"},
+            {name: "Jetpack Joyride", emoji: "🚀", url: "https://www.crazygames.com/game/jetpack-joyride"},
+            {name: "Crossy Road", emoji: "🐔", url: "https://www.crazygames.com/game/crossy-road"},
+            {name: "Doodle Jump", emoji: "🟢", url: "https://www.crazygames.com/game/doodle-jump"},
+            {name: "Geometry Dash", emoji: "📐", url: "https://www.crazygames.com/game/geometry-dash-online"},
+            {name: "Happy Wheels", emoji: "🚲", url: "https://www.crazygames.com/game/happy-wheels"},
+            {name: "Bloons TD 6", emoji: "🎈", url: "https://www.crazygames.com/game/bloons-td-6"},
+            {name: "Plants vs Zombies", emoji: "🌻", url: "https://www.crazygames.com/game/plants-vs-zombies"},
+            {name: "Zuma", emoji: "🐸", url: "https://www.crazygames.com/game/zuma-deluxe"},
+            {name: "Bejeweled", emoji: "💎", url: "https://www.crazygames.com/game/bejeweled"},
+            {name: "Candy Crush", emoji: "🍭", url: "https://www.crazygames.com/game/candy-crush"},
+            {name: "Bubble Shooter", emoji: "🫧", url: "https://www.crazygames.com/game/bubble-shooter"},
+            {name: "Mahjong", emoji: "🀄", url: "https://www.crazygames.com/game/mahjong"},
+            {name: "Ludo King", emoji: "🎲", url: "https://www.crazygames.com/game/ludo-king"},
+            {name: "Carrom", emoji: "⚫", url: "https://www.crazygames.com/game/carrom-clash"},
+            {name: "8 Ball Pool", emoji: "🎱", url: "https://www.crazygames.com/game/8-ball-pool"},
+            {name: "Bowling", emoji: "🎳", url: "https://www.crazygames.com/game/bowling"},
+            {name: "Darts", emoji: "🎯", url: "https://www.crazygames.com/game/darts"},
+            {name: "Table Tennis", emoji: "🏓", url: "https://www.crazygames.com/game/table-tennis-world-tour"},
+            {name: "Boxing Random", emoji: "🥊", url: "https://www.crazygames.com/game/boxing-random"}
+        ];
+
+        // Games ko page pe load karo
+        const grid = document.getElementById('gamesGrid');
+        games.forEach(game => {
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.innerHTML = `
+                <div class="game-thumb">${game.emoji}</div>
+                <div class="game-name">${game.name}</div>
+            `;
+            card.onclick = () => window.open(game.url, '_blank');
+            grid.appendChild(card);
         });
     </script>
 </body>
-</html>
+</html>    
