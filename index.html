@@ -35,7 +35,7 @@
     </div>
 
     <div class="container">
-        <div class="stats">🎮 Total Games: <span id="totalGames">12</span> | More Coming Soon</div>
+        <div class="stats">🎮 Total Games: <span id="totalGames">20</span> | More Coming Soon</div>
         <div class="games-grid" id="gamesList"></div>
     </div>
 
@@ -67,7 +67,15 @@
             {id: 9, name: "Abyu Reaction Test", emoji: "⚡", type: "reaction"},
             {id: 10, name: "Abyu Rock Paper", emoji: "✂️", type: "rps"},
             {id: 11, name: "Abyu Flappy Bird", emoji: "🐦", type: "flappy"},
-            {id: 12, name: "Abyu Breakout", emoji: "🧱", type: "breakout"}
+            {id: 12, name: "Abyu Breakout", emoji: "🧱", type: "breakout"},
+            {id: 13, name: "Abyu Pong", emoji: "🏓", type: "pong"},
+            {id: 14, name: "Abyu 2048", emoji: "🔢", type: "2048"},
+            {id: 15, name: "Abyu Maze Runner", emoji: "🌀", type: "maze"},
+            {id: 16, name: "Abyu Tower Stack", emoji: "🗼", type: "tower"},
+            {id: 17, name: "Abyu Dino Jump", emoji: "🦖", type: "dino"},
+            {id: 18, name: "Abyu Bubble Pop", emoji: "🫧", type: "bubble"},
+            {id: 19, name: "Abyu Sudoku", emoji: "🧩", type: "sudoku"},
+            {id: 20, name: "Abyu Car Racing", emoji: "🏎️", type: "racing"}
         ];
 
         const grid = document.getElementById('gamesList');
@@ -97,6 +105,14 @@
             else if(type === 'rps') loadRPSGame(container);
             else if(type === 'flappy') loadFlappyGame(container);
             else if(type === 'breakout') loadBreakoutGame(container);
+            else if(type === 'pong') loadPongGame(container);
+            else if(type === '2048') load2048Game(container);
+            else if(type === 'maze') loadMazeGame(container);
+            else if(type === 'tower') loadTowerGame(container);
+            else if(type === 'dino') loadDinoGame(container);
+            else if(type === 'bubble') loadBubbleGame(container);
+            else if(type === 'sudoku') loadSudokuGame(container);
+            else if(type === 'racing') loadRacingGame(container);
         }
 
         function closeGame() {
@@ -104,6 +120,7 @@
             if(currentGame) clearInterval(currentGame);
         }
 
+        // GAME 1-12 SAME AS BEFORE - shortened for space
         function loadSnakeGame(container) {
             container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU SNAKE</h2><div class="score">Score: <span id="snakeScore">0</span></div><canvas id="snakeCanvas" width="400" height="400"></canvas><div class="controls"><button class="btn" onclick="startSnake()">START</button><p style="color:#888;margin-top:10px;">Swipe to Move</p></div>`;
             window.startSnake = function() {
@@ -198,6 +215,8 @@
             container.innerHTML=`<h2 style="color:#00ffff;text-align:center;">ABYU BREAKOUT</h2><div class="score">Score: <span id="breakScore">0</span></div><canvas id="breakCanvas" width="400" height="500"></canvas><div class="controls"><button class="btn" onclick="startBreakout()">START</button><p style="color:#888;">Drag to Move</p></div>`;
             window.startBreakout=()=>{ const c=document.getElementById('breakCanvas'),x=c.getContext('2d'); let ball={x:200,y:400,vx:3,vy:-3},paddle={x:150,y:470,w:100},bricks=[],score=0,game=true; for(let i=0;i<5;i++)for(let j=0;j<8;j++)bricks.push({x:j*50+5,y:i*30+50,w:45,h:25,hit:false}); c.ontouchmove=e=>{let rect=c.getBoundingClientRect();paddle.x=e.touches[0].clientX-rect.left-paddle.w/2;e.preventDefault();}; function draw(){ if(!game)return; x.fillStyle='#000';x.fillRect(0,0,400,500); x.fillStyle='#00ff88';x.fillRect(paddle.x,paddle.y,paddle.w,15); x.beginPath();x.arc(ball.x,ball.y,10,0,7);x.fill(); ball.x+=ball.vx;ball.y+=ball.vy; if(ball.x<10||ball.x>390)ball.vx*=-1; if(ball.y<10)ball.vy*=-1; if(ball.y>480){game=false;alert('Game Over! Score: '+score);return;} if(ball.y>460&&ball.x>paddle.x&&ball.x<paddle.x+paddle.w)ball.vy=-Math.abs(ball.vy); x.fillStyle='#ff0080'; bricks.forEach(b=>{if(!b.hit){x.fillRect(b.x,b.y,b.w,b.h); if(ball.x>b.x&&ball.x<b.x+b.w&&ball.y>b.y&&ball.y<b.y+b.h){b.hit=true;ball.vy*=-1;score+=10;document.getElementById('breakScore').innerText=score;}}}); if(bricks.every(b=>b.hit)){game=false;alert('You Win! Score: '+score);} } clearInterval(currentGame); game=true;ball={x:200,y:400,vx:3,vy:-3};score=0;bricks=[];for(let i=0;i<5;i++)for(let j=0;j<8;j++)bricks.push({x:j*50+5,y:i*30+50,w:45,h:25,hit:false}); currentGame=setInterval(draw,20); };
         }
-    </script>
-</body>
-</html>
+
+        // GAME 13: PONG
+        function loadPongGame(container) {
+            container.innerHTML=`<h2 style="color:#00ffff;text-align:center;">ABYU PONG</h2><div class="score">You: <span id="pongPlayer">0</span> | CPU: <span id="pongCPU">0</span></div><canvas id="pongCanvas" width="400" height="400"></canvas><div class="controls"><button class="btn" onclick="startPong()">START</button><p style="color:#888;">Drag to Move</p></div>`;
+            window.startPong=()=>{ const c=document.getElementById('pongCanvas'),x=c.getContext('2d'); let ball={x:200,y:200,vx:3,vy:3},player={y:150},cpu={y:150},pScore=0,cScore=0,game=true; c.ontouchmove=e=>{let rect=c.getBoundingClientRect();player.y=e.touches[0].clientY-rect.top-50;e.preventDefault();}; function draw(){ if(!game)return; x.fillStyle='#000';x.fillRect(0,0,400,400); x.fillStyle='#00ff88';x.fillRect(10,player.y,10,100);x.fillRect(380,cpu.y,10,100); x.beginPath();x.arc(ball.x,ball.y,8,0,7);x.fill(); ball.x+=ball.vx;ball.y+=ball.vy; if(ball.y<8||ball.y>392)ball.vy*=-1; if(ball.x<20&&ball.y>player.y&&ball.y<player.y+100)ball.vx=Math.abs(ball.vx); if(ball.x>370&&ball.y>cpu.y&&ball.y<cpu.y+100)ball.vx=-Math.abs(ball.vx); cpu.y+=ball.y>cpu.y+50?2:-2; if(ball.x<0){cScore++;document.getElement
