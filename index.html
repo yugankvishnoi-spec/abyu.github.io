@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+       
     <meta name="google-site-verification" content="A5rzSqAsqoMQ_-mg1dPPmFH8AZl_U9ye_c6ElYbrpoM"/>
     <title>Abyu Game - 12 Original Online Games by Yugank Vishnoi</title>
     <meta name="description" content="Play 12 original, fast, and fun arcade games built completely with clean code. Play Abyu Snake, Flappy Bird, Breakout, and more on Abyu Game by Yugank Vishnoi.">
     <meta name="keywords" content="Abyu Game, Yugank Vishnoi, Online Games, Snake Game, Flappy Bird, Tic Tac Toe, Made in India Games">
     <meta name="author" content="Yugank Vishnoi">
     <meta name="robots" content="index, follow">
-    
+       
     <meta property="og:title" content="Abyu Game - 12 Original Games">
     <meta property="og:description" content="100% Apna Code | Zero External Links. Play original mini-games instantly.">
     <meta property="og:type" content="website">
@@ -23,7 +23,7 @@
             font-family: 'Segoe UI', Arial, sans-serif; 
             background-image: radial-gradient(circle at 50% 50%, #111122 0%, #05050a 100%);
         }
-        
+           
         /* PREMIUM CYBERPUNK HEADER */
         .header { 
             background: rgba(10, 10, 25, 0.9);
@@ -46,11 +46,11 @@
             font-size: 1.1rem;
             text-shadow: 0 0 8px rgba(255, 0, 127, 0.6);
             font-weight: bold;
-            letter-spacing: 1px;
+  log       letter-spacing: 1px;
         }
-        
+           
         .container { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
-        
+           
         .stats { 
             text-align: center; 
             color: #00ffff; 
@@ -59,7 +59,7 @@
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
             font-weight: bold;
         }
-        
+           
         /* PREMIUM NEON GRID */
         .games-grid { 
             display: grid; 
@@ -77,7 +77,6 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             box-shadow: 0 0 15px rgba(255, 0, 127, 0.15), inset 0 0 15px rgba(255, 0, 127, 0.05);
         }
-        /* Alternating Neon Colors for Grid Cards */
         .game-card:nth-child(even) {
             border-color: #00ffff;
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.15), inset 0 0 15px rgba(0, 255, 255, 0.05);
@@ -102,7 +101,7 @@
             font-size: 1.1rem; 
             letter-spacing: 0.5px;
         }
-        
+           
         /* MODAL & GAME WINDOW */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 10, 0.95); z-index: 9999; align-items: center; justify-content: center; }
         .modal.active { display: flex; }
@@ -170,7 +169,7 @@
             box-shadow: 0 0 25px rgba(0, 255, 136, 0.7);
         }
         .score { font-size: 1.8rem; color: #ff00ff; text-align: center; margin: 15px 0; text-shadow: 0 0 10px #ff00ff; font-weight: bold;}
-        
+           
         /* ABOUT US SECTION WITH NEON BORDER */
         .about { 
             background: rgba(15, 15, 30, 0.8); 
@@ -241,10 +240,12 @@
             grid.appendChild(card);
         });
 
-        let currentGame = null;
+        let gameInterval = null;
+        let snake, food, dx, dy, score, canvas, ctx;
+        const gridSize = 20;
 
         function openGame(type) {
-            if(currentGame) { clearInterval(currentGame); currentGame = null; }
+            closeGame();
             document.getElementById('gameModal').classList.add('active');
             const container = document.getElementById('gameContainer');
             container.innerHTML = '';
@@ -264,10 +265,113 @@
 
         function closeGame() {
             document.getElementById('gameModal').classList.remove('active');
-            if(currentGame) { clearInterval(currentGame); currentGame = null; }
+            if(gameInterval) { clearInterval(gameInterval); gameInterval = null; }
             document.onkeydown = null;
         }
 
         function loadSnakeGame(container) {
-            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;text-shadow: 0 0 10px #00ffff;">ABYU SNAKE</h2><div class="score">Score: <span id="snakeScore">0</span></div><canvas id="snakeCanvas" width="400" height="400"></canvas><div class="controls"><button class="btn" onclick="startSnake()">START</button        
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;text-shadow: 0 0 10px #00ffff;">ABYU SNAKE</h2><div class="score">Score: <span id="snakeScore">0</span></div><canvas id="snakeCanvas" width="400" height="400"></canvas><div class="controls"><button class="btn" onclick="startSnake()">START</button></div>`;
+        }
+        
+        function startSnake() {
+            canvas = document.getElementById('snakeCanvas');
+            ctx = canvas.getContext('2d');
+            snake = [{x: 160, y: 160}, {x: 140, y: 160}, {x: 120, y: 160}];
+            dx = gridSize; dy = 0; score = 0;
+            document.getElementById('snakeScore').innerText = score;
+            generateFood();
+            if(gameInterval) clearInterval(gameInterval);
+            gameInterval = setInterval(updateSnake, 100);
+            document.onkeydown = changeDirection;
+        }
 
+        function updateSnake() {
+            if (hasGameEnded()) { clearInterval(gameInterval); alert("Game Over! Score: " + score); return; }
+            const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+            snake.unshift(head);
+            if (snake[0].x === food.x && snake[0].y === food.y) {
+                score += 10;
+                document.getElementById('snakeScore').innerText = score;
+                generateFood();
+            } else { snake.pop(); }
+            drawSnakeGame();
+        }
+
+        function drawSnakeGame() {
+            ctx.fillStyle = '#000'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ff007f'; ctx.shadowBlur = 10; ctx.shadowColor = '#ff007f';
+            ctx.fillRect(food.x, food.y, gridSize, gridSize);
+            ctx.fillStyle = '#00ff88'; ctx.shadowColor = '#00ff88';
+            snake.forEach(part => { ctx.fillRect(part.x, part.y, gridSize - 2, gridSize - 2); });
+            ctx.shadowBlur = 0;
+        }
+
+        function generateFood() {
+            food = {
+                x: Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize,
+                y: Math.floor(Math.random() * (canvas.height / gridSize)) * gridSize
+            };
+            snake.forEach(part => { if (part.x === food.x && part.y === food.y) generateFood(); });
+        }
+
+        function changeDirection(event) {
+            const keyPressed = event.keyCode;
+            const goingUp = dy === -gridSize; const goingDown = dy === gridSize;
+            const goingRight = dx === gridSize; const goingLeft = dx === -gridSize;
+            if (keyPressed === 37 && !goingRight) { dx = -gridSize; dy = 0; }
+            if (keyPressed === 38 && !goingDown) { dx = 0; dy = -gridSize; }
+            if (keyPressed === 39 && !goingLeft) { dx = gridSize; dy = 0; }
+            if (keyPressed === 40 && !goingUp) { dx = 0; dy = gridSize; }
+        }
+
+        function hasGameEnded() {
+            for (let i = 4; i < snake.length; i++) { if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true; }
+            return snake[0].x < 0 || snake[0].x >= canvas.width || snake[0].y < 0 || snake[0].y >= canvas.height;
+        }
+
+        function loadTicTacToe(container) {
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU TIC TAC TOE</h2><p style="text-align:center;margin-top:20px;">Coming Soon...</p>`;
+        }
+        
+        function loadClickerGame(container) {
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU CLICKER</h2><p style="text-align:center;margin-top:20px;">Coming Soon...</p>`;
+        }
+        
+        function loadMemoryGame(container) {
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU MEMORY</h2><p style="text-align:center;margin-top:20px;">Coming Soon...</p>`;
+        }
+        
+        function loadGuessGame(container) {
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU GUESS NUMBER</h2><p style="text-align:center;margin-top:20px;">Coming Soon...</p>`;
+        }
+        
+        function loadDodgeGame(container) {
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU DODGE CAR</h2><p style="text-align:center;margin-top:20px;">Coming Soon...</p>`;
+        }
+        
+        function loadColorGame(container) {
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU COLOR MATCH</h2><p style="text-align:center;margin-top:20px;">Coming Soon...</p>`;
+        }
+        
+        function loadMathGame(container) {
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU MATH QUIZ</h2><p style="text-align:center;margin-top:20px;">Coming Soon...</p>`;
+        }
+        
+        function loadReactionGame(container) {
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU REACTION TEST</h2><p style="text-align:center;margin-top:20px;">Coming Soon...</p>`;
+        }
+        
+        function loadRPSGame(container) {
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU ROCK PAPER</h2><p style="text-align:center;margin-top:20px;">Coming Soon...</p>`;
+        }
+        
+        function loadFlappyGame(container) {
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU FLAPPY BIRD</h2><p style="text-align:center;margin-top:20px;">Coming Soon...</p>`;
+        }
+        
+        function loadBreakoutGame(container) {
+            container.innerHTML = `<h2 style="color:#00ffff;text-align:center;">ABYU BREAKOUT</h2><p style="text-align:center;margin-top:20px;">Coming Soon...</p>`;
+        }
+    </script>
+</body>
+</html>
