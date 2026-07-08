@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<!-- PWA Manifest Link -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff007f">
 <title>Abyu Game - 30 Games</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
@@ -21,7 +24,30 @@ body{background:linear-gradient(135deg, #0b0b1e 0%, #1a1a3a 100%);background-siz
 .game-emoji{font-size:3rem;margin-bottom:10px}
 .game-name{font-size:1.1rem;font-weight:bold}
 
-/* FULLSCREEN LOCK MODAL - YAHI FIX HAI */
+/* BIG AND EXTRA BOLD DOWNLOAD BUTTON STYLE */
+.pwa-download-btn {
+    display: inline-block; /* Hamesha visible rahega */
+    background: linear-gradient(45deg, #00ff88, #00ffff);
+    color: #000;
+    border: 3px solid #ff007f;
+    padding: 18px 40px; /* Bada padding size bada karne ke liye */
+    font-size: 1.5rem;  /* Bada font size */
+    font-weight: 900;   /* Extra Bold text */
+    text-transform: uppercase;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 20px auto 10px auto;
+    box-shadow: 0 0 20px #00ff88;
+    animation: megaPulse 1.5s infinite;
+    width: 90%;
+    max-width: 450px;
+}
+@keyframes megaPulse {
+    0% { transform: scale(1); box-shadow: 0 0 15px #00ff88; }
+    50% { transform: scale(1.06); box-shadow: 0 0 35px #00ff88, 0 0 20px #ff007f; }
+    100% { transform: scale(1); box-shadow: 0 0 15px #00ff88; }
+}
+
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,1);z-index:9999;align-items:center;justify-content:center}
 .modal.active{display:flex}
 .game-window{background:#111125;width:100%;height:100%;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;border:none}
@@ -33,7 +59,6 @@ body{background:linear-gradient(135deg, #0b0b1e 0%, #1a1a3a 100%);background-siz
 .btn-mobile{padding:16px 25px!important;font-size:1.3rem!important;width:95%;max-width:100%;margin:5px auto!important;display:block}
 .score{font-size:1.8rem;color:#ff00ff;margin:5px 0;font-weight:bold}
 
-/* CANVAS AB PURA SCREEN LEGA */
 .canvas-responsive{width:100vw!important;height:70vh!important;max-width:100%!important;max-height:70vh!important;background:#000;border:2px solid #00ffff;display:block;margin:0 auto;border-radius:0}
 
 .ttt-box{display:inline-block;width:30vw;height:30vw;max-width:100px;max-height:100px;background:#1a1a3a;border:3px solid #00ffff;font-size:8vw;color:#fff;font-weight:bold;margin:1vw;cursor:pointer;border-radius:8px}
@@ -43,7 +68,12 @@ input{padding:12px;font-size:1.3rem;width:150px;text-align:center;margin-bottom:
 </style>
 </head>
 <body>
-<div class="header"><div class="logo">ABYU GAME</div><div class="subtitle">30 Original Games | MADE IN INDIA 🇮🇳</div></div>
+<div class="header">
+    <div class="logo">ABYU GAME</div>
+    <div class="subtitle">30 Original Games | MADE IN INDIA 🇮🇳</div>
+    <!-- Bada PWA Download Button Jo Hamesha Dikhega -->
+    <button id="downloadBtn" class="pwa-download-btn">📲 DOWNLOAD APP</button>
+</div>
 <div class="container"><div class="games-grid">
 <div class="game-card" onclick="openGame('snake')"><div class="game-emoji">🐍</div><div class="game-name">Abyu Snake</div></div>
 <div class="game-card" onclick="openGame('tictactoe')"><div class="game-emoji">⭕</div><div class="game-name">Tic Tac Toe</div></div>
@@ -168,7 +198,40 @@ function loadPianoGame(con){con.innerHTML='<h2>PIANO TILES</h2><div><button clas
 function loadHangmanGame(con){con.innerHTML='<h2>HANGMAN</h2><p style="font-size:3rem;margin:10vh 0">Word: _</p><input maxlength="1"><button class="btn btn-mobile">GUESS</button>'}
 function loadSudokuGame(con){con.innerHTML='<h2>SUDOKU</h2><p>9x9 Grid</p><div style="display:grid;grid-template-columns:repeat(9,10vw);gap:0.5vw;margin:20px auto;width:fit-content;">'+Array(81).fill(0).map((_,i)=>`<input style="width:10vw;height:10vw;max-width:40px;max-height:40px;text-align:center">`).join('')+'</div>'}
 function loadRunGame(con){con.innerHTML='<h2>JUNGLE RUN</h2><p>Space dabao jump ke liye</p><canvas class="canvas-responsive" width="300" height="400"></canvas><button class="btn btn-mobile">START RUN</button>'}
+
+// PWA AND DOWNLOAD LOGIC CODE
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker Active!', reg))
+            .catch(err => console.log('Service Worker Error!', err));
+    });
+}
+
+let deferredPrompt;
+const downloadBtn = document.getElementById('downloadBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // PWA Prompt active hone par button ka click event bind hoga
+    downloadBtn.addEventListener('click', () => {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User installed the app');
+            } else {
+                console.log('User cancelled install');
+            }
+            deferredPrompt = null;
+        });
+    });
+});
+
+// App install hone ke baad bhi button ko gayab nahi hone dega
+window.addEventListener('appinstalled', () => {
+    console.log('App successfully installed!');
+});
 </script>
 </body>
 </html>
-Isme sab kuch add karo
