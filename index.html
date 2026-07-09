@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abyu Game - 36 Games</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:linear-gradient(135deg, #0b0b1e 0%, #1a1a3a 100%);color:#fff;font-family:Arial;text-align:center;padding-bottom:50px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:linear-gradient(135deg, #0b0b1e 0%, #1a1a3a 100%);color:#fff;text-align:center;padding-bottom:50px}
 .header{background:#121232;padding:30px 10px;border-bottom:4px solid #00ff88}
-.logo{font-size:2.5rem;font-weight:bold;color:#00ffff}
+.logo{font-size:2.5rem;font-weight:bold;color:#00ffff;text-shadow:0 0 10px #00ffff}
 .subtitle{color:#ff007f;font-weight:bold;margin-top:5px}
 .container{max-width:1100px;margin:20px auto;padding:10px}
 .games-grid{display:flex;flex-wrap:wrap;justify-content:center}
@@ -19,15 +19,19 @@ body{background:linear-gradient(135deg, #0b0b1e 0%, #1a1a3a 100%);color:#fff;fon
 .pwa-download-btn {display: inline-block;background: linear-gradient(45deg, #00ff88, #00ffff);color: #000;border: 3px solid #ff007f;padding: 18px 40px;font-size: 1.5rem;font-weight: 900;border-radius: 50px;margin: 20px auto;text-decoration: none;}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center}
 .modal.active{display:flex}
-.game-window{background:#111125;width:95%;height:90%;padding:15px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:auto;border-radius:15px}
+.game-window{background:#111125;width:95%;max-width:500px;height:90%;padding:15px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:auto;border-radius:15px}
 .close-btn{position:absolute;top:15px;right:15px;background:#ff007f;color:#fff;border:none;padding:10px 15px;font-weight:bold;border-radius:8px;cursor:pointer;z-index:10000}
 .btn{background:#00ffff;color:#000;border:none;padding:10px 20px;font-size:1.1rem;font-weight:bold;border-radius:8px;cursor:pointer;margin:5px}
+.btn:active{transform:scale(0.95)}
 .score{font-size:1.6rem;color:#ff00ff;margin:10px 0;font-weight:bold}
 canvas{background:#000;border:2px solid #00ffff;margin:10px 0}
 input{padding:10px;font-size:1.1rem;width:150px;text-align:center;margin:5px;border-radius:8px;border:2px solid #00ffff;background:#000;color:#fff}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;width:270px;margin:10px auto}
 .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;width:360px;margin:10px auto}
 .box{width:80px;height:80px;background:#1a1a3a;border:3px solid #00ffff;font-size:2rem;color:#fff;font-weight:bold;cursor:pointer;border-radius:8px}
+.about{background:#121232;border:2px solid #ff00ff;border-radius:15px;max-width:600px;margin:40px auto;padding:20px}
+.email-link {color: #ff007f;text-decoration: none;font-weight: bold;font-size: 1.1rem;}
+.email-link:hover {background: #ff007f;color: #fff;padding: 5px;border-radius: 5px;}
 </style>
 </head>
 <body>
@@ -38,102 +42,127 @@ input{padding:10px;font-size:1.1rem;width:150px;text-align:center;margin:5px;bor
 </div>
 
 <div class="container"><div class="games-grid">
-<div class="game-card" onclick="openGame(1)"><div class="game-emoji">🧱</div><div class="game-name">Tetris</div></div>
-<div class="game-card" onclick="openGame(2)"><div class="game-emoji">🚀</div><div class="game-name">Space Shooter</div></div>
-<div class="game-card" onclick="openGame(3)"><div class="game-emoji">🔴</div><div class="game-name">Memory Simon</div></div>
-<div class="game-card" onclick="openGame(4)"><div class="game-emoji">🏢</div><div class="game-name">Tower Builder</div></div>
-<div class="game-card" onclick="openGame(5)"><div class="game-emoji">🏓</div><div class="game-name">Ping Pong</div></div>
-<div class="game-card" onclick="openGame(6)"><div class="game-emoji">🏎️</div><div class="game-name">Car Racer</div></div>
-<div class="game-card" onclick="openGame(7)"><div class="game-emoji">🐍</div><div class="game-name">Snake</div></div>
-<div class="game-card" onclick="openGame(8)"><div class="game-emoji">⭕</div><div class="game-name">Tic Tac Toe</div></div>
-<div class="game-card" onclick="openGame(9)"><div class="game-emoji">👆</div><div class="game-name">Clicker</div></div>
-<div class="game-card" onclick="openGame(10)"><div class="game-emoji">🧠</div><div class="game-name">Memory Cards</div></div>
-<div class="game-card" onclick="openGame(11)"><div class="game-emoji">🔢</div><div class="game-name">Guess Number</div></div>
-<div class="game-card" onclick="openGame(12)"><div class="game-emoji">🚗</div><div class="game-name">Dodge Car</div></div>
-<div class="game-card" onclick="openGame(13)"><div class="game-emoji">🎨</div><div class="game-name">Color Match</div></div>
-<div class="game-card" onclick="openGame(14)"><div class="game-emoji">➕</div><div class="game-name">Math Quiz</div></div>
-<div class="game-card" onclick="openGame(15)"><div class="game-emoji">⚡</div><div class="game-name">Reaction Test</div></div>
-<div class="game-card" onclick="openGame(16)"><div class="game-emoji">✂️</div><div class="game-name">Rock Paper</div></div>
-<div class="game-card" onclick="openGame(17)"><div class="game-emoji">🐦</div><div class="game-name">Flappy Bird</div></div>
-<div class="game-card" onclick="openGame(18)"><div class="game-emoji">🧱</div><div class="game-name">Breakout</div></div>
-<div class="game-card" onclick="openGame(19)"><div class="game-emoji">⚡</div><div class="game-name">Click Speed</div></div>
-<div class="game-card" onclick="openGame(20)"><div class="game-emoji">🎲</div><div class="game-name">Dice Roll</div></div>
-<div class="game-card" onclick="openGame(21)"><div class="game-emoji">🪙</div><div class="game-name">Coin Flip</div></div>
-<div class="game-card" onclick="openGame(22)"><div class="game-emoji">😂</div><div class="game-name">Emoji Match</div></div>
-<div class="game-card" onclick="openGame(23)"><div class="game-emoji">🔤</div><div class="game-name">Word Scramble</div></div>
-<div class="game-card" onclick="openGame(24)"><div class="game-emoji">2️⃣</div><div class="game-name">2048</div></div>
-<div class="game-card" onclick="openGame(25)"><div class="game-emoji">💣</div><div class="game-name">Minesweeper</div></div>
-<div class="game-card" onclick="openGame(26)"><div class="game-emoji">🔨</div><div class="game-name">Whack A Mole</div></div>
-<div class="game-card" onclick="openGame(27)"><div class="game-emoji">🎰</div><div class="game-name">Slot Machine</div></div>
-<div class="game-card" onclick="openGame(28)"><div class="game-emoji">⭕</div><div class="game-name">Connect 4</div></div>
-<div class="game-card" onclick="openGame(29)"><div class="game-emoji">🧩</div><div class="game-name">15 Puzzle</div></div>
-<div class="game-card" onclick="openGame(30)"><div class="game-emoji">🎯</div><div class="game-name">Aim Trainer</div></div>
-<div class="game-card" onclick="openGame(31)"><div class="game-emoji">🎈</div><div class="game-name">Balloon Pop</div></div>
-<div class="game-card" onclick="openGame(32)"><div class="game-emoji">🎹</div><div class="game-name">Piano Tiles</div></div>
-<div class="game-card" onclick="openGame(33)"><div class="game-emoji">👨</div><div class="game-name">Hangman</div></div>
-<div class="game-card" onclick="openGame(34)"><div class="game-emoji">9️⃣</div><div class="game-name">Sudoku</div></div>
-<div class="game-card" onclick="openGame(35)"><div class="game-emoji">🏃</div><div class="game-name">Jungle Run</div></div>
-<div class="game-card" onclick="openGame(36)"><div class="game-emoji">⭐</div><div class="game-name">Star Catcher</div></div>
+<div class="game-card" onclick="openGame('snake')"><div class="game-emoji">🐍</div><div class="game-name">Snake</div></div>
+<div class="game-card" onclick="openGame('tictactoe')"><div class="game-emoji">⭕</div><div class="game-name">Tic Tac Toe</div></div>
+<div class="game-card" onclick="openGame('clicker')"><div class="game-emoji">👆</div><div class="game-name">Clicker</div></div>
+<div class="game-card" onclick="openGame('guess')"><div class="game-emoji">🔢</div><div class="game-name">Guess Number</div></div>
+<div class="game-card" onclick="openGame('dice')"><div class="game-emoji">🎲</div><div class="game-name">Dice Roll</div></div>
+<div class="game-card" onclick="openGame('coin')"><div class="game-emoji">🪙</div><div class="game-name">Coin Flip</div></div>
+<div class="game-card" onclick="openGame('rps')"><div class="game-emoji">✂️</div><div class="game-name">Rock Paper</div></div>
+<div class="game-card" onclick="openGame('reaction')"><div class="game-emoji">⚡</div><div class="game-name">Reaction</div></div>
+<div class="game-card" onclick="openGame('memory')"><div class="game-emoji">🧠</div><div class="game-name">Memory</div></div>
+<div class="game-card" onclick="openGame('math')"><div class="game-emoji">➕</div><div class="game-name">Math Quiz</div></div>
+<div class="game-card" onclick="openGame('pong')"><div class="game-emoji">🏓</div><div class="game-name">Ping Pong</div></div>
+<div class="game-card" onclick="openGame('race')"><div class="game-emoji">🏎️</div><div class="game-name">Car Racer</div></div>
+<div class="game-card" onclick="openGame('space')"><div class="game-emoji">🚀</div><div class="game-name">Space</div></div>
+<div class="game-card" onclick="openGame('tower')"><div class="game-emoji">🏢</div><div class="game-name">Tower</div></div>
+<div class="game-card" onclick="openGame('simon')"><div class="game-emoji">🔴</div><div class="game-name">Simon</div></div>
+<div class="game-card" onclick="openGame('tetris')"><div class="game-emoji">🧱</div><div class="game-name">Tetris</div></div>
+<div class="game-card" onclick="openGame('flappy')"><div class="game-emoji">🐦</div><div class="game-name">Flappy</div></div>
+<div class="game-card" onclick="openGame('breakout')"><div class="game-emoji">🧱</div><div class="game-name">Breakout</div></div>
+<div class="game-card" onclick="openGame('clickspeed')"><div class="game-emoji">⚡</div><div class="game-name">Click Speed</div></div>
+<div class="game-card" onclick="openGame('emoji')"><div class="game-emoji">😂</div><div class="game-name">Emoji</div></div>
+<div class="game-card" onclick="openGame('word')"><div class="game-emoji">🔤</div><div class="game-name">Word</div></div>
+<div class="game-card" onclick="openGame('game2048')"><div class="game-emoji">2️⃣</div><div class="game-name">2048</div></div>
+<div class="game-card" onclick="openGame('whack')"><div class="game-emoji">🔨</div><div class="game-name">Whack</div></div>
+<div class="game-card" onclick="openGame('slot')"><div class="game-emoji">🎰</div><div class="game-name">Slot</div></div>
+<div class="game-card" onclick="openGame('puzzle')"><div class="game-emoji">🧩</div><div class="game-name">Puzzle</div></div>
+<div class="game-card" onclick="openGame('aim')"><div class="game-emoji">🎯</div><div class="game-name">Aim</div></div>
+<div class="game-card" onclick="openGame('balloon')"><div class="game-emoji">🎈</div><div class="game-name">Balloon</div></div>
+<div class="game-card" onclick="openGame('piano')"><div class="game-emoji">🎹</div><div class="game-name">Piano</div></div>
+<div class="game-card" onclick="openGame('hangman')"><div class="game-emoji">👨</div><div class="game-name">Hangman</div></div>
+<div class="game-card" onclick="openGame('sudoku')"><div class="game-emoji">9️⃣</div><div class="game-name">Sudoku</div></div>
+<div class="game-card" onclick="openGame('run')"><div class="game-emoji">🏃</div><div class="game-name">Run</div></div>
+<div class="game-card" onclick="openGame('dodge')"><div class="game-emoji">🚗</div><div class="game-name">Dodge</div></div>
+<div class="game-card" onclick="openGame('color')"><div class="game-emoji">🎨</div><div class="game-name">Color</div></div>
+<div class="game-card" onclick="openGame('mine')"><div class="game-emoji">💣</div><div class="game-name">Mine</div></div>
+<div class="game-card" onclick="openGame('connect')"><div class="game-emoji">⭕</div><div class="game-name">Connect4</div></div>
 </div></div>
+
+<div class="about">
+<h3>ABOUT US</h3>
+<p style="margin:10px 0;color:#00ffff;">Founder-Developer: Yugank Vishnoi</p>
+<p style="margin:5px 0;color:#00ffff;">Co-founder: Abhinav Singh</p>
+<p style="margin:10px 0;">Contact: <a class="email-link" href="mailto:yugankvishnoi@gmail.com">yugankvishnoi@gmail.com</a></p>
+<p style="color:#666;font-weight:bold;margin-top:15px;">MADE IN INDIA 🇮🇳</p>
+</div>
 
 <div class="modal" id="gameModal"><button class="close-btn" onclick="closeGame()">❌ CLOSE</button><div class="game-window" id="gameContainer"></div></div>
 
 <script>
-var score=0, gameInterval=null;
-function openGame(n){
+var score=0, gameInterval=null, gameData={};
+
+function openGame(type){
     document.getElementById('gameModal').className='modal active';
     var con=document.getElementById('gameContainer');
-    if(gameInterval){clearInterval(gameInterval)}
-    score=0;
-    var games={
-        1:loadTetris,2:loadSpace,3:loadSimon,4:loadTower,5:loadPong,6:loadRace,7:loadSnake,8:loadTTT,9:loadClicker,10:loadMemory,
-        11:loadGuess,12:loadDodge,13:loadColor,14:loadMath,15:loadReaction,16:loadRPS,17:loadFlappy,18:loadBreakout,19:loadClickSpeed,20:loadDice,
-        21:loadCoin,22:loadEmoji,23:loadWord,24:load2048,25:loadMine,26:loadWhack,27:loadSlot,28:loadConnect,29:loadPuzzle,30:loadAim,
-        31:loadBalloon,32:loadPiano,33:loadHangman,34:loadSudoku,35:loadRun,36:loadStar
+    if(gameInterval){clearInterval(gameInterval);gameInterval=null}
+    score=0; gameData={};
+
+    const games = {
+        snake:()=>{con.innerHTML=`<h2>🐍 SNAKE</h2><div class="score" id="sScore">Score: 0</div><canvas id="can" width="300" height="300"></canvas><br><button class="btn" onclick="gameData.dir='U'">⬆️</button><br><button class="btn" onclick="gameData.dir='L'">⬅️</button><button class="btn" onclick="gameData.dir='R'">➡️</button><br><button class="btn" onclick="gameData.dir='D'">⬇️</button>`;
+        let can=document.getElementById('can'),ctx=can.getContext('2d');gameData.snake=[{x:140,y:140}];gameData.dir='R';gameData.food={x:60,y:60};
+        gameInterval=setInterval(()=>{let h={...gameData.snake[0]};if(gameData.dir=='R')h.x+=20;if(gameData.dir=='L')h.x-=20;if(gameData.dir=='U')h.y-=20;if(gameData.dir=='D')h.y+=20;if(h.x<0||h.x>=300||h.y<0||h.y>=300){clearInterval(gameInterval);alert("Game Over! "+score);return}gameData.snake.unshift(h);if(h.x==gameData.food.x&&h.y==gameData.food.y){score+=10;document.getElementById('sScore').innerText="Score: "+score;gameData.food={x:Math.floor(Math.random()*15)*20,y:Math.floor(Math.random()*15)*20}}else{gameData.snake.pop()}ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);ctx.fillStyle='#ff007f';ctx.fillRect(gameData.food.x,gameData.food.y,18,18);ctx.fillStyle='#00ff88';gameData.snake.forEach(b=>ctx.fillRect(b.x,b.y,18,18))},150)},
+
+        tictactoe:()=>{let g=Array(9).fill("");let t="X";con.innerHTML=`<h2>⭕ TIC TAC TOE</h2><div class="score" id="tS">Turn: X</div><div class="grid3">`+g.map((_,i)=>`<button class="box" id="b${i}" onclick="clickBox(${i})"></button>`).join('')+`</div>`;
+        window.clickBox=(i)=>{if(g[i]!="")return;g[i]=t;document.getElementById('b'+i).innerText=t;[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].forEach(w=>{if(w.every(x=>g[x]==t)){document.getElementById('tS').innerText=t+" Wins!"}});t=t=="X"?"O":"X";document.getElementById('tS').innerText="Turn: "+t}},
+
+        clicker:()=>{con.innerHTML=`<h2>👆 CLICKER</h2><div class="score" id="cs">Clicks: 0</div><button class="btn" style="padding:60px;font-size:2rem" onclick="score++;document.getElementById('cs').innerText='Clicks: '+score">CLICK ME!</button>`},
+
+        guess:()=>{let n=Math.floor(Math.random()*100)+1;con.innerHTML=`<h2>🔢 GUESS NUMBER</h2><p>1-100</p><input type="number" id="gi"><button class="btn" onclick="gC()">GUESS</button><div class="score" id="gR"></div>`;
+        window.gC=()=>{let v=+document.getElementById('gi').value;document.getElementById('gR').innerText=v==n?"Sahi! 🎉":v<n?"Bada hai ⬆️":"Chota hai ⬇️"}},
+
+        dice:()=>{con.innerHTML=`<h2>🎲 DICE ROLL</h2><div class="score" id="dr">🎲</div><button class="btn" onclick="document.getElementById('dr').innerText='🎲 '+Math.floor(Math.random()*6+1)">ROLL</button>`},
+
+        coin:()=>{con.innerHTML=`<h2>🪙 COIN FLIP</h2><div class="score" id="cr">🪙</div><button class="btn" onclick="document.getElementById('cr').innerText=Math.random()<0.5?'HEADS':'TAILS'">FLIP</button>`},
+
+        rps:()=>{con.innerHTML=`<h2>✂️ ROCK PAPER</h2><div class="score" id="rr">Choose</div><button class="btn" onclick="pR('Rock')">✊</button><button class="btn" onclick="pR('Paper')">✋</button><button class="btn" onclick="pR('Scissor')">✌️</button>`;
+        window.pR=(u)=>{let c=['Rock','Paper','Scissor'][Math.floor(Math.random()*3)];let r=u==c?'Draw':(u=='Rock'&&c=='Scissor')||(u=='Paper'&&c=='Rock')||(u=='Scissor'&&c=='Paper')?'Win!':'Lose!';document.getElementById('rr').innerText=`You:${u} Comp:${c} ${r}`}},
+
+        reaction:()=>{con.innerHTML=`<h2>⚡ REACTION</h2><div class="score" id="rt">Wait...</div><button class="btn" id="rtB" onclick="sRT()">START</button>`;
+        window.sRT=()=>{document.getElementById('rt').innerText="Wait...";document.getElementById('rtB').style.background="red";setTimeout(()=>{let s=Date.now();document.getElementById('rtB').style.background="green";document.getElementById('rt').innerText="CLICK!";document.getElementById('rtB').onclick=()=>{document.getElementById('rt').innerText=(Date.now()-s)+"ms";document.getElementById('rtB').onclick=sRT;document.getElementById('rtB').style.background="#00ffff"}},2000+Math.random()*3000)}},
+
+        memory:()=>{let em=['🍎','🍌','🍇','🍊'];let cards=[...em,...em].sort(()=>0.5-Math.random());con.innerHTML=`<h2>🧠 MEMORY</h2><div class="grid4">`+cards.map(c=>`<button class="box" onclick="alert('Card: ${c}')">${c}</button>`).join('')+`</div>`},
+
+        math:()=>{let a=Math.floor(Math.random()*10),b=Math.floor(Math.random()*10);con.innerHTML=`<h2>➕ MATH QUIZ</h2><div class="score">${a} + ${b} =?</div><input type="number" id="ma"><button class="btn" onclick="alert(${a}+${b}==+document.getElementById('ma').value?'Sahi!':'Galat')">CHECK</button>`},
+
+        pong:()=>{con.innerHTML=`<h2>🏓 PING PONG</h2><canvas id="pCan" width="300" height="400"></canvas><br><button class="btn" onclick="gameData.px-=30">⬅️</button><button class="btn" onclick="gameData.px+=30">➡️</button>`;
+        let ctx=document.getElementById('pCan').getContext('2d');gameData.px=130;gameData.bx=150;gameData.by=150;gameData.bdx=4;gameData.bdy=4;
+        gameInterval=setInterval(()=>{gameData.bx+=gameData.bdx;gameData.by+=gameData.bdy;if(gameData.bx<0||gameData.bx>290)gameData.bdx*=-1;if(gameData.by<0)gameData.bdy*=-1;if(gameData.by>370&&gameData.bx>gameData.px&&gameData.bx<gameData.px+80)gameData.bdy*=-1;
+        ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);ctx.fillStyle='#00ff88';ctx.fillRect(gameData.px,370,80,15);ctx.fillStyle='#ffff00';ctx.fillRect(gameData.bx,gameData.by,12,12)},30)},
+
+        race:()=>{con.innerHTML=`<h2>🏎️ CAR RACER</h2><div class="score" id="rcS">Score: 0</div><canvas id="rCan" width="300" height="400"></canvas><br><button class="btn" onclick="gameData.cx-=40">⬅️</button><button class="btn" onclick="gameData.cx+=40">➡️</button>`;
+        let ctx=document.getElementById('rCan').getContext('2d');gameData.cx=130;gameData.oy=0;
+        gameInterval=setInterval(()=>{gameData.oy+=8;if(gameData.oy>400){gameData.oy=0;score+=5;document.getElementById('rcS').innerText="Score: "+score}
+        ctx.fillStyle='#222';ctx.fillRect(0,0,300,400);ctx.fillStyle='#00ffff';ctx.fillRect(gameData.cx,340,30,50);ctx.fillStyle='#ff007f';ctx.fillRect(130,gameData.oy,30,50)},30)},
+
+        space:()=>{con.innerHTML=`<h2>🚀 SPACE</h2><div class="score">Score: 0</div><canvas width="300" height="400"></canvas><br><button class="btn">FIRE</button>`},
+        tower:()=>{con.innerHTML=`<h2>🏢 TOWER</h2><div class="score">Blocks: 0</div><canvas width="300" height="400"></canvas><br><button class="btn" onclick="alert('Block Dropped!')">DROP</button>`},
+        simon:()=>{con.innerHTML=`<h2>🔴 SIMON</h2><div class="grid4"><button class="box" style="background:red"></button><button class="box" style="background:blue"></button><button class="box" style="background:green"></button><button class="box" style="background:yellow"></button></div>`},
+        tetris:()=>{con.innerHTML=`<h2>🧱 TETRIS</h2><canvas width="200" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">🔄</button><button class="btn">➡️</button>`},
+        flappy:()=>{con.innerHTML=`<h2>🐦 FLAPPY</h2><canvas width="300" height="400"></canvas><br><button class="btn" onclick="alert('Jump!')">JUMP</button>`},
+        breakout:()=>{con.innerHTML=`<h2>🧱 BREAKOUT</h2><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`},
+        clickspeed:()=>{con.innerHTML=`<h2>⚡ CLICK SPEED</h2><div class="score" id="css">Clicks: 0</div><button class="btn" onclick="score++;document.getElementById('css').innerText='Clicks: '+score">CLICK FAST!</button>`},
+        emoji:()=>{con.innerHTML=`<h2>😂 EMOJI</h2><div class="grid4"><button class="box" onclick="alert('Matched!')">😀</button><button class="box" onclick="alert('Matched!')">😂</button><button class="box" onclick="alert('Matched!')">😍</button><button class="box" onclick="alert('Matched!')">😎</button></div>`},
+        word:()=>{con.innerHTML=`<h2>🔤 WORD</h2><div class="score">ABYU</div><input placeholder="Unscramble"><button class="btn" onclick="alert('Correct!')">CHECK</button>`},
+        game2048:()=>{con.innerHTML=`<h2>2️⃣ 2048</h2><div class="grid4"><button class="box">2</button><button class="box">4</button><button class="box">8</button><button class="box">16</button></div>`},
+        whack:()=>{con.innerHTML=`<h2>🔨 WHACK</h2><div class="score" id="ws">Score: 0</div><div class="grid3">`+Array(9).fill(0).map((_,i)=>`<button class="box" onclick="score++;document.getElementById('ws').innerText='Score: '+score">🕳️</button>`).join('')+`</div>`},
+        slot:()=>{con.innerHTML=`<h2>🎰 SLOT</h2><div class="score" id="sl">🍒 🍋 🍇</div><button class="btn" onclick="document.getElementById('sl').innerText=['🍒','🍋','🍇','⭐','💎'][Math.floor(Math.random()*5)]+' '+['🍒','🍋','🍇','⭐','💎'][Math.floor(Math.random()*5)]+' '+['🍒','🍋','🍇','⭐','💎'][Math.floor(Math.random()*5)]">SPIN</button>`},
+        puzzle:()=>{con.innerHTML=`<h2>🧩 15 PUZZLE</h2><div class="grid4">`+Array(15).fill(0).map((_,i)=>`<button class="box">${i+1}</button>`).join('')+`<button class="box"></button></div>`},
+        aim:()=>{con.innerHTML=`<h2>🎯 AIM</h2><div class="score" id="as">Score: 0</div><button class="btn" style="margin-top:50px" onclick="score++;document.getElementById('as').innerText='Score: '+score">HIT ME</button>`},
+        balloon:()=>{con.innerHTML=`<h2>🎈 BALLOON</h2><div class="score" id="bs">Score: 0</div><button class="btn" style="font-size:3rem" onclick="score++;document.getElementById('bs').innerText='Score: '+score">🎈</button>`},
+        piano:()=>{con.innerHTML=`<h2>🎹 PIANO</h2><div>`+['C','D','E','F','G','A','B'].map(n=>`<button class="btn" onclick="alert('Note: ${n}')">${n}</button>`).join('')+`</div>`},
+        hangman:()=>{con.innerHTML=`<h2>👨 HANGMAN</h2><div class="score">_ _</div><input maxlength="1" id="hI"><button class="btn" onclick="alert('Guessed!')">GUESS</button>`},
+        sudoku:()=>{con.innerHTML=`<h2>9️⃣ SUDOKU</h2><div class="grid4">`+Array(16).fill(0).map(()=>`<input style="width:70px">`).join('')+`</div>`},
+        run:()=>{con.innerHTML=`<h2>🏃 RUN</h2><div class="score" id="rus">Score: 0</div><canvas width="300" height="400"></canvas><br><button class="btn" onclick="score+=10;document.getElementById('rus').innerText='Score: '+score">JUMP</button>`},
+        dodge:()=>{con.innerHTML=`<h2>🚗 DODGE</h2><div class="score">Score: 0</div><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`},
+        color:()=>{con.innerHTML=`<h2>🎨 COLOR</h2><div class="score">Match Color</div><button class="btn" style="background:red" onclick="alert('Correct!')">RED</button><button class="btn" style="background:blue" onclick="alert('Correct!')">BLUE</button>`},
+        mine:()=>{con.innerHTML=`<h2>💣 MINE</h2><div class="grid4">`+Array(16).fill(0).map(()=>`<button class="box" onclick="alert('Safe!')"></button>`).join('')+`</div>`},
+        connect:()=>{con.innerHTML=`<h2>⭕ CONNECT 4</h2><div class="grid4">`+Array(16).fill(0).map(()=>`<button class="box" onclick="this.style.background='#00ff88'"></button>`).join('')+`</div>`}
     };
-    if(games[n])games[n](con);
+    games[type]();
 }
 function closeGame(){document.getElementById('gameModal').className='modal';if(gameInterval){clearInterval(gameInterval)}}
-
-// 1-8: FULL GAMES
-function loadSnake(con){con.innerHTML=`<h2>🐍 SNAKE</h2><div class="score" id="sScore">Score: 0</div><canvas id="can" width="300" height="300"></canvas><br><button class="btn" onclick="dir='U'">⬆️</button><br><button class="btn" onclick="dir='L'">⬅️</button><button class="btn" onclick="dir='R'">➡️</button><br><button class="btn" onclick="dir='D'">⬇️</button>`;var can=can,ctx=can.getContext('2d'),snake=[{x:140,y:140}],dir='R',food={x:60,y:60};gameInterval=setInterval(()=>{var h={x:snake[0].x,y:snake[0].y};if(dir=='R')h.x+=20;if(dir=='L')h.x-=20;if(dir=='U')h.y-=20;if(dir=='D')h.y+=20;if(h.x<0||h.x>=300||h.y<0||h.y>=300){clearInterval(gameInterval);alert("Game Over! "+score);return}snake.unshift(h);if(h.x==food.x&&h.y==food.y){score+=10;document.getElementById('sScore').innerText="Score: "+score;food={x:Math.floor(Math.random()*15)*20,y:Math.floor(Math.random()*15)*20}}else{snake.pop()}ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);ctx.fillStyle='#ff007f';ctx.fillRect(food.x,food.y,18,18);ctx.fillStyle='#00ff88';snake.forEach(b=>ctx.fillRect(b.x,b.y,18,18))},150)}
-function loadTTT(con){let g=["","",""],t="X";let h=`<h2>⭕ TIC TAC TOE</h2><div class="score" id="tS">Turn: X</div><div class="grid3">`;for(let i=0;i<9;i++)h+=`<button class="box" id="b${i}" onclick="cT(${i})"></button>`;con.innerHTML=h+'</div>';window.cT=function(i){if(g[i]!="")return;g[i]=t;document.getElementById('b'+i).innerText=t;if([0,1,2,3,4,5,6,7,8,0,3,6,1,4,7,2,5,8,0,4,8,2,4,6].some((v,idx,arr)=>idx%3==0&&g[arr[idx]]==t&&g[arr[idx+1]]==t&&g[arr[idx+2]]==t)){document.getElementById('tS').innerText=t+" Wins!";return}t=t=="X"?"O":"X";document.getElementById('tS').innerText="Turn: "+t}}
-function loadClicker(con){con.innerHTML=`<h2>👆 CLICKER</h2><div class="score" id="cS">Clicks: 0</div><button class="btn" style="font-size:2rem;padding:60px" onclick="score++;document.getElementById('cS').innerText='Clicks: '+score">CLICK!</button>`}
-function loadGuess(con){let n=Math.floor(Math.random()*100)+1;con.innerHTML=`<h2>🔢 GUESS NUMBER</h2><p>1-100</p><input type="number" id="gi"><button class="btn" onclick="gC()">GUESS</button><div class="score" id="gR"></div>`;window.gC=function(){let v=document.getElementById('gi').value;document.getElementById('gR').innerText=v==n?"Sahi! 🎉":v<n?"Bada hai ⬆️":"Chota hai ⬇️"}}
-function loadDice(con){con.innerHTML=`<h2>🎲 DICE ROLL</h2><div class="score" id="dR">🎲</div><button class="btn" onclick="document.getElementById('dR').innerText='🎲 '+ (Math.floor(Math.random()*6)+1)">ROLL</button>`}
-function loadCoin(con){con.innerHTML=`<h2>🪙 COIN FLIP</h2><div class="score" id="coR">🪙</div><button class="btn" onclick="document.getElementById('coR').innerText=Math.random()<0.5?'HEADS':'TAILS'">FLIP</button>`}
-function loadRPS(con){con.innerHTML=`<h2>✂️ ROCK PAPER</h2><div class="score" id="rR">Choose</div><button class="btn" onclick="pR('Rock')">✊</button><button class="btn" onclick="pR('Paper')">✋</button><button class="btn" onclick="pR('Scissor')">✌️</button>`;window.pR=function(u){let c=['Rock','Paper','Scissor'][Math.floor(Math.random()*3)];let r=u==c?'Draw':(u=='Rock'&&c=='Scissor')||(u=='Paper'&&c=='Rock')||(u=='Scissor'&&c=='Paper')?'Win!':'Lose!';document.getElementById('rR').innerText=`You:${u} Comp:${c} ${r}`}}
-function loadReaction(con){con.innerHTML=`<h2>⚡ REACTION</h2><div class="score" id="rt">Wait...</div><button class="btn" id="rtB" onclick="sRT()">START</button>`;window.sRT=function(){document.getElementById('rt').innerText="Wait...";document.getElementById('rtB').style.background="red";setTimeout(()=>{let s=Date.now();document.getElementById('rtB').style.background="green";document.getElementById('rt').innerText="CLICK!";document.getElementById('rtB').onclick=function(){document.getElementById('rt').innerText=(Date.now()-s)+"ms";document.getElementById('rtB').onclick=sRT;document.getElementById('rtB').style.background="#00ffff"}},2000+Math.random()*3000)}}
-
-// 9-36: SIMPLE VERSION - SAB CHALENGE
-function loadTetris(con){con.innerHTML=`<h2>🧱 TETRIS</h2><div class="score">Score: ${score}</div><canvas width="200" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">🔄</button><button class="btn">➡️</button><p>Use buttons to play</p>`}
-function loadSpace(con){con.innerHTML=`<h2>🚀 SPACE SHOOTER</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">FIRE</button><button class="btn">➡️</button>`}
-function loadSimon(con){con.innerHTML=`<h2>🔴 SIMON</h2><div class="score">Level: 1</div><div class="grid4"><button class="box" style="background:red"></button><button class="box" style="background:blue"></button><button class="box" style="background:green"></button><button class="box" style="background:yellow"></button></div>`}
-function loadTower(con){con.innerHTML=`<h2>🏢 TOWER</h2><div class="score">Blocks: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">DROP</button>`}
-function loadPong(con){con.innerHTML=`<h2>🏓 PING PONG</h2><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`}
-function loadRace(con){con.innerHTML=`<h2>🏎️ RACER</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`}
-function loadMemory(con){let em=['🍎','🍌','🍇','🍊'];let cards=[...em,...em].sort(()=>0.5-Math.random());let h=`<h2>🧠 MEMORY</h2><div class="grid4">`;cards.forEach(c=>h+=`<button class="box">${c}</button>`);con.innerHTML=h+'</div>'}
-function loadDodge(con){con.innerHTML=`<h2>🚗 DODGE</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`}
-function loadColor(con){con.innerHTML=`<h2>🎨 COLOR MATCH</h2><div class="score">Score: ${score}</div><button class="btn" style="background:red">RED</button><button class="btn" style="background:blue">BLUE</button>`}
-function loadMath(con){let a=Math.floor(Math.random()*10),b=Math.floor(Math.random()*10);con.innerHTML=`<h2>➕ MATH</h2><div class="score">${a} + ${b} =?</div><input type="number" id="mA"><button class="btn" onclick="alert('Check')">SUBMIT</button>`}
-function loadFlappy(con){con.innerHTML=`<h2>🐦 FLAPPY</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">JUMP</button>`}
-function loadBreakout(con){con.innerHTML=`<h2>🧱 BREAKOUT</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`}
-function loadClickSpeed(con){con.innerHTML=`<h2>⚡ CLICK SPEED</h2><div class="score">Clicks: ${score}</div><button class="btn" onclick="score++;this.innerText='Clicks: '+score">CLICK FAST!</button>`}
-function loadEmoji(con){con.innerHTML=`<h2>😂 EMOJI MATCH</h2><div class="grid4"><button class="box">😀</button><button class="box">😂</button><button class="box">😍</button><button class="box">😎</button></div>`}
-function loadWord(con){con.innerHTML=`<h2>🔤 WORD</h2><div class="score">ABYU</div><input placeholder="Unscramble"><button class="btn">CHECK</button>`}
-function load2048(con){con.innerHTML=`<h2>2️⃣ 2048</h2><div class="score">Score: ${score}</div><div class="grid4"><button class="box">2</button><button class="box">4</button><button class="box"></button><button class="box"></button></div>`}
-function loadMine(con){con.innerHTML=`<h2>💣 MINES</h2><div class="grid4">`;for(let i=0;i<16;i++)con.innerHTML+=`<button class="box"></button>`;con.innerHTML+='</div>'}
-function loadWhack(con){con.innerHTML=`<h2>🔨 WHACK</h2><div class="score">Score: ${score}</div><div class="grid4">`;for(let i=0;i<9;i++)con.innerHTML+=`<button class="box">🕳️</button>`;con.innerHTML+='</div>'}
-function loadSlot(con){con.innerHTML=`<h2>🎰 SLOT</h2><div class="score">🍒 🍋 🍇</div><button class="btn">SPIN</button>`}
-function loadConnect(con){con.innerHTML=`<h2>⭕ CONNECT 4</h2><div class="grid4">`;for(let i=0;i<16;i++)con.innerHTML+=`<button class="box"></button>`;con.innerHTML+='</div>'}
-function loadPuzzle(con){con.innerHTML=`<h2>🧩 15 PUZZLE</h2><div class="grid4">`;for(let i=1;i<=15;i++)con.innerHTML+=`<button class="box">${i}</button>`;con.innerHTML+=`<button class="box"></button></div>`}
-function loadAim(con){con.innerHTML=`<h2>🎯 AIM</h2><div class="score">Score: ${score}</div><button class="btn" style="position:relative" onclick="score++;this.innerText=score">HIT ME</button>`}
-function loadBalloon(con){con.innerHTML=`<h2>🎈 BALLOON</h2><div class="score">Score: ${score}</div><button class="btn" style="font-size:3rem" onclick="score++">🎈</button>`}
-function loadPiano(con){con.innerHTML=`<h2>🎹 PIANO</h2><div style="display:flex">`;['C','D','E','F','G'].forEach(n=>con.innerHTML+=`<button class="btn">${n}</button>`);con.innerHTML+='</div>'}
-function loadHangman(con){con.innerHTML=`<h2>👨 HANGMAN</h2><div class="score">_ _ _ _</div><input maxlength="1"><button class="btn">GUESS</button>`}
-function loadSudoku(con){con.innerHTML=`<h2>9️⃣ SUDOKU</h2><div class="grid4">`;for(let i=0;i<16;i++)con.innerHTML+=`<input style="width:70px">`;con.innerHTML+='</div>'}
-function loadRun(con){con.innerHTML=`<h2>🏃 RUN</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">JUMP</button>`}
-function loadStar(con){con.innerHTML=`<h2>⭐ STAR CATCHER</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`}
+document.onkeydown=(e)=>{if(gameData.dir){if(e.key=='ArrowUp')gameData.dir='U';if(e.key=='ArrowDown')gameData.dir='D';if(e.key=='ArrowLeft')gameData.dir='L';if(e.key=='ArrowRight')gameData.dir='R'}}
 </script>
 </body>
 </html>
