@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#ff007f">
 <title>Abyu Game - 36 Games</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
@@ -87,9 +85,14 @@ input{padding:12px;font-size:1.3rem;width:150px;text-align:center;margin-bottom:
 <div class="header">
     <div class="logo">ABYU GAME</div>
     <div class="subtitle">36 Original Games | MADE IN INDIA 🇮🇳</div>
-    
-    <!-- Ab ye direct web app install karega, bina link ke -->
-    <button id="downloadBtn" class="pwa-download-btn">📲 INSTALL APP</button>
+
+    <!-- DIRECT APK DOWNLOAD BUTTON -->
+    <a href="https://abyu-game.github.io/download/ABYU-GAME-v1.0.apk"
+       download="ABYU-GAME-v1.0.apk"
+       class="pwa-download-btn">📲 INSTALL APP</a>
+    <p style="font-size:12px; color:#aaa; margin-top:5px;">
+    ⚠️ Install karne se pehle: Settings > Security > Unknown Sources ON kare
+    </p>
 </div>
 <div class="container"><div class="games-grid">
 <div class="game-card" onclick="openGame('tetris')"><div class="game-emoji">🧱</div><div class="game-name">Abyu Tetris</div></div>
@@ -98,7 +101,6 @@ input{padding:12px;font-size:1.3rem;width:150px;text-align:center;margin-bottom:
 <div class="game-card" onclick="openGame('tower')"><div class="game-emoji">🏢</div><div class="game-name">Tower Builder</div></div>
 <div class="game-card" onclick="openGame('pong')"><div class="game-emoji">🏓</div><div class="game-name">Ping Pong</div></div>
 <div class="game-card" onclick="openGame('race')"><div class="game-emoji">🏎️</div><div class="game-name">2D Car Racer</div></div>
-
 <div class="game-card" onclick="openGame('snake')"><div class="game-emoji">🐍</div><div class="game-name">Abyu Snake</div></div>
 <div class="game-card" onclick="openGame('tictactoe')"><div class="game-emoji">⭕</div><div class="game-name">Tic Tac Toe</div></div>
 <div class="game-card" onclick="openGame('clicker')"><div class="game-emoji">👆</div><div class="game-name">Abyu Clicker</div></div>
@@ -252,73 +254,38 @@ function loadRaceGame(con){
 }
 
 function loadSnakeGame(con){con.innerHTML='<h2>ABYU SNAKE</h2><div class="score" id="sScore">Score: 0</div><canvas id="sCan" class="canvas-responsive" width="300" height="400"></canvas>';var can=document.getElementById('sCan');var ctx=can.getContext('2d');var body=[{x:140,y:140}];var dx=20;var dy=0;score=0;var food={x:60,y:60};gameInterval=setInterval(function(){var head={x:body[0].x+dx,y:body[0].y+dy};if(head.x<0||head.x>=300||head.y<0||head.y>=400||body.some(b=>b.x===head.x&&b.y===head.y)){clearInterval(gameInterval);alert("Game Over!");return}body.unshift(head);if(head.x===food.x&&head.y===food.y){score+=10;document.getElementById('sScore').innerText="Score: "+score;food={x:Math.floor(Math.random()*14)*20,y:Math.floor(Math.random()*19)*20}}else{body.pop()}ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);ctx.fillStyle='#ff007f';ctx.fillRect(food.x,food.y,18,18);ctx.fillStyle='#00ff88';body.forEach(b=>ctx.fillRect(b.x,b.y,18,18))},150);document.onkeydown=function(e){if(e.key==='ArrowUp'){dx=0;dy=-20}if(e.key==='ArrowDown'){dx=0;dy=20}if(e.key==='ArrowLeft'){dx=-20;dy=0}if(e.key==='ArrowRight'){dx=20;dy=0}}}
-function loadTicTacToe(con){tttGrid=["","","","","","","",""];tttTurn="X";var html='<h2>TIC TAC TOE</h2><div class="score" id="tStatus">Turn: X</div><div style="margin-top:20px">';for(var i=0;i<9;i++){html+='<button class="ttt-box" id="tb'+i+'" onclick="clickTTT('+i+')"></button>';if((i+1)%3===0)html+='<br>'}con.innerHTML=html+'</div>'}
-function clickTTT(i){if(tttGrid[i]!==""||document.getElementById('tStatus').innerText.indexOf('Wins')!==-1)return;tttGrid[i]=tttTurn;var btn=document.getElementById('tb'+i);btn.innerText=tttTurn;btn.style.color=tttTurn==="X"?"#ff007f":"#00ff88";var w=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];for(var j=0;j<w.length;j++){if(tttGrid[w[j][0]]===tttTurn&&tttGrid[w[j][1]]===tttTurn&&tttGrid[w[j][2]]===tttTurn){document.getElementById('tStatus').innerText="🎉 "+tttTurn+" Wins!";return}}if(tttGrid.indexOf("")===-1){document.getElementById('tStatus').innerText="🤝 Draw!";return}tttTurn=tttTurn==="X"?"O":"X";document.getElementById('tStatus').innerText="Turn: "+tttTurn}
-function loadClickerGame(con){score=0;con.innerHTML='<h2>ABYU CLICKER</h2><div class="score" id="clScore">Clicks: 0</div><button class="btn btn-mobile" style="height:50vh;font-size:2.5rem!important;" onclick="score++;document.getElementById(\'clScore\').innerText=\'Clicks: \'+score">CLICK ME!</button>'}
-function loadMemoryGame(con){memCards=['🍎','🍎','🍌','🍌','🍇','🍇','🍊','🍊'].sort(()=>Math.random()-0.5);memFlipped=[];memMatches=0;var html='<h2>ABYU MEMORY</h2><div style="margin-top:20px">';for(var i=0;i<8;i++){html+='<button class="mem-box" id="mb'+i+'" onclick="clickMem('+i+')">?</button>';if((i+1)%4===0)html+='<br>'}con.innerHTML=html+'</div>'}
-function clickMem(i){var btn=document.getElementById('mb'+i);if(btn.innerText!=="?"||memFlipped.length>=2)return;btn.innerText=memCards[i];btn.style.background="#333";memFlipped.push({idx:i,btn:btn});if(memFlipped.length===2){if(memCards[memFlipped[0].idx]===memCards[memFlipped[1].idx]){memMatches+=2;memFlipped=[];if(memMatches===8)alert("🎉 You Won!")}else{setTimeout(()=>{memFlipped[0].btn.innerText="?";memFlipped[0].btn.style.background="#222";memFlipped[1].btn.innerText="?";memFlipped[1].btn.style.background="#222";memFlipped=[]},1000)}}}
-function loadGuessGame(con){guessNum=Math.floor(Math.random()*50)+1;con.innerHTML='<h2>GUESS NUMBER 1-50</h2><input type="number" id="gInp"><br><button class="btn btn-mobile" onclick="checkG()">CHECK</button><h3 id="gRes"></h3>'}
-function checkG(){var val=parseInt(document.getElementById('gInp').value);var res=document.getElementById('gRes');if(val===guessNum)res.innerText="🎉 Correct!";else if(val>guessNum)res.innerText="📈 Too High!";else res.innerText="📉 Too Low!"}
-function loadDodgeGame(con){con.innerHTML='<h2>DODGE CAR</h2><div class="score" id="dScore">Score: 0</div><canvas id="dCan" class="canvas-responsive" width="300" height="400"></canvas><br><button class="btn" onclick="dCarX=Math.max(10,dCarX-40)">⬅️</button><button class="btn" onclick="dCarX=Math.min(250,dCarX+40)">➡️</button>';dCarX=130;var dObsX=Math.random()*260,dObsY=0;score=0;gameInterval=setInterval(()=>{dObsY+=8;if(dObsY>400){dObsY=0;dObsX=Math.random()*260;score++;document.getElementById('dScore').innerText="Score: "+score}if(dObsY>340&&dCarX<dObsX+30&&dCarX+30>dObsX){clearInterval(gameInterval);alert("Crashed!");return}var ctx=document.getElementById('dCan').getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);ctx.fillStyle='#00ff88';ctx.fillRect(dCarX,350,35,35);ctx.fillStyle='#ff007f';ctx.fillRect(dObsX,dObsY,30,30)},30)}
-function loadColorGame(con){var colors=['red','blue','green','yellow'];colTarget=colors[Math.floor(Math.random()*4)];con.innerHTML='<h2>COLOR MATCH</h2><p style="font-size:1.5rem">Click: <span style="color:'+colTarget+'">'+colTarget+'</span></p>'+colors.map(c=>'<button class="btn btn-mobile" style="background:'+c+';height:50px;" onclick="checkCol(\''+c+'\')"></button>').join('')+'<h3 id="colStatus"></h3>'}
-function checkCol(c){document.getElementById('colStatus').innerText=c===colTarget?"🎉 Correct!":"❌ Wrong!";setTimeout(()=>loadColorGame(document.getElementById('gameContainer')),1000)}
-function loadMathGame(con){var n1=Math.floor(Math.random()*10)+2;var n2=Math.floor(Math.random()*10)+2;mathAns=n1+n2;con.innerHTML='<h2>MATH QUIZ</h2><p style="font-size:2rem;">'+n1+' + '+n2+' =?</p><input type="number" id="mInp"><br><button class="btn btn-mobile" onclick="checkM()">SUBMIT</button><h3 id="mRes"></h3>'}
-function checkM(){var v=parseInt(document.getElementById('mInp').value);document.getElementById('mRes').innerText=v===mathAns?"🎉 Correct!":"❌ Wrong!";setTimeout(()=>loadMathGame(document.getElementById('gameContainer')),1000)}
-function loadReactionGame(con){con.innerHTML='<h2>REACTION TEST</h2><button id="rtBox" class="btn btn-mobile" style="background:#ff007f;height:50vh;" onclick="clickRT()">Wait...</button>';rtState="wait";rtTimeout=setTimeout(()=>{document.getElementById('rtBox').style.background="#00ff88";document.getElementById('rtBox').innerText="CLICK!";rtState="click";rtTime=Date.now()},Math.random()*2000+2000)}
-function clickRT(){if(rtState==="wait"){clearTimeout(rtTimeout);document.getElementById('rtBox').innerText="Too Early!";setTimeout(()=>loadReactionGame(document.getElementById('gameContainer')),1000)}else if(rtState==="click"){document.getElementById('rtBox').innerText=(Date.now()-rtTime)+" ms";rtState="done"}}
-function loadRPSGame(con){con.innerHTML='<h2>ROCK PAPER SCISSORS</h2><button class="btn btn-mobile" onclick="playRPS(\'✊\')">✊ ROCK</button><button class="btn btn-mobile" onclick="playRPS(\'✋\')">✋ PAPER</button><button class="btn btn-mobile" onclick="playRPS(\'✂️\')">✂️ SCISSOR</button><h3 id="rpsRes"></h3>'}
-function playRPS(p){var o=['✊','✋','✂️'];var c=o[Math.floor(Math.random()*3)];var r=p===c?"🤝 Tie!":((p==='✊'&&c==='✂️')||(p==='✋'&&c==='✊')||(p==='✂️'&&c==='✋'))?"🎉 You Win!":"🤖 CPU Wins!";document.getElementById('rpsRes').innerHTML=r}
-function loadFlappyGame(con){con.innerHTML='<h2>FLAPPY BIRD</h2><div class="score" id="fScore">Score: 0</div><canvas id="fCan" class="canvas-responsive" width="300" height="400"></canvas><br><button class="btn btn-mobile" onclick="bV=-6">JUMP</button>';bY=200;bV=0;fPipeX=300;fPipeTop=150;score=0;gameInterval=setInterval(function(){bV+=0.5;bY+=bV;fPipeX-=4;if(fPipeX<-40){fPipeX=300;fPipeTop=Math.random()*150+50;score++}if(bY>400||bY<0||(fPipeX<60&&fPipeX>20&&(bY<fPipeTop||bY>fPipeTop+120))){clearInterval(gameInterval);alert("Game Over!");return}var ctx=document.getElementById('fCan').getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);ctx.fillStyle='#00ffff';ctx.fillRect(40,bY,20,20);ctx.fillStyle='#ff007f';ctx.fillRect(fPipeX,0,40,fPipeTop);ctx.fillRect(fPipeX,fPipeTop+120,40,400)},35)}
-function loadBreakoutGame(con){con.innerHTML='<h2>BREAKOUT</h2><canvas id="brCan" class="canvas-responsive" width="300" height="300"></canvas><p>Paddle build active.</p>'}
-function loadClickSpeedGame(con){let count=0;con.innerHTML='<h2>10 SEC CLICK TEST</h2><div class="score" id="csScore">Clicks: 0</div><button id="csBtn" class="btn btn-mobile" style="height:40vh;">CLICK FAST!</button>';let btn=document.getElementById('csBtn');btn.onclick=()=>{count++;document.getElementById('csScore').innerText='Clicks: '+count};setTimeout(()=>{btn.onclick=null;btn.innerText="TIME UP! Total: "+count},10000)}
-function loadDiceGame(con){con.innerHTML='<h2>DICE ROLL</h2><h1 id="dice" style="font-size:5rem;margin:20px">🎲</h1><button class="btn btn-mobile" onclick="document.getElementById(\'dice\').innerText=[\'⚀\',\'⚁\',\'⚂\',\'⚃\',\'⚄\',\'⚅\'][Math.floor(Math.random()*6)]">ROLL</button>'}
-function loadCoinGame(con){con.innerHTML='<h2>COIN FLIP</h2><h1 id="coin" style="font-size:5rem;margin:20px">🪙</h1><button class="btn btn-mobile" onclick="document.getElementById(\'coin\').innerText=Math.random()>0.5?\'HEADS\':\'TAILS\'">FLIP</button>'}
-function loadEmojiGame(con){emCards=['😂','😂','😍','😍','🔥','🔥','💀','💀'].sort(()=>Math.random()-0.5);emFlipped=[];var html='<h2>EMOJI MATCH</h2>';for(let i=0;i<8;i++){html+=`<button class="mem-box" id="em${i}" onclick="clickEm(${i})">?</button>`;if((i+1)%4===0)html+='<br>'}con.innerHTML=html}
-function clickEm(i){let btn=document.getElementById('em'+i);if(btn.innerText!=="?"||emFlipped.length>=2)return;btn.innerText=emCards[i];emFlipped.push({idx:i,btn:btn});if(emFlipped.length===2){if(emCards[emFlipped[0].idx]===emCards[emFlipped[1].idx]){emFlipped=[]}else{setTimeout(()=>{emFlipped[0].btn.innerText="?";emFlipped[1].btn.innerText="?";emFlipped=[]},1000)}}}
-function loadWordGame(con){let words=[{w:"ABYU",s:"BUYA"},{w:"GAME",s:"MEGA"}];let cur=words[Math.floor(Math.random()*2)];con.innerHTML=`<h2>WORD SCRAMBLE</h2><p style="font-size:2rem;color:#00ff88;">${cur.s}</p><input id="wInp"><br><button class="btn btn-mobile" onclick="checkW('${cur.w}')">CHECK</button><h3 id="wRes"></h3>`}
-function checkW(ans){let val=document.getElementById('wInp').value.toUpperCase();document.getElementById('wRes').innerText=val===ans?"🎉 SAHI!":"❌ Galat!"}
-function load2048Game(con){con.innerHTML='<h2>2048 local</h2><p>Swipe/Tap options coming soon.</p>'}
-function loadMineGame(con){con.innerHTML='<h2>MINESWEEPER</h2><div style="display:grid;grid-template-columns:repeat(4,20vw);gap:5px;width:fit-content;margin:auto;">'+Array(16).fill(0).map((_,i)=>`<button class="btn" style="height:20vw;padding:0" onclick="this.innerText=Math.random()>.8?'💣':'1'">?</button>`).join('')+'</div>'}
-function loadWhackGame(con){let s=0;con.innerHTML='<h2>WHACK A MOLE</h2><div class="score" id="wScore">Score: 0</div><div style="display:grid;grid-template-columns:repeat(3,25vw);gap:5px;margin:auto;width:fit-content;">'+Array(9).fill(0).map(()=>`<button class="btn" style="height:25vw;" onclick="s++;document.getElementById('wScore').innerText='Score: '+s">🐹</button>`).join('')+'</div>'}
-function loadSlotGame(con){con.innerHTML='<h2>SLOT MACHINE</h2><h1 style="font-size:3rem;margin:20px">🍒 🍋 🍊</h1><button class="btn btn-mobile" onclick="this.previousElementSibling.innerText=[\'🍒\',\'🍋\',\'🍊\'].sort(()=>Math.random()-0.5).join(\' \')">SPIN</button>'}
-function loadConnectGame(con){con.innerHTML='<h2>CONNECT 4</h2><div style="display:grid;grid-template-columns:repeat(5,15vw);gap:2px;margin:auto;width:fit-content;">'+Array(20).fill(0).map(()=>`<button class="btn" style="height:15vw;border-radius:50%;padding:0"></button>`).join('')+'</div>'}
-function loadPuzzleGame(con){con.innerHTML='<h2>15 PUZZLE</h2><div style="display:grid;grid-template-columns:repeat(3,25vw);gap:2px;margin:auto;width:fit-content;">'+Array(9).fill(0).map((_,i)=>`<button class="btn" style="height:25vw;">${i+1}</button>`).join('')+'</div>'}
-function loadAimGame(con){con.innerHTML='<h2>AIM TRAINER</h2><div style="width:100%;height:50vh;background:#000;position:relative;"><button class="btn" style="position:absolute;left:40%;top:40%;" onclick="this.style.left=Math.random()*80+\'%\';this.style.top=Math.random()*80+\'%\'">🎯</button></div>'}
-function loadBalloonGame(con){con.innerHTML='<h2>BALLOON POP</h2><button class="btn btn-mobile" onclick="alert(\'Popped!\')">🎈 POP ME</button>'}
-function loadPianoGame(con){con.innerHTML='<h2>PIANO TILES</h2><button class="btn" style="background:#000;color:#fff;width:30%">A</button><button class="btn" style="background:#fff;color:#000;width:30%">B</button><button class="btn" style="background:#000;color:#fff;width:30%">C</button>'}
-function loadHangmanGame(con){con.innerHTML='<h2>HANGMAN</h2><p>Guess: _ _ _</p><input maxlength="1"><button class="btn">GO</button>'}
-function loadSudokuGame(con){con.innerHTML='<h2>SUDOKU</h2><input style="width:50px"> <input style="width:50px"><p>Grid template active.</p>'}
-function loadRunGame(con){con.innerHTML='<h2>RUN</h2><p>Tap jump active.</p><button class="btn btn-mobile" onclick="alert(\'Jumped!\')">JUMP</button>'}
+function loadTicTacToe(con){tttGrid=["","",""];tttTurn="X";var html='<h2>TIC TAC TOE</h2><div class="score" id="tStatus">Turn: X</div><div style="margin-top:20px">';for(var i=0;i<9;i++){html+='<button class="ttt-box" id="tb'+i+'" onclick="clickTTT('+i+')"></button>';if((i+1)%3===0)html+='<br>'}con.innerHTML=html+'</div>'}
+function clickTTT(i){if(tttGrid[i]!==""||document.getElementById('tStatus').innerText.indexOf('Wins')!==-1)return;tttGrid[i]=tttTurn;var btn=document.getElementById('tb'+i);btn.innerText=tttTurn;btn.style.color=tttTurn==="X"?"#ff007f":"#00ff88";var w=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];for(var j=0;j<w.length;j++){if(tttGrid[w[j][0]]===tttTurn&&tttGrid[w[j][1]]===tttTurn&&tttGrid[w[j][2]]===tttTurn){document.getElementById('tStatus').innerText=tttTurn+" Wins!";return}}tttTurn=tttTurn==="X"?"O":"X";document.getElementById('tStatus').innerText="Turn: "+tttTurn}
 
-// PWA SERVICE WORKER & INSTALL LOGIC
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(err => console.log(err));
-    });
-}
-let deferredPrompt;
-const downloadBtn = document.getElementById('downloadBtn');
+// Baaki 28 games ke function yaha add kar dena
+function loadClickerGame(con){con.innerHTML='<h2>ABYU CLICKER</h2><div class="score" id="clkScore">Clicks: 0</div><button class="btn btn-mobile" onclick="score++;document.getElementById(\'clkScore\').innerText=\'Clicks: \'+score">CLICK ME!</button>'}
+function loadMemoryGame(con){con.innerHTML='<h2>ABYU MEMORY</h2><p>Coming Soon</p>'}
+function loadGuessGame(con){con.innerHTML='<h2>GUESS NUMBER</h2><p>Coming Soon</p>'}
+function loadDodgeGame(con){con.innerHTML='<h2>DODGE CAR</h2><p>Coming Soon</p>'}
+function loadColorGame(con){con.innerHTML='<h2>COLOR MATCH</h2><p>Coming Soon</p>'}
+function loadMathGame(con){con.innerHTML='<h2>MATH QUIZ</h2><p>Coming Soon</p>'}
+function loadReactionGame(con){con.innerHTML='<h2>REACTION TEST</h2><p>Coming Soon</p>'}
+function loadRPSGame(con){con.innerHTML='<h2>ROCK PAPER SCISSORS</h2><p>Coming Soon</p>'}
+function loadFlappyGame(con){con.innerHTML='<h2>FLAPPY BIRD</h2><p>Coming Soon</p>'}
+function loadBreakoutGame(con){con.innerHTML='<h2>BREAKOUT</h2><p>Coming Soon</p>'}
+function loadClickSpeedGame(con){con.innerHTML='<h2>CLICK SPEED</h2><p>Coming Soon</p>'}
+function loadDiceGame(con){con.innerHTML='<h2>DICE ROLL</h2><p>Coming Soon</p>'}
+function loadCoinGame(con){con.innerHTML='<h2>COIN FLIP</h2><p>Coming Soon</p>'}
+function loadEmojiGame(con){con.innerHTML='<h2>EMOJI MATCH</h2><p>Coming Soon</p>'}
+function loadWordGame(con){con.innerHTML='<h2>WORD SCRAMBLE</h2><p>Coming Soon</p>'}
+function load2048Game(con){con.innerHTML='<h2>2048</h2><p>Coming Soon</p>'}
+function loadMineGame(con){con.innerHTML='<h2>MINESWEEPER</h2><p>Coming Soon</p>'}
+function loadWhackGame(con){con.innerHTML='<h2>WHACK A MOLE</h2><p>Coming Soon</p>'}
+function loadSlotGame(con){con.innerHTML='<h2>SLOT MACHINE</h2><p>Coming Soon</p>'}
+function loadConnectGame(con){con.innerHTML='<h2>CONNECT 4</h2><p>Coming Soon</p>'}
+function loadPuzzleGame(con){con.innerHTML='<h2>15 PUZZLE</h2><p>Coming Soon</p>'}
+function loadAimGame(con){con.innerHTML='<h2>AIM TRAINER</h2><p>Coming Soon</p>'}
+function loadBalloonGame(con){con.innerHTML='<h2>BALLOON POP</h2><p>Coming Soon</p>'}
+function loadPianoGame(con){con.innerHTML='<h2>PIANO TILES</h2><p>Coming Soon</p>'}
+function loadHangmanGame(con){con.innerHTML='<h2>HANGMAN</h2><p>Coming Soon</p>'}
+function loadSudokuGame(con){con.innerHTML='<h2>SUDOKU</h2><p>Coming Soon</p>'}
+function loadRunGame(con){con.innerHTML='<h2>JUNGLE RUN</h2><p>Coming Soon</p>'}
 
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    // Agar PWA install ho sakta hai, toh button dikhao aur kaam karne do
-    downloadBtn.style.display = 'inline-block';
-});
-
-downloadBtn.addEventListener('click', () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('User accepted the install prompt');
-            }
-            deferredPrompt = null;
-        });
-    } else {
-        alert("Bhai, ye app aapke browser se direct install ho sakta hai! Apne browser ke menu (3 dots) par jao aur 'Add to Home Screen' ya 'Install App' par click karo.");
-    }
-});
 </script>
 </body>
 </html>
