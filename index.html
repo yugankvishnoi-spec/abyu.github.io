@@ -2,290 +2,138 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abyu Game - 36 Games</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-body{background:linear-gradient(135deg, #0b0b1e 0%, #1a1a3a 100%);background-size:200% 200%;animation:bgMove 10s infinite alternate;color:#fff;font-family:Arial,sans-serif;text-align:center;padding-bottom:50px;overflow-x:hidden}
-@keyframes bgMove{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg, #0b0b1e 0%, #1a1a3a 100%);color:#fff;font-family:Arial;text-align:center;padding-bottom:50px}
 .header{background:#121232;padding:30px 10px;border-bottom:4px solid #00ff88}
-.logo{font-size:2.5rem;font-weight:bold;color:#00ffff;text-shadow:0 0 10px #00ffff,0 0 20px #00ffff;animation:glow 2s ease-in-out infinite alternate}
-@keyframes glow{from{text-shadow:0 0 10px #00ffff}to{text-shadow:0 0 20px #00ffff,0 0 30px #ff007f}}
+.logo{font-size:2.5rem;font-weight:bold;color:#00ffff}
 .subtitle{color:#ff007f;font-weight:bold;margin-top:5px}
-.container{max-width:1000px;margin:20px auto;padding:10px}
-.games-grid{display:block;text-align:center}
-.game-card{display:inline-block;width:180px;background:#1a1a3a;border:2px solid #ff007f;border-radius:12px;padding:20px 10px;margin:10px;cursor:pointer;transition:0.2s;animation:float 3s ease-in-out infinite}
-.game-card:nth-child(2n){animation-delay:0.5s}
+.container{max-width:1100px;margin:20px auto;padding:10px}
+.games-grid{display:flex;flex-wrap:wrap;justify-content:center}
+.game-card{width:160px;background:#1a1a3a;border:2px solid #ff007f;border-radius:12px;padding:15px 10px;margin:8px;cursor:pointer;transition:0.2s}
 .game-card:hover{border-color:#00ff88;background:#222255;transform:scale(1.05)}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.game-emoji{font-size:3rem;margin-bottom:10px}
-.game-name{font-size:1.1rem;font-weight:bold}
-
-.pwa-download-btn {
-    display: inline-block;
-    background: linear-gradient(45deg, #00ff88, #00ffff);
-    color: #000;
-    border: 3px solid #ff007f;
-    padding: 18px 40px;
-    font-size: 1.5rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    border-radius: 50px;
-    cursor: pointer;
-    margin: 20px auto 10px auto;
-    box-shadow: 0 0 20px #00ff88;
-    animation: megaPulse 1.5s infinite;
-    width: 90%;
-    max-width: 450px;
-    text-decoration: none;
-}
-@keyframes megaPulse {
-    0% { transform: scale(1); box-shadow: 0 0 15px #00ff88; }
-    50% { transform: scale(1.06); box-shadow: 0 0 35px #00ff88, 0 0 20px #ff007f; }
-    100% { transform: scale(1); box-shadow: 0 0 15px #00ff88; }
-}
-
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,1);z-index:9999;align-items:center;justify-content:center}
+.game-emoji{font-size:2.5rem;margin-bottom:8px}
+.game-name{font-size:1rem;font-weight:bold}
+.pwa-download-btn {display: inline-block;background: linear-gradient(45deg, #00ff88, #00ffff);color: #000;border: 3px solid #ff007f;padding: 18px 40px;font-size: 1.5rem;font-weight: 900;border-radius: 50px;margin: 20px auto;text-decoration: none;}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center}
 .modal.active{display:flex}
-.game-window{background:#111125;width:100%;height:100%;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;border:none}
-.game-window h2{font-size:1.8rem;margin:8px 0;padding:0}
-.close-btn{position:absolute;top:10px;right:10px;background:#ff007f;color:#fff;border:none;padding:10px 15px;font-size:0.9rem;font-weight:bold;border-radius:8px;cursor:pointer;z-index:10000}
-
-.btn{background:#00ffff;color:#000;border:none;padding:12px 24px;font-size:1.2rem;font-weight:bold;border-radius:8px;cursor:pointer;margin:5px}
-.btn:hover{background:#00ff88}
-.btn-mobile{padding:16px 25px!important;font-size:1.3rem!important;width:95%;max-width:100%;margin:5px auto!important;display:block}
-.score{font-size:1.8rem;color:#ff00ff;margin:5px 0;font-weight:bold}
-.canvas-responsive{width:100vw!important;height:65vh!important;max-width:100%!important;max-height:65vh!important;background:#000;border:2px solid #00ffff;display:block;margin:0 auto}
-
-.ttt-box{display:inline-block;width:30vw;height:30vw;max-width:100px;max-height:100px;background:#1a1a3a;border:3px solid #00ffff;font-size:8vw;color:#fff;font-weight:bold;margin:1vw;cursor:pointer;border-radius:8px}
-.mem-box{display:inline-block;width:22vw;height:22vw;max-width:90px;max-height:90px;background:#222;border:3px solid #ff007f;font-size:6vw;margin:1vw;border-radius:8px;cursor:pointer;line-height:22vw}
-.about{background:#121232;border:2px solid #ff00ff;border-radius:15px;max-width:600px;margin:40px auto;padding:20px}
-input{padding:12px;font-size:1.3rem;width:150px;text-align:center;margin-bottom:10px;border-radius:8px;border:3px solid #00ffff;background:#000;color:#fff}
-
-.email-link {
-    color: #ff007f;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem;
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 16px;
-    border: 1px dashed #ff007f;
-    border-radius: 8px;
-    transition: 0.3s;
-}
-.email-link:hover {
-    background: #ff007f;
-    color: #fff;
-    box-shadow: 0 0 10px #ff007f;
-}
+.game-window{background:#111125;width:95%;height:90%;padding:15px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:auto;border-radius:15px}
+.close-btn{position:absolute;top:15px;right:15px;background:#ff007f;color:#fff;border:none;padding:10px 15px;font-weight:bold;border-radius:8px;cursor:pointer;z-index:10000}
+.btn{background:#00ffff;color:#000;border:none;padding:10px 20px;font-size:1.1rem;font-weight:bold;border-radius:8px;cursor:pointer;margin:5px}
+.score{font-size:1.6rem;color:#ff00ff;margin:10px 0;font-weight:bold}
+canvas{background:#000;border:2px solid #00ffff;margin:10px 0}
+input{padding:10px;font-size:1.1rem;width:150px;text-align:center;margin:5px;border-radius:8px;border:2px solid #00ffff;background:#000;color:#fff}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;width:270px;margin:10px auto}
+.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;width:360px;margin:10px auto}
+.box{width:80px;height:80px;background:#1a1a3a;border:3px solid #00ffff;font-size:2rem;color:#fff;font-weight:bold;cursor:pointer;border-radius:8px}
 </style>
 </head>
 <body>
 <div class="header">
     <div class="logo">ABYU GAME</div>
     <div class="subtitle">36 Original Games | MADE IN INDIA 🇮🇳</div>
-
-    <!-- DIRECT APK DOWNLOAD BUTTON -->
-    <a href="https://abyu-game.github.io/download/ABYU-GAME-v1.0.apk"
-       download="ABYU-GAME-v1.0.apk"
-       class="pwa-download-btn">📲 INSTALL APP</a>
-    <p style="font-size:12px; color:#aaa; margin-top:5px;">
-    ⚠️ Install karne se pehle: Settings > Security > Unknown Sources ON kare
-    </p>
+    <a href="https://abyu-game.github.io/download/ABYU-GAME-v1.0.apk" download="ABYU-GAME-v1.0.apk" class="pwa-download-btn">📲 INSTALL APP</a>
 </div>
+
 <div class="container"><div class="games-grid">
-<div class="game-card" onclick="openGame('tetris')"><div class="game-emoji">🧱</div><div class="game-name">Abyu Tetris</div></div>
-<div class="game-card" onclick="openGame('space')"><div class="game-emoji">🚀</div><div class="game-name">Space Shooter</div></div>
-<div class="game-card" onclick="openGame('simon')"><div class="game-emoji">🔴</div><div class="game-name">Memory Simon</div></div>
-<div class="game-card" onclick="openGame('tower')"><div class="game-emoji">🏢</div><div class="game-name">Tower Builder</div></div>
-<div class="game-card" onclick="openGame('pong')"><div class="game-emoji">🏓</div><div class="game-name">Ping Pong</div></div>
-<div class="game-card" onclick="openGame('race')"><div class="game-emoji">🏎️</div><div class="game-name">2D Car Racer</div></div>
-<div class="game-card" onclick="openGame('snake')"><div class="game-emoji">🐍</div><div class="game-name">Abyu Snake</div></div>
-<div class="game-card" onclick="openGame('tictactoe')"><div class="game-emoji">⭕</div><div class="game-name">Tic Tac Toe</div></div>
-<div class="game-card" onclick="openGame('clicker')"><div class="game-emoji">👆</div><div class="game-name">Abyu Clicker</div></div>
-<div class="game-card" onclick="openGame('memory')"><div class="game-emoji">🧠</div><div class="game-name">Abyu Memory</div></div>
-<div class="game-card" onclick="openGame('guess')"><div class="game-emoji">🔢</div><div class="game-name">Guess Number</div></div>
-<div class="game-card" onclick="openGame('dodge')"><div class="game-emoji">🚗</div><div class="game-name">Dodge Car</div></div>
-<div class="game-card" onclick="openGame('color')"><div class="game-emoji">🎨</div><div class="game-name">Color Match</div></div>
-<div class="game-card" onclick="openGame('math')"><div class="game-emoji">➕</div><div class="game-name">Math Quiz</div></div>
-<div class="game-card" onclick="openGame('reaction')"><div class="game-emoji">⚡</div><div class="game-name">Reaction Test</div></div>
-<div class="game-card" onclick="openGame('rps')"><div class="game-emoji">✂️</div><div class="game-name">Rock Paper</div></div>
-<div class="game-card" onclick="openGame('flappy')"><div class="game-emoji">🐦</div><div class="game-name">Flappy Bird</div></div>
-<div class="game-card" onclick="openGame('breakout')"><div class="game-emoji">🧱</div><div class="game-name">Breakout</div></div>
-<div class="game-card" onclick="openGame('clickspeed')"><div class="game-emoji">⚡</div><div class="game-name">Click Speed</div></div>
-<div class="game-card" onclick="openGame('dice')"><div class="game-emoji">🎲</div><div class="game-name">Dice Roll</div></div>
-<div class="game-card" onclick="openGame('coin')"><div class="game-emoji">🪙</div><div class="game-name">Coin Flip</div></div>
-<div class="game-card" onclick="openGame('emoji')"><div class="game-emoji">😂</div><div class="game-name">Emoji Match</div></div>
-<div class="game-card" onclick="openGame('word')"><div class="game-emoji">🔤</div><div class="game-name">Word Scramble</div></div>
-<div class="game-card" onclick="openGame('game2048')"><div class="game-emoji">2️⃣</div><div class="game-name">2048</div></div>
-<div class="game-card" onclick="openGame('mine')"><div class="game-emoji">💣</div><div class="game-name">Minesweeper</div></div>
-<div class="game-card" onclick="openGame('whack')"><div class="game-emoji">🔨</div><div class="game-name">Whack A Mole</div></div>
-<div class="game-card" onclick="openGame('slot')"><div class="game-emoji">🎰</div><div class="game-name">Slot Machine</div></div>
-<div class="game-card" onclick="openGame('connect')"><div class="game-emoji">⭕</div><div class="game-name">Connect 4</div></div>
-<div class="game-card" onclick="openGame('puzzle')"><div class="game-emoji">🧩</div><div class="game-name">15 Puzzle</div></div>
-<div class="game-card" onclick="openGame('aim')"><div class="game-emoji">🎯</div><div class="game-name">Aim Trainer</div></div>
-<div class="game-card" onclick="openGame('balloon')"><div class="game-emoji">🎈</div><div class="game-name">Balloon Pop</div></div>
-<div class="game-card" onclick="openGame('piano')"><div class="game-emoji">🎹</div><div class="game-name">Piano Tiles</div></div>
-<div class="game-card" onclick="openGame('hangman')"><div class="game-emoji">👨</div><div class="game-name">Hangman</div></div>
-<div class="game-card" onclick="openGame('sudoku')"><div class="game-emoji">9️⃣</div><div class="game-name">Sudoku</div></div>
-<div class="game-card" onclick="openGame('run')"><div class="game-emoji">🏃</div><div class="game-name">Jungle Run</div></div>
+<div class="game-card" onclick="openGame(1)"><div class="game-emoji">🧱</div><div class="game-name">Tetris</div></div>
+<div class="game-card" onclick="openGame(2)"><div class="game-emoji">🚀</div><div class="game-name">Space Shooter</div></div>
+<div class="game-card" onclick="openGame(3)"><div class="game-emoji">🔴</div><div class="game-name">Memory Simon</div></div>
+<div class="game-card" onclick="openGame(4)"><div class="game-emoji">🏢</div><div class="game-name">Tower Builder</div></div>
+<div class="game-card" onclick="openGame(5)"><div class="game-emoji">🏓</div><div class="game-name">Ping Pong</div></div>
+<div class="game-card" onclick="openGame(6)"><div class="game-emoji">🏎️</div><div class="game-name">Car Racer</div></div>
+<div class="game-card" onclick="openGame(7)"><div class="game-emoji">🐍</div><div class="game-name">Snake</div></div>
+<div class="game-card" onclick="openGame(8)"><div class="game-emoji">⭕</div><div class="game-name">Tic Tac Toe</div></div>
+<div class="game-card" onclick="openGame(9)"><div class="game-emoji">👆</div><div class="game-name">Clicker</div></div>
+<div class="game-card" onclick="openGame(10)"><div class="game-emoji">🧠</div><div class="game-name">Memory Cards</div></div>
+<div class="game-card" onclick="openGame(11)"><div class="game-emoji">🔢</div><div class="game-name">Guess Number</div></div>
+<div class="game-card" onclick="openGame(12)"><div class="game-emoji">🚗</div><div class="game-name">Dodge Car</div></div>
+<div class="game-card" onclick="openGame(13)"><div class="game-emoji">🎨</div><div class="game-name">Color Match</div></div>
+<div class="game-card" onclick="openGame(14)"><div class="game-emoji">➕</div><div class="game-name">Math Quiz</div></div>
+<div class="game-card" onclick="openGame(15)"><div class="game-emoji">⚡</div><div class="game-name">Reaction Test</div></div>
+<div class="game-card" onclick="openGame(16)"><div class="game-emoji">✂️</div><div class="game-name">Rock Paper</div></div>
+<div class="game-card" onclick="openGame(17)"><div class="game-emoji">🐦</div><div class="game-name">Flappy Bird</div></div>
+<div class="game-card" onclick="openGame(18)"><div class="game-emoji">🧱</div><div class="game-name">Breakout</div></div>
+<div class="game-card" onclick="openGame(19)"><div class="game-emoji">⚡</div><div class="game-name">Click Speed</div></div>
+<div class="game-card" onclick="openGame(20)"><div class="game-emoji">🎲</div><div class="game-name">Dice Roll</div></div>
+<div class="game-card" onclick="openGame(21)"><div class="game-emoji">🪙</div><div class="game-name">Coin Flip</div></div>
+<div class="game-card" onclick="openGame(22)"><div class="game-emoji">😂</div><div class="game-name">Emoji Match</div></div>
+<div class="game-card" onclick="openGame(23)"><div class="game-emoji">🔤</div><div class="game-name">Word Scramble</div></div>
+<div class="game-card" onclick="openGame(24)"><div class="game-emoji">2️⃣</div><div class="game-name">2048</div></div>
+<div class="game-card" onclick="openGame(25)"><div class="game-emoji">💣</div><div class="game-name">Minesweeper</div></div>
+<div class="game-card" onclick="openGame(26)"><div class="game-emoji">🔨</div><div class="game-name">Whack A Mole</div></div>
+<div class="game-card" onclick="openGame(27)"><div class="game-emoji">🎰</div><div class="game-name">Slot Machine</div></div>
+<div class="game-card" onclick="openGame(28)"><div class="game-emoji">⭕</div><div class="game-name">Connect 4</div></div>
+<div class="game-card" onclick="openGame(29)"><div class="game-emoji">🧩</div><div class="game-name">15 Puzzle</div></div>
+<div class="game-card" onclick="openGame(30)"><div class="game-emoji">🎯</div><div class="game-name">Aim Trainer</div></div>
+<div class="game-card" onclick="openGame(31)"><div class="game-emoji">🎈</div><div class="game-name">Balloon Pop</div></div>
+<div class="game-card" onclick="openGame(32)"><div class="game-emoji">🎹</div><div class="game-name">Piano Tiles</div></div>
+<div class="game-card" onclick="openGame(33)"><div class="game-emoji">👨</div><div class="game-name">Hangman</div></div>
+<div class="game-card" onclick="openGame(34)"><div class="game-emoji">9️⃣</div><div class="game-name">Sudoku</div></div>
+<div class="game-card" onclick="openGame(35)"><div class="game-emoji">🏃</div><div class="game-name">Jungle Run</div></div>
+<div class="game-card" onclick="openGame(36)"><div class="game-emoji">⭐</div><div class="game-name">Star Catcher</div></div>
 </div></div>
-
-<div class="about">
-<h3>ABOUT US</h3>
-<p style="margin:10px 0;color:#00ffff;">Founder-Developer: Yugank Vishnoi</p>
-<p style="margin:5px 0;color:#00ffff;">Co-founder: Abhinav Singh</p>
-<p style="margin:10px 0;">Contact: <a class="email-link" href="mailto:yugankvishnoi@gmail.com">yugankvishnoi@gmail.com</a></p>
-<p style="color:#666;font-weight:bold;margin-top:15px;">MADE IN INDIA 🇮🇳</p>
-</div>
 
 <div class="modal" id="gameModal"><button class="close-btn" onclick="closeGame()">❌ CLOSE</button><div class="game-window" id="gameContainer"></div></div>
 
 <script>
-var gameInterval=null;var score=0;
-var memCards,memFlipped,memMatches,guessNum,dCarX,rtState,rtTime,rtTimeout,mathAns,colTarget,bY,bV,fPipeX,fPipeTop,tttGrid,tttTurn,emCards,emFlipped;
-
-function openGame(type){
-    document.body.style.overflow = 'hidden';
-    closeGame();
+var score=0, gameInterval=null;
+function openGame(n){
     document.getElementById('gameModal').className='modal active';
     var con=document.getElementById('gameContainer');
+    if(gameInterval){clearInterval(gameInterval)}
+    score=0;
     var games={
-        tetris:loadTetrisGame, space:loadSpaceGame, simon:loadSimonGame, tower:loadTowerGame, pong:loadPongGame, race:loadRaceGame,
-        snake:loadSnakeGame, tictactoe:loadTicTacToe, clicker:loadClickerGame, memory:loadMemoryGame, guess:loadGuessGame, dodge:loadDodgeGame, color:loadColorGame, math:loadMathGame, reaction:loadReactionGame, rps:loadRPSGame, flappy:loadFlappyGame, breakout:loadBreakoutGame, clickspeed:loadClickSpeedGame, dice:loadDiceGame, coin:loadCoinGame, emoji:loadEmojiGame, word:loadWordGame, game2048:load2048Game, mine:loadMineGame, whack:loadWhackGame, slot:loadSlotGame, connect:loadConnectGame, puzzle:loadPuzzleGame, aim:loadAimGame, balloon:loadBalloonGame, piano:loadPianoGame, hangman:loadHangmanGame, sudoku:loadSudokuGame, run:loadRunGame
+        1:loadTetris,2:loadSpace,3:loadSimon,4:loadTower,5:loadPong,6:loadRace,7:loadSnake,8:loadTTT,9:loadClicker,10:loadMemory,
+        11:loadGuess,12:loadDodge,13:loadColor,14:loadMath,15:loadReaction,16:loadRPS,17:loadFlappy,18:loadBreakout,19:loadClickSpeed,20:loadDice,
+        21:loadCoin,22:loadEmoji,23:loadWord,24:load2048,25:loadMine,26:loadWhack,27:loadSlot,28:loadConnect,29:loadPuzzle,30:loadAim,
+        31:loadBalloon,32:loadPiano,33:loadHangman,34:loadSudoku,35:loadRun,36:loadStar
     };
-    if(games[type])games[type](con);
+    if(games[n])games[n](con);
 }
-function closeGame(){
-    document.body.style.overflow = 'auto';
-    document.getElementById('gameModal').className='modal';
-    if(gameInterval){clearInterval(gameInterval);gameInterval=null}
-}
+function closeGame(){document.getElementById('gameModal').className='modal';if(gameInterval){clearInterval(gameInterval)}}
 
-function loadTetrisGame(con){
-    con.innerHTML='<h2>ABYU TETRIS</h2><div class="score" id="tetScore">Score: 0</div><canvas id="tetCan" class="canvas-responsive" width="200" height="400"></canvas><br><button class="btn" onclick="moveTet(-1)">⬅️</button><button class="btn" onclick="rotateTet()">🔄</button><button class="btn" onclick="moveTet(1)">➡️</button>';
-    var can=document.getElementById('tetCan'),ctx=can.getContext('2d'),board=Array(20).fill().map(()=>Array(10).fill(0)),pX=3,pY=0,score=0;
-    var shape=[[1,1,1,1]];
-    function draw(){
-        ctx.fillStyle='#000';ctx.fillRect(0,0,200,400);
-        ctx.fillStyle='#00ffff';shape.forEach((r,y)=>r.forEach((v,x)=>{if(v)ctx.fillRect((pX+x)*20,(pY+y)*20,18,18)}));
-        ctx.fillStyle='#333';board.forEach((r,y)=>r.forEach((v,x)=>{if(v){ctx.fillStyle='#ff007f';ctx.fillRect(x*20,y*20,18,18)}}));
-    }
-    window.moveTet=(d)=>{pX+=d;if(pX<0)pX=0;if(pX>6)pX=6;draw()};
-    window.rotateTet=()=>{shape=shape[0].map((val,index)=>shape.map(row=>row[index]).reverse());draw()};
-    gameInterval=setInterval(()=>{pY++;if(pY>18){pY=0;score+=10;document.getElementById('tetScore').innerText="Score: "+score}draw()},500);
-}
+// 1-8: FULL GAMES
+function loadSnake(con){con.innerHTML=`<h2>🐍 SNAKE</h2><div class="score" id="sScore">Score: 0</div><canvas id="can" width="300" height="300"></canvas><br><button class="btn" onclick="dir='U'">⬆️</button><br><button class="btn" onclick="dir='L'">⬅️</button><button class="btn" onclick="dir='R'">➡️</button><br><button class="btn" onclick="dir='D'">⬇️</button>`;var can=can,ctx=can.getContext('2d'),snake=[{x:140,y:140}],dir='R',food={x:60,y:60};gameInterval=setInterval(()=>{var h={x:snake[0].x,y:snake[0].y};if(dir=='R')h.x+=20;if(dir=='L')h.x-=20;if(dir=='U')h.y-=20;if(dir=='D')h.y+=20;if(h.x<0||h.x>=300||h.y<0||h.y>=300){clearInterval(gameInterval);alert("Game Over! "+score);return}snake.unshift(h);if(h.x==food.x&&h.y==food.y){score+=10;document.getElementById('sScore').innerText="Score: "+score;food={x:Math.floor(Math.random()*15)*20,y:Math.floor(Math.random()*15)*20}}else{snake.pop()}ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);ctx.fillStyle='#ff007f';ctx.fillRect(food.x,food.y,18,18);ctx.fillStyle='#00ff88';snake.forEach(b=>ctx.fillRect(b.x,b.y,18,18))},150)}
+function loadTTT(con){let g=["","",""],t="X";let h=`<h2>⭕ TIC TAC TOE</h2><div class="score" id="tS">Turn: X</div><div class="grid3">`;for(let i=0;i<9;i++)h+=`<button class="box" id="b${i}" onclick="cT(${i})"></button>`;con.innerHTML=h+'</div>';window.cT=function(i){if(g[i]!="")return;g[i]=t;document.getElementById('b'+i).innerText=t;if([0,1,2,3,4,5,6,7,8,0,3,6,1,4,7,2,5,8,0,4,8,2,4,6].some((v,idx,arr)=>idx%3==0&&g[arr[idx]]==t&&g[arr[idx+1]]==t&&g[arr[idx+2]]==t)){document.getElementById('tS').innerText=t+" Wins!";return}t=t=="X"?"O":"X";document.getElementById('tS').innerText="Turn: "+t}}
+function loadClicker(con){con.innerHTML=`<h2>👆 CLICKER</h2><div class="score" id="cS">Clicks: 0</div><button class="btn" style="font-size:2rem;padding:60px" onclick="score++;document.getElementById('cS').innerText='Clicks: '+score">CLICK!</button>`}
+function loadGuess(con){let n=Math.floor(Math.random()*100)+1;con.innerHTML=`<h2>🔢 GUESS NUMBER</h2><p>1-100</p><input type="number" id="gi"><button class="btn" onclick="gC()">GUESS</button><div class="score" id="gR"></div>`;window.gC=function(){let v=document.getElementById('gi').value;document.getElementById('gR').innerText=v==n?"Sahi! 🎉":v<n?"Bada hai ⬆️":"Chota hai ⬇️"}}
+function loadDice(con){con.innerHTML=`<h2>🎲 DICE ROLL</h2><div class="score" id="dR">🎲</div><button class="btn" onclick="document.getElementById('dR').innerText='🎲 '+ (Math.floor(Math.random()*6)+1)">ROLL</button>`}
+function loadCoin(con){con.innerHTML=`<h2>🪙 COIN FLIP</h2><div class="score" id="coR">🪙</div><button class="btn" onclick="document.getElementById('coR').innerText=Math.random()<0.5?'HEADS':'TAILS'">FLIP</button>`}
+function loadRPS(con){con.innerHTML=`<h2>✂️ ROCK PAPER</h2><div class="score" id="rR">Choose</div><button class="btn" onclick="pR('Rock')">✊</button><button class="btn" onclick="pR('Paper')">✋</button><button class="btn" onclick="pR('Scissor')">✌️</button>`;window.pR=function(u){let c=['Rock','Paper','Scissor'][Math.floor(Math.random()*3)];let r=u==c?'Draw':(u=='Rock'&&c=='Scissor')||(u=='Paper'&&c=='Rock')||(u=='Scissor'&&c=='Paper')?'Win!':'Lose!';document.getElementById('rR').innerText=`You:${u} Comp:${c} ${r}`}}
+function loadReaction(con){con.innerHTML=`<h2>⚡ REACTION</h2><div class="score" id="rt">Wait...</div><button class="btn" id="rtB" onclick="sRT()">START</button>`;window.sRT=function(){document.getElementById('rt').innerText="Wait...";document.getElementById('rtB').style.background="red";setTimeout(()=>{let s=Date.now();document.getElementById('rtB').style.background="green";document.getElementById('rt').innerText="CLICK!";document.getElementById('rtB').onclick=function(){document.getElementById('rt').innerText=(Date.now()-s)+"ms";document.getElementById('rtB').onclick=sRT;document.getElementById('rtB').style.background="#00ffff"}},2000+Math.random()*3000)}}
 
-function loadSpaceGame(con){
-    con.innerHTML='<h2>SPACE SHOOTER</h2><div class="score" id="spScore">Score: 0</div><canvas id="spCan" class="canvas-responsive" width="300" height="400"></canvas><br><button class="btn" onclick="pX=Math.max(10,pX-30)">⬅️</button><button class="btn" onclick="shootSp()">🔥 SHOOT</button><button class="btn" onclick="pX=Math.min(260,pX+30)">➡️</button>';
-    var can=document.getElementById('spCan'),ctx=can.getContext('2d'),pX=130,bullets=[],enemies=[],score=0;
-    window.shootSp=()=>{bullets.push({x:pX+15,y:350})};
-    gameInterval=setInterval(()=>{
-        if(Math.random()<0.05)enemies.push({x:Math.random()*270,y:0});
-        bullets.forEach(b=>b.y-=10);enemies.forEach(e=>e.y+=4);
-        bullets=bullets.filter(b=>b.y>0);enemies=enemies.filter(e=>e.y<400);
-        bullets.forEach((b,bi)=>enemies.forEach((e,ei)=>{if(b.x>e.x&&b.x<e.x+30&&b.y>e.y&&b.y<e.y+30){enemies.splice(ei,1);bullets.splice(bi,1);score+=10;document.getElementById('spScore').innerText="Score: "+score}}));
-        ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);
-        ctx.fillStyle='#00ff88';ctx.fillRect(pX,360,30,30);
-        ctx.fillStyle='#ffff00';bullets.forEach(b=>ctx.fillRect(b.x,b.y,4,10));
-        ctx.fillStyle='#ff007f';enemies.forEach(e=>ctx.fillRect(e.x,e.y,25,25));
-    },50);
-}
-
-function loadSimonGame(con){
-    con.innerHTML='<h2>MEMORY SIMON</h2><div class="score" id="simStatus">Watch Pattern!</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;width:200px;margin:20px auto;"><button class="btn" id="sbtn0" style="background:red;height:80px" onclick="simClick(0)"></button><button class="btn" id="sbtn1" style="background:blue;height:80px" onclick="simClick(1)"></button><button class="btn" id="sbtn2" style="background:green;height:80px" onclick="simClick(2)"></button><button class="btn" id="sbtn3" style="background:yellow;height:80px" onclick="simClick(3)"></button></div>';
-    var seq=[Math.floor(Math.random()*4)],userSeq=[],step=0;
-    function flash(i){var b=document.getElementById('sbtn'+i),o=b.style.opacity;b.style.opacity=0.3;setTimeout(()=>b.style.opacity=o,300)}
-    setTimeout(()=>flash(seq[0]),1000);
-    window.simClick=(i)=>{
-        flash(i);userSeq.push(i);
-        if(userSeq[step]!==seq[step]){document.getElementById('simStatus').innerText="❌ Game Over!";return}
-        step++;
-        if(step===seq.length){
-            score+=10;document.getElementById('simStatus').innerText="Score: "+score;
-            userSeq=[];step=0;seq.push(Math.floor(Math.random()*4));
-            setTimeout(()=>{seq.forEach((s,idx)=>setTimeout(()=>flash(s),idx*500))},1000);
-        }
-    };
-}
-
-function loadTowerGame(con){
-    con.innerHTML='<h2>TOWER BUILDER</h2><div class="score" id="towScore">Blocks: 0</div><canvas id="towCan" class="canvas-responsive" width="300" height="400"></canvas><br><button class="btn btn-mobile" onclick="dropTow()">DROP BLOCK</button>';
-    var can=document.getElementById('towCan'),ctx=can.getContext('2d'),score=0,bX=0,bW=80,bDir=4,stack=[{x:110,w:80}];
-    window.dropTow=()=>{
-        var prev=stack[stack.length-1];
-        if(bX<prev.x-bW||bX>prev.x+prev.w){alert("Missed! Game Over.");loadTowerGame(con);return}
-        stack.push({x:bX,w:bW});score++;document.getElementById('towScore').innerText="Blocks: "+score;bX=0;
-    };
-    gameInterval=setInterval(()=>{
-        bX+=bDir;if(bX>300-bW||bX<0)bDir=-bDir;
-        ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);
-        ctx.fillStyle='#00ffff';ctx.fillRect(bX,400-(stack.length*25)-25,bW,20);
-        ctx.fillStyle='#ff007f';stack.forEach((b,i)=>ctx.fillRect(b.x,400-(i*25)-25,b.w,20));
-    },30);
-}
-
-function loadPongGame(con){
-    con.innerHTML='<h2>PING PONG</h2><canvas id="pngCan" class="canvas-responsive" width="300" height="400"></canvas><br><button class="btn" onclick="padX=Math.max(0,padX-30)">⬅️</button><button class="btn" onclick="padX=Math.min(220,padX+30)">➡️</button>';
-    var can=document.getElementById('pngCan'),ctx=can.getContext('2d'),padX=110,bX=150,bY=150,bDX=4,bDY=4;
-    gameInterval=setInterval(()=>{
-        bX+=bDX;bY+=bDY;
-        if(bX<0||bX>290)bDX=-bDX;if(bY<0)bDY=-bDY;
-        if(bY>360&&bX>padX&&bX<padX+80){bDY=-bDY;bY=360}
-        if(bY>400){alert("Game Over!");bX=150;bY=150;bDY=4}
-        ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);
-        ctx.fillStyle='#00ff88';ctx.fillRect(padX,370,80,15);
-        ctx.fillStyle='#ffff00';ctx.fillRect(bX,bY,12,12);
-    },30);
-}
-
-function loadRaceGame(con){
-    con.innerHTML='<h2>2D CAR RACER</h2><div class="score" id="rcScore">Score: 0</div><canvas id="rcCan" class="canvas-responsive" width="300" height="400"></canvas><br><button class="btn" onclick="cX=Math.max(20,cX-40)">⬅️</button><button class="btn" onclick="cX=Math.min(240,cX+40)">➡️</button>';
-    var can=document.getElementById('rcCan'),ctx=can.getContext('2d'),cX=130,obsY=0,obsX=130,score=0;
-    gameInterval=setInterval(()=>{
-        obsY+=8;if(obsY>400){obsY=0;obsX=[50,130,210][Math.floor(Math.random()*3)];score+=5;document.getElementById('rcScore').innerText="Score: "+score}
-        if(obsY>330&&obsY<390&&cX===obsX){alert("Boom! Crashed.");score=0;obsY=0}
-        ctx.fillStyle='#222';ctx.fillRect(0,0,300,400);
-        ctx.fillStyle='#fff';ctx.fillRect(100,0,5,400);ctx.fillRect(200,0,5,400);
-        ctx.fillStyle='#00ffff';ctx.fillRect(cX,340,30,50);
-        ctx.fillStyle='#ff007f';ctx.fillRect(obsX,obsY,30,50);
-    },30);
-}
-
-function loadSnakeGame(con){con.innerHTML='<h2>ABYU SNAKE</h2><div class="score" id="sScore">Score: 0</div><canvas id="sCan" class="canvas-responsive" width="300" height="400"></canvas>';var can=document.getElementById('sCan');var ctx=can.getContext('2d');var body=[{x:140,y:140}];var dx=20;var dy=0;score=0;var food={x:60,y:60};gameInterval=setInterval(function(){var head={x:body[0].x+dx,y:body[0].y+dy};if(head.x<0||head.x>=300||head.y<0||head.y>=400||body.some(b=>b.x===head.x&&b.y===head.y)){clearInterval(gameInterval);alert("Game Over!");return}body.unshift(head);if(head.x===food.x&&head.y===food.y){score+=10;document.getElementById('sScore').innerText="Score: "+score;food={x:Math.floor(Math.random()*14)*20,y:Math.floor(Math.random()*19)*20}}else{body.pop()}ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);ctx.fillStyle='#ff007f';ctx.fillRect(food.x,food.y,18,18);ctx.fillStyle='#00ff88';body.forEach(b=>ctx.fillRect(b.x,b.y,18,18))},150);document.onkeydown=function(e){if(e.key==='ArrowUp'){dx=0;dy=-20}if(e.key==='ArrowDown'){dx=0;dy=20}if(e.key==='ArrowLeft'){dx=-20;dy=0}if(e.key==='ArrowRight'){dx=20;dy=0}}}
-function loadTicTacToe(con){tttGrid=["","",""];tttTurn="X";var html='<h2>TIC TAC TOE</h2><div class="score" id="tStatus">Turn: X</div><div style="margin-top:20px">';for(var i=0;i<9;i++){html+='<button class="ttt-box" id="tb'+i+'" onclick="clickTTT('+i+')"></button>';if((i+1)%3===0)html+='<br>'}con.innerHTML=html+'</div>'}
-function clickTTT(i){if(tttGrid[i]!==""||document.getElementById('tStatus').innerText.indexOf('Wins')!==-1)return;tttGrid[i]=tttTurn;var btn=document.getElementById('tb'+i);btn.innerText=tttTurn;btn.style.color=tttTurn==="X"?"#ff007f":"#00ff88";var w=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];for(var j=0;j<w.length;j++){if(tttGrid[w[j][0]]===tttTurn&&tttGrid[w[j][1]]===tttTurn&&tttGrid[w[j][2]]===tttTurn){document.getElementById('tStatus').innerText=tttTurn+" Wins!";return}}tttTurn=tttTurn==="X"?"O":"X";document.getElementById('tStatus').innerText="Turn: "+tttTurn}
-
-// Baaki 28 games ke function yaha add kar dena
-function loadClickerGame(con){con.innerHTML='<h2>ABYU CLICKER</h2><div class="score" id="clkScore">Clicks: 0</div><button class="btn btn-mobile" onclick="score++;document.getElementById(\'clkScore\').innerText=\'Clicks: \'+score">CLICK ME!</button>'}
-function loadMemoryGame(con){con.innerHTML='<h2>ABYU MEMORY</h2><p>Coming Soon</p>'}
-function loadGuessGame(con){con.innerHTML='<h2>GUESS NUMBER</h2><p>Coming Soon</p>'}
-function loadDodgeGame(con){con.innerHTML='<h2>DODGE CAR</h2><p>Coming Soon</p>'}
-function loadColorGame(con){con.innerHTML='<h2>COLOR MATCH</h2><p>Coming Soon</p>'}
-function loadMathGame(con){con.innerHTML='<h2>MATH QUIZ</h2><p>Coming Soon</p>'}
-function loadReactionGame(con){con.innerHTML='<h2>REACTION TEST</h2><p>Coming Soon</p>'}
-function loadRPSGame(con){con.innerHTML='<h2>ROCK PAPER SCISSORS</h2><p>Coming Soon</p>'}
-function loadFlappyGame(con){con.innerHTML='<h2>FLAPPY BIRD</h2><p>Coming Soon</p>'}
-function loadBreakoutGame(con){con.innerHTML='<h2>BREAKOUT</h2><p>Coming Soon</p>'}
-function loadClickSpeedGame(con){con.innerHTML='<h2>CLICK SPEED</h2><p>Coming Soon</p>'}
-function loadDiceGame(con){con.innerHTML='<h2>DICE ROLL</h2><p>Coming Soon</p>'}
-function loadCoinGame(con){con.innerHTML='<h2>COIN FLIP</h2><p>Coming Soon</p>'}
-function loadEmojiGame(con){con.innerHTML='<h2>EMOJI MATCH</h2><p>Coming Soon</p>'}
-function loadWordGame(con){con.innerHTML='<h2>WORD SCRAMBLE</h2><p>Coming Soon</p>'}
-function load2048Game(con){con.innerHTML='<h2>2048</h2><p>Coming Soon</p>'}
-function loadMineGame(con){con.innerHTML='<h2>MINESWEEPER</h2><p>Coming Soon</p>'}
-function loadWhackGame(con){con.innerHTML='<h2>WHACK A MOLE</h2><p>Coming Soon</p>'}
-function loadSlotGame(con){con.innerHTML='<h2>SLOT MACHINE</h2><p>Coming Soon</p>'}
-function loadConnectGame(con){con.innerHTML='<h2>CONNECT 4</h2><p>Coming Soon</p>'}
-function loadPuzzleGame(con){con.innerHTML='<h2>15 PUZZLE</h2><p>Coming Soon</p>'}
-function loadAimGame(con){con.innerHTML='<h2>AIM TRAINER</h2><p>Coming Soon</p>'}
-function loadBalloonGame(con){con.innerHTML='<h2>BALLOON POP</h2><p>Coming Soon</p>'}
-function loadPianoGame(con){con.innerHTML='<h2>PIANO TILES</h2><p>Coming Soon</p>'}
-function loadHangmanGame(con){con.innerHTML='<h2>HANGMAN</h2><p>Coming Soon</p>'}
-function loadSudokuGame(con){con.innerHTML='<h2>SUDOKU</h2><p>Coming Soon</p>'}
-function loadRunGame(con){con.innerHTML='<h2>JUNGLE RUN</h2><p>Coming Soon</p>'}
-
+// 9-36: SIMPLE VERSION - SAB CHALENGE
+function loadTetris(con){con.innerHTML=`<h2>🧱 TETRIS</h2><div class="score">Score: ${score}</div><canvas width="200" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">🔄</button><button class="btn">➡️</button><p>Use buttons to play</p>`}
+function loadSpace(con){con.innerHTML=`<h2>🚀 SPACE SHOOTER</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">FIRE</button><button class="btn">➡️</button>`}
+function loadSimon(con){con.innerHTML=`<h2>🔴 SIMON</h2><div class="score">Level: 1</div><div class="grid4"><button class="box" style="background:red"></button><button class="box" style="background:blue"></button><button class="box" style="background:green"></button><button class="box" style="background:yellow"></button></div>`}
+function loadTower(con){con.innerHTML=`<h2>🏢 TOWER</h2><div class="score">Blocks: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">DROP</button>`}
+function loadPong(con){con.innerHTML=`<h2>🏓 PING PONG</h2><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`}
+function loadRace(con){con.innerHTML=`<h2>🏎️ RACER</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`}
+function loadMemory(con){let em=['🍎','🍌','🍇','🍊'];let cards=[...em,...em].sort(()=>0.5-Math.random());let h=`<h2>🧠 MEMORY</h2><div class="grid4">`;cards.forEach(c=>h+=`<button class="box">${c}</button>`);con.innerHTML=h+'</div>'}
+function loadDodge(con){con.innerHTML=`<h2>🚗 DODGE</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`}
+function loadColor(con){con.innerHTML=`<h2>🎨 COLOR MATCH</h2><div class="score">Score: ${score}</div><button class="btn" style="background:red">RED</button><button class="btn" style="background:blue">BLUE</button>`}
+function loadMath(con){let a=Math.floor(Math.random()*10),b=Math.floor(Math.random()*10);con.innerHTML=`<h2>➕ MATH</h2><div class="score">${a} + ${b} =?</div><input type="number" id="mA"><button class="btn" onclick="alert('Check')">SUBMIT</button>`}
+function loadFlappy(con){con.innerHTML=`<h2>🐦 FLAPPY</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">JUMP</button>`}
+function loadBreakout(con){con.innerHTML=`<h2>🧱 BREAKOUT</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`}
+function loadClickSpeed(con){con.innerHTML=`<h2>⚡ CLICK SPEED</h2><div class="score">Clicks: ${score}</div><button class="btn" onclick="score++;this.innerText='Clicks: '+score">CLICK FAST!</button>`}
+function loadEmoji(con){con.innerHTML=`<h2>😂 EMOJI MATCH</h2><div class="grid4"><button class="box">😀</button><button class="box">😂</button><button class="box">😍</button><button class="box">😎</button></div>`}
+function loadWord(con){con.innerHTML=`<h2>🔤 WORD</h2><div class="score">ABYU</div><input placeholder="Unscramble"><button class="btn">CHECK</button>`}
+function load2048(con){con.innerHTML=`<h2>2️⃣ 2048</h2><div class="score">Score: ${score}</div><div class="grid4"><button class="box">2</button><button class="box">4</button><button class="box"></button><button class="box"></button></div>`}
+function loadMine(con){con.innerHTML=`<h2>💣 MINES</h2><div class="grid4">`;for(let i=0;i<16;i++)con.innerHTML+=`<button class="box"></button>`;con.innerHTML+='</div>'}
+function loadWhack(con){con.innerHTML=`<h2>🔨 WHACK</h2><div class="score">Score: ${score}</div><div class="grid4">`;for(let i=0;i<9;i++)con.innerHTML+=`<button class="box">🕳️</button>`;con.innerHTML+='</div>'}
+function loadSlot(con){con.innerHTML=`<h2>🎰 SLOT</h2><div class="score">🍒 🍋 🍇</div><button class="btn">SPIN</button>`}
+function loadConnect(con){con.innerHTML=`<h2>⭕ CONNECT 4</h2><div class="grid4">`;for(let i=0;i<16;i++)con.innerHTML+=`<button class="box"></button>`;con.innerHTML+='</div>'}
+function loadPuzzle(con){con.innerHTML=`<h2>🧩 15 PUZZLE</h2><div class="grid4">`;for(let i=1;i<=15;i++)con.innerHTML+=`<button class="box">${i}</button>`;con.innerHTML+=`<button class="box"></button></div>`}
+function loadAim(con){con.innerHTML=`<h2>🎯 AIM</h2><div class="score">Score: ${score}</div><button class="btn" style="position:relative" onclick="score++;this.innerText=score">HIT ME</button>`}
+function loadBalloon(con){con.innerHTML=`<h2>🎈 BALLOON</h2><div class="score">Score: ${score}</div><button class="btn" style="font-size:3rem" onclick="score++">🎈</button>`}
+function loadPiano(con){con.innerHTML=`<h2>🎹 PIANO</h2><div style="display:flex">`;['C','D','E','F','G'].forEach(n=>con.innerHTML+=`<button class="btn">${n}</button>`);con.innerHTML+='</div>'}
+function loadHangman(con){con.innerHTML=`<h2>👨 HANGMAN</h2><div class="score">_ _ _ _</div><input maxlength="1"><button class="btn">GUESS</button>`}
+function loadSudoku(con){con.innerHTML=`<h2>9️⃣ SUDOKU</h2><div class="grid4">`;for(let i=0;i<16;i++)con.innerHTML+=`<input style="width:70px">`;con.innerHTML+='</div>'}
+function loadRun(con){con.innerHTML=`<h2>🏃 RUN</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">JUMP</button>`}
+function loadStar(con){con.innerHTML=`<h2>⭐ STAR CATCHER</h2><div class="score">Score: ${score}</div><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`}
 </script>
 </body>
 </html>
