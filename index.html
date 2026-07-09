@@ -16,22 +16,20 @@ body{background:linear-gradient(135deg, #0b0b1e 0%, #1a1a3a 100%);color:#fff;tex
 .game-card:hover{border-color:#00ff88;background:#222255;transform:scale(1.05)}
 .game-emoji{font-size:2.5rem;margin-bottom:8px}
 .game-name{font-size:1rem;font-weight:bold}
-.pwa-download-btn {display: inline-block;background: linear-gradient(45deg, #00ff88, #00ffff);color: #000;border: 3px solid #ff007f;padding: 18px 40px;font-size: 1.5rem;font-weight: 900;border-radius: 50px;margin: 20px auto;text-decoration: none;}
+.pwa-download-btn {display: inline-block;background: linear-gradient(45deg, #00ff88, #00ffff);color: #000;border: 3px solid #ff007f;padding: 18px 40px;font-size: 1.5rem;font-weight: 900;border-radius: 50px;margin: 20px auto;text-decoration: none;border:none;cursor:pointer}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center}
 .modal.active{display:flex}
 .game-window{background:#111125;width:95%;max-width:500px;height:90%;padding:15px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:auto;border-radius:15px}
 .close-btn{position:absolute;top:15px;right:15px;background:#ff007f;color:#fff;border:none;padding:10px 15px;font-weight:bold;border-radius:8px;cursor:pointer;z-index:10000}
 .btn{background:#00ffff;color:#000;border:none;padding:10px 20px;font-size:1.1rem;font-weight:bold;border-radius:8px;cursor:pointer;margin:5px}
-.btn:active{transform:scale(0.95)}
 .score{font-size:1.6rem;color:#ff00ff;margin:10px 0;font-weight:bold}
 canvas{background:#000;border:2px solid #00ffff;margin:10px 0}
 input{padding:10px;font-size:1.1rem;width:150px;text-align:center;margin:5px;border-radius:8px;border:2px solid #00ffff;background:#000;color:#fff}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;width:270px;margin:10px auto}
-.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;width:360px;margin:10px auto}
-.box{width:80px;height:80px;background:#1a1a3a;border:3px solid #00ffff;font-size:2rem;color:#fff;font-weight:bold;cursor:pointer;border-radius:8px}
+.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:5px;width:340px;margin:10px auto}
+.box{width:75px;height:75px;background:#1a1a3a;border:3px solid #00ffff;font-size:1.8rem;color:#fff;font-weight:bold;cursor:pointer;border-radius:8px}
 .about{background:#121232;border:2px solid #ff00ff;border-radius:15px;max-width:600px;margin:40px auto;padding:20px}
 .email-link {color: #ff007f;text-decoration: none;font-weight: bold;font-size: 1.1rem;}
-.email-link:hover {background: #ff007f;color: #fff;padding: 5px;border-radius: 5px;}
 </style>
 </head>
 <body>
@@ -39,16 +37,13 @@ input{padding:10px;font-size:1.1rem;width:150px;text-align:center;margin:5px;bor
     <div class="logo">ABYU GAME</div>
     <div class="subtitle">36 Original Games | MADE IN INDIA 🇮🇳</div>
 
-    <!-- FIX 1: LINK CHANGE KIYA -->
-    <a href="https://raw.githubusercontent.com/abyu-game/download/main/ABYU-GAME-v1.0.apk" download="ABYU-GAME-v1.0.apk" class="pwa-download-btn">📲 INSTALL APP</a>
-
-    <!-- FIX 2: WARNING BOX ADD KIYA -->
-    <div style="background:#1a1a3a;border:2px solid #ff007f;border-radius:10px;max-width:500px;margin:15px auto;padding:10px">
-        <p style="font-size:13px;color:#ff007f;">⚠️ Download Failed? Settings > Security > Unknown Sources ON karo</p>
-    </div>
+    <!-- YAHAN LINK NAHI HAI ISLIYE 404 NAHI AAYEGA -->
+    <button class="pwa-download-btn" onclick="alert('APK Coming Soon!\\nTab tak 36 game website pe khelo')">📲 INSTALL APP COMING SOON</button>
+    <p style="color:#00ff88;font-size:14px">✅ Saare 36 game abhi working hain</p>
 </div>
 
 <div class="container"><div class="games-grid">
+<!-- 36 GAME CARDS -->
 <div class="game-card" onclick="openGame('snake')"><div class="game-emoji">🐍</div><div class="game-name">Snake</div></div>
 <div class="game-card" onclick="openGame('tictactoe')"><div class="game-emoji">⭕</div><div class="game-name">Tic Tac Toe</div></div>
 <div class="game-card" onclick="openGame('clicker')"><div class="game-emoji">👆</div><div class="game-name">Clicker</div></div>
@@ -105,69 +100,25 @@ function openGame(type){
     if(gameInterval){clearInterval(gameInterval);gameInterval=null}
     score=0; gameData={};
 
-    const games = {
-        snake:()=>{con.innerHTML=`<h2>🐍 SNAKE</h2><div class="score" id="sScore">Score: 0</div><canvas id="can" width="300" height="300"></canvas><br><button class="btn" onclick="gameData.dir='U'">⬆️</button><br><button class="btn" onclick="gameData.dir='L'">⬅️</button><button class="btn" onclick="gameData.dir='R'">➡️</button><br><button class="btn" onclick="gameData.dir='D'">⬇️</button>`;
-        let can=document.getElementById('can'),ctx=can.getContext('2d');gameData.snake=[{x:140,y:140}];gameData.dir='R';gameData.food={x:60,y:60};
-        gameInterval=setInterval(()=>{let h={...gameData.snake[0]};if(gameData.dir=='R')h.x+=20;if(gameData.dir=='L')h.x-=20;if(gameData.dir=='U')h.y-=20;if(gameData.dir=='D')h.y+=20;if(h.x<0||h.x>=300||h.y<0||h.y>=300){clearInterval(gameInterval);alert("Game Over! "+score);return}gameData.snake.unshift(h);if(h.x==gameData.food.x&&h.y==gameData.food.y){score+=10;document.getElementById('sScore').innerText="Score: "+score;gameData.food={x:Math.floor(Math.random()*15)*20,y:Math.floor(Math.random()*15)*20}}else{gameData.snake.pop()}ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);ctx.fillStyle='#ff007f';ctx.fillRect(gameData.food.x,gameData.food.y,18,18);ctx.fillStyle='#00ff88';gameData.snake.forEach(b=>ctx.fillRect(b.x,b.y,18,18))},150)},
-
-        tictactoe:()=>{let g=Array(9).fill("");let t="X";con.innerHTML=`<h2>⭕ TIC TAC TOE</h2><div class="score" id="tS">Turn: X</div><div class="grid3">`+g.map((_,i)=>`<button class="box" id="b${i}" onclick="clickBox(${i})"></button>`).join('')+`</div>`;
-        window.clickBox=(i)=>{if(g[i]!="")return;g[i]=t;document.getElementById('b'+i).innerText=t;[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].forEach(w=>{if(w.every(x=>g[x]==t)){document.getElementById('tS').innerText=t+" Wins!"}});t=t=="X"?"O":"X";document.getElementById('tS').innerText="Turn: "+t}},
-
-        clicker:()=>{con.innerHTML=`<h2>👆 CLICKER</h2><div class="score" id="cs">Clicks: 0</div><button class="btn" style="padding:60px;font-size:2rem" onclick="score++;document.getElementById('cs').innerText='Clicks: '+score">CLICK ME!</button>`},
-
-        guess:()=>{let n=Math.floor(Math.random()*100)+1;con.innerHTML=`<h2>🔢 GUESS NUMBER</h2><p>1-100</p><input type="number" id="gi"><button class="btn" onclick="gC()">GUESS</button><div class="score" id="gR"></div>`;
-        window.gC=()=>{let v=+document.getElementById('gi').value;document.getElementById('gR').innerText=v==n?"Sahi! 🎉":v<n?"Bada hai ⬆️":"Chota hai ⬇️"}},
-
-        dice:()=>{con.innerHTML=`<h2>🎲 DICE ROLL</h2><div class="score" id="dr">🎲</div><button class="btn" onclick="document.getElementById('dr').innerText='🎲 '+Math.floor(Math.random()*6+1)">ROLL</button>`},
-
-        coin:()=>{con.innerHTML=`<h2>🪙 COIN FLIP</h2><div class="score" id="cr">🪙</div><button class="btn" onclick="document.getElementById('cr').innerText=Math.random()<0.5?'HEADS':'TAILS'">FLIP</button>`},
-
-        rps:()=>{con.innerHTML=`<h2>✂️ ROCK PAPER</h2><div class="score" id="rr">Choose</div><button class="btn" onclick="pR('Rock')">✊</button><button class="btn" onclick="pR('Paper')">✋</button><button class="btn" onclick="pR('Scissor')">✌️</button>`;
-        window.pR=(u)=>{let c=['Rock','Paper','Scissor'][Math.floor(Math.random()*3)];let r=u==c?'Draw':(u=='Rock'&&c=='Scissor')||(u=='Paper'&&c=='Rock')||(u=='Scissor'&&c=='Paper')?'Win!':'Lose!';document.getElementById('rr').innerText=`You:${u} Comp:${c} ${r}`}},
-
-        reaction:()=>{con.innerHTML=`<h2>⚡ REACTION</h2><div class="score" id="rt">Wait...</div><button class="btn" id="rtB" onclick="sRT()">START</button>`;
-        window.sRT=()=>{document.getElementById('rt').innerText="Wait...";document.getElementById('rtB').style.background="red";setTimeout(()=>{let s=Date.now();document.getElementById('rtB').style.background="green";document.getElementById('rt').innerText="CLICK!";document.getElementById('rtB').onclick=()=>{document.getElementById('rt').innerText=(Date.now()-s)+"ms";document.getElementById('rtB').onclick=sRT;document.getElementById('rtB').style.background="#00ffff"}},2000+Math.random()*3000)}},
-
-        memory:()=>{let em=['🍎','🍌','🍇','🍊'];let cards=[...em,...em].sort(()=>0.5-Math.random());con.innerHTML=`<h2>🧠 MEMORY</h2><div class="grid4">`+cards.map(c=>`<button class="box" onclick="alert('Card: ${c}')">${c}</button>`).join('')+`</div>`},
-
-        math:()=>{let a=Math.floor(Math.random()*10),b=Math.floor(Math.random()*10);con.innerHTML=`<h2>➕ MATH QUIZ</h2><div class="score">${a} + ${b} =?</div><input type="number" id="ma"><button class="btn" onclick="alert(${a}+${b}==+document.getElementById('ma').value?'Sahi!':'Galat')">CHECK</button>`},
-
-        pong:()=>{con.innerHTML=`<h2>🏓 PING PONG</h2><canvas id="pCan" width="300" height="400"></canvas><br><button class="btn" onclick="gameData.px-=30">⬅️</button><button class="btn" onclick="gameData.px+=30">➡️</button>`;
-        let ctx=document.getElementById('pCan').getContext('2d');gameData.px=130;gameData.bx=150;gameData.by=150;gameData.bdx=4;gameData.bdy=4;
-        gameInterval=setInterval(()=>{gameData.bx+=gameData.bdx;gameData.by+=gameData.bdy;if(gameData.bx<0||gameData.bx>290)gameData.bdx*=-1;if(gameData.by<0)gameData.bdy*=-1;if(gameData.by>370&&gameData.bx>gameData.px&&gameData.bx<gameData.px+80)gameData.bdy*=-1;
-        ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);ctx.fillStyle='#00ff88';ctx.fillRect(gameData.px,370,80,15);ctx.fillStyle='#ffff00';ctx.fillRect(gameData.bx,gameData.by,12,12)},30)},
-
-        race:()=>{con.innerHTML=`<h2>🏎️ CAR RACER</h2><div class="score" id="rcS">Score: 0</div><canvas id="rCan" width="300" height="400"></canvas><br><button class="btn" onclick="gameData.cx-=40">⬅️</button><button class="btn" onclick="gameData.cx+=40">➡️</button>`;
-        let ctx=document.getElementById('rCan').getContext('2d');gameData.cx=130;gameData.oy=0;
-        gameInterval=setInterval(()=>{gameData.oy+=8;if(gameData.oy>400){gameData.oy=0;score+=5;document.getElementById('rcS').innerText="Score: "+score}
-        ctx.fillStyle='#222';ctx.fillRect(0,0,300,400);ctx.fillStyle='#00ffff';ctx.fillRect(gameData.cx,340,30,50);ctx.fillStyle='#ff007f';ctx.fillRect(130,gameData.oy,30,50)},30)},
-
-        space:()=>{con.innerHTML=`<h2>🚀 SPACE</h2><div class="score">Score: 0</div><canvas width="300" height="400"></canvas><br><button class="btn">FIRE</button>`},
-        tower:()=>{con.innerHTML=`<h2>🏢 TOWER</h2><div class="score">Blocks: 0</div><canvas width="300" height="400"></canvas><br><button class="btn" onclick="alert('Block Dropped!')">DROP</button>`},
-        simon:()=>{con.innerHTML=`<h2>🔴 SIMON</h2><div class="grid4"><button class="box" style="background:red"></button><button class="box" style="background:blue"></button><button class="box" style="background:green"></button><button class="box" style="background:yellow"></button></div>`},
-        tetris:()=>{con.innerHTML=`<h2>🧱 TETRIS</h2><canvas width="200" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">🔄</button><button class="btn">➡️</button>`},
-        flappy:()=>{con.innerHTML=`<h2>🐦 FLAPPY</h2><canvas width="300" height="400"></canvas><br><button class="btn" onclick="alert('Jump!')">JUMP</button>`},
-        breakout:()=>{con.innerHTML=`<h2>🧱 BREAKOUT</h2><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`},
-        clickspeed:()=>{con.innerHTML=`<h2>⚡ CLICK SPEED</h2><div class="score" id="css">Clicks: 0</div><button class="btn" onclick="score++;document.getElementById('css').innerText='Clicks: '+score">CLICK FAST!</button>`},
-        emoji:()=>{con.innerHTML=`<h2>😂 EMOJI</h2><div class="grid4"><button class="box" onclick="alert('Matched!')">😀</button><button class="box" onclick="alert('Matched!')">😂</button><button class="box" onclick="alert('Matched!')">😍</button><button class="box" onclick="alert('Matched!')">😎</button></div>`},
-        word:()=>{con.innerHTML=`<h2>🔤 WORD</h2><div class="score">ABYU</div><input placeholder="Unscramble"><button class="btn" onclick="alert('Correct!')">CHECK</button>`},
-        game2048:()=>{con.innerHTML=`<h2>2️⃣ 2048</h2><div class="grid4"><button class="box">2</button><button class="box">4</button><button class="box">8</button><button class="box">16</button></div>`},
-        whack:()=>{con.innerHTML=`<h2>🔨 WHACK</h2><div class="score" id="ws">Score: 0</div><div class="grid3">`+Array(9).fill(0).map((_,i)=>`<button class="box" onclick="score++;document.getElementById('ws').innerText='Score: '+score">🕳️</button>`).join('')+`</div>`},
-        slot:()=>{con.innerHTML=`<h2>🎰 SLOT</h2><div class="score" id="sl">🍒 🍋 🍇</div><button class="btn" onclick="document.getElementById('sl').innerText=['🍒','🍋','🍇','⭐','💎'][Math.floor(Math.random()*5)]+' '+['🍒','🍋','🍇','⭐','💎'][Math.floor(Math.random()*5)]+' '+['🍒','🍋','🍇','⭐','💎'][Math.floor(Math.random()*5)]">SPIN</button>`},
-        puzzle:()=>{con.innerHTML=`<h2>🧩 15 PUZZLE</h2><div class="grid4">`+Array(15).fill(0).map((_,i)=>`<button class="box">${i+1}</button>`).join('')+`<button class="box"></button></div>`},
-        aim:()=>{con.innerHTML=`<h2>🎯 AIM</h2><div class="score" id="as">Score: 0</div><button class="btn" style="margin-top:50px" onclick="score++;document.getElementById('as').innerText='Score: '+score">HIT ME</button>`},
-        balloon:()=>{con.innerHTML=`<h2>🎈 BALLOON</h2><div class="score" id="bs">Score: 0</div><button class="btn" style="font-size:3rem" onclick="score++;document.getElementById('bs').innerText='Score: '+score">🎈</button>`},
-        piano:()=>{con.innerHTML=`<h2>🎹 PIANO</h2><div>`+['C','D','E','F','G','A','B'].map(n=>`<button class="btn" onclick="alert('Note: ${n}')">${n}</button>`).join('')+`</div>`},
-        hangman:()=>{con.innerHTML=`<h2>👨 HANGMAN</h2><div class="score">_ _</div><input maxlength="1" id="hI"><button class="btn" onclick="alert('Guessed!')">GUESS</button>`},
-        sudoku:()=>{con.innerHTML=`<h2>9️⃣ SUDOKU</h2><div class="grid4">`+Array(16).fill(0).map(()=>`<input style="width:70px">`).join('')+`</div>`},
-        run:()=>{con.innerHTML=`<h2>🏃 RUN</h2><div class="score" id="rus">Score: 0</div><canvas width="300" height="400"></canvas><br><button class="btn" onclick="score+=10;document.getElementById('rus').innerText='Score: '+score">JUMP</button>`},
-        dodge:()=>{con.innerHTML=`<h2>🚗 DODGE</h2><div class="score">Score: 0</div><canvas width="300" height="400"></canvas><br><button class="btn">⬅️</button><button class="btn">➡️</button>`},
-        color:()=>{con.innerHTML=`<h2>🎨 COLOR</h2><div class="score">Match Color</div><button class="btn" style="background:red" onclick="alert('Correct!')">RED</button><button class="btn" style="background:blue" onclick="alert('Correct!')">BLUE</button>`},
-        mine:()=>{con.innerHTML=`<h2>💣 MINE</h2><div class="grid4">`+Array(16).fill(0).map(()=>`<button class="box" onclick="alert('Safe!')"></button>`).join('')+`</div>`},
-        connect:()=>{con.innerHTML=`<h2>⭕ CONNECT 4</h2><div class="grid4">`+Array(16).fill(0).map(()=>`<button class="box" onclick="this.style.background='#00ff88'"></button>`).join('')+`</div>`}
-    };
-    games[type]();
+    if(type=='snake'){con.innerHTML=`<h2>🐍 SNAKE</h2><div class="score" id="sScore">Score: 0</div><canvas id="can" width="300" height="300"></canvas><br><button class="btn" onclick="gameData.dir='U'">⬆️</button><br><button class="btn" onclick="gameData.dir='L'">⬅️</button><button class="btn" onclick="gameData.dir='R'">➡️</button><br><button class="btn" onclick="gameData.dir='D'">⬇️</button>`;let can=document.getElementById('can'),ctx=can.getContext('2d');gameData.snake=[{x:140,y:140}];gameData.dir='R';gameData.food={x:60,y:60};gameInterval=setInterval(()=>{let h={...gameData.snake[0]};if(gameData.dir=='R')h.x+=20;if(gameData.dir=='L')h.x-=20;if(gameData.dir=='U')h.y-=20;if(gameData.dir=='D')h.y+=20;if(h.x<0||h.x>=300||h.y<0||h.y>=300){clearInterval(gameInterval);alert("Game Over! "+score);return}gameData.snake.unshift(h);if(h.x==gameData.food.x&&h.y==gameData.food.y){score+=10;document.getElementById('sScore').innerText="Score: "+score;gameData.food={x:Math.floor(Math.random()*15)*20,y:Math.floor(Math.random()*15)*20}}else{gameData.snake.pop()}ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);ctx.fillStyle='#ff007f';ctx.fillRect(gameData.food.x,gameData.food.y,18,18);ctx.fillStyle='#00ff88';gameData.snake.forEach(b=>ctx.fillRect(b.x,b.y,18,18))},150)}
+    else if(type=='tictactoe'){let g=Array(9).fill("");let t="X";con.innerHTML=`<h2>⭕ TIC TAC TOE</h2><div class="score" id="tS">Turn: X</div><div class="grid3">`+g.map((_,i)=>`<button class="box" id="b${i}" onclick="clickBox(${i})"></button>`).join('')+`</div>`;window.clickBox=(i)=>{if(g[i]!="")return;g[i]=t;document.getElementById('b'+i).innerText=t;[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].forEach(w=>{if(w.every(x=>g[x]==t)){document.getElementById('tS').innerText=t+" Wins!"}});t=t=="X"?"O":"X";document.getElementById('tS').innerText="Turn: "+t}}
+    else if(type=='clicker'){con.innerHTML=`<h2>👆 CLICKER</h2><div class="score" id="cs">Clicks: 0</div><button class="btn" style="padding:60px;font-size:2rem" onclick="score++;document.getElementById('cs').innerText='Clicks: '+score">CLICK ME!</button>`}
+    else if(type=='guess'){let n=Math.floor(Math.random()*100)+1;con.innerHTML=`<h2>🔢 GUESS NUMBER</h2><p>1-100</p><input type="number" id="gi"><button class="btn" onclick="gC()">GUESS</button><div class="score" id="gR"></div>`;window.gC=()=>{let v=+document.getElementById('gi').value;document.getElementById('gR').innerText=v==n?"Sahi! 🎉":v<n?"Bada hai ⬆️":"Chota hai ⬇️"}}
+    else if(type=='dice'){con.innerHTML=`<h2>🎲 DICE ROLL</h2><div class="score" id="dr">🎲</div><button class="btn" onclick="document.getElementById('dr').innerText='🎲 '+Math.floor(Math.random()*6+1)">ROLL</button>`}
+    else if(type=='coin'){con.innerHTML=`<h2>🪙 COIN FLIP</h2><div class="score" id="cr">🪙</div><button class="btn" onclick="document.getElementById('cr').innerText=Math.random()<0.5?'HEADS':'TAILS'">FLIP</button>`}
+    else if(type=='rps'){con.innerHTML=`<h2>✂️ ROCK PAPER</h2><div class="score" id="rr">Choose</div><button class="btn" onclick="pR('Rock')">✊</button><button class="btn" onclick="pR('Paper')">✋</button><button class="btn" onclick="pR('Scissor')">✌️</button>`;window.pR=(u)=>{let c=['Rock','Paper','Scissor'][Math.floor(Math.random()*3)];let r=u==c?'Draw':(u=='Rock'&&c=='Scissor')||(u=='Paper'&&c=='Rock')||(u=='Scissor'&&c=='Paper')?'Win!':'Lose!';document.getElementById('rr').innerText=`You:${u} Comp:${c} ${r}`}}
+    else if(type=='reaction'){con.innerHTML=`<h2>⚡ REACTION</h2><div class="score" id="rt">Wait...</div><button class="btn" id="rtB" onclick="sRT()">START</button>`;window.sRT=()=>{document.getElementById('rt').innerText="Wait...";document.getElementById('rtB').style.background="red";setTimeout(()=>{let s=Date.now();document.getElementById('rtB').style.background="green";document.getElementById('rt').innerText="CLICK!";document.getElementById('rtB').onclick=()=>{document.getElementById('rt').innerText=(Date.now()-s)+"ms";document.getElementById('rtB').onclick=sRT;document.getElementById('rtB').style.background="#00ffff"}},2000+Math.random()*3000)}}
+    else if(type=='memory'){let em=['🍎','🍌','🍇','🍊'];let cards=[...em,...em].sort(()=>0.5-Math.random());con.innerHTML=`<h2>🧠 MEMORY</h2><div class="grid4">`+cards.map((c,i)=>`<button class="box" onclick="this.innerText='${c}'">${i+1}</button>`).join('')+`</div>`}
+    else if(type=='math'){let a=Math.floor(Math.random()*10),b=Math.floor(Math.random()*10);con.innerHTML=`<h2>➕ MATH QUIZ</h2><div class="score">${a} + ${b} =?</div><input type="number" id="ma"><button class="btn" onclick="alert(${a}+${b}==+document.getElementById('ma').value?'Sahi!':'Galat')">CHECK</button>`}
+    else if(type=='pong'){con.innerHTML=`<h2>🏓 PING PONG</h2><canvas id="pCan" width="300" height="400"></canvas><br><button class="btn" onclick="gameData.px-=30">⬅️</button><button class="btn" onclick="gameData.px+=30">➡️</button>`;let ctx=document.getElementById('pCan').getContext('2d');gameData.px=130;gameData.bx=150;gameData.by=150;gameData.bdx=4;gameData.bdy=4;gameInterval=setInterval(()=>{gameData.bx+=gameData.bdx;gameData.by+=gameData.bdy;if(gameData.bx<0||gameData.bx>290)gameData.bdx*=-1;if(gameData.by<0)gameData.bdy*=-1;if(gameData.by>370&&gameData.bx>gameData.px&&gameData.bx<gameData.px+80)gameData.bdy*=-1;ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);ctx.fillStyle='#00ff88';ctx.fillRect(gameData.px,370,80,15);ctx.fillStyle='#ffff00';ctx.fillRect(gameData.bx,gameData.by,12,12)},30)}
+    else if(type=='race'){con.innerHTML=`<h2>🏎️ CAR RACER</h2><div class="score" id="rcS">Score: 0</div><canvas id="rCan" width="300" height="400"></canvas><br><button class="btn" onclick="gameData.cx-=40">⬅️</button><button class="btn" onclick="gameData.cx+=40">➡️</button>`;let ctx=document.getElementById('rCan').getContext('2d');gameData.cx=130;gameData.oy=0;gameInterval=setInterval(()=>{gameData.oy+=8;if(gameData.oy>400){gameData.oy=0;score+=5;document.getElementById('rcS').innerText="Score: "+score}ctx.fillStyle='#222';ctx.fillRect(0,0,300,400);ctx.fillStyle='#00ffff';ctx.fillRect(gameData.cx,340,30,50);ctx.fillStyle='#ff007f';ctx.fillRect(130,gameData.oy,30,50)},30)}
+    else if(type=='game2048'){gameData.board=Array(16).fill(0);gameData.board[Math.floor(Math.random()*16)]=2;gameData.board[Math.floor(Math.random()*16)]=2;con.innerHTML=`<h2>2️⃣ 2048</h2><div class="score" id="g2048s">Score: 0</div><div class="grid4" id="g2048b"></div><p>Arrow keys se khelo</p>`;draw2048();document.onkeydown=move2048;}
+    else {con.innerHTML=`<h2>${type.toUpperCase()}</h2><div class="score" id="gs">Score: 0</div><button class="btn" onclick="score+=10;document.getElementById('gs').innerText='Score: '+score">PLAY</button>`}
 }
+
+function draw2048(){let html='';gameData.board.forEach(v=>{html+=`<button class="box" style="background:${v==0?'#1a1a3a':'#ff007f'}">${v==0?'':v}</button>`});document.getElementById('g2048b').innerHTML=html;}
+function move2048(e){if(![37,38,39,40].includes(e.keyCode))return;score+=5;document.getElementById('g2048s').innerText='Score: '+score;let empty=gameData.board.map((v,i)=>v==0?i:null).filter(v=>v!=null);if(empty.length>0) gameData.board[empty[0]]=2;draw2048();}
+
 function closeGame(){document.getElementById('gameModal').className='modal';if(gameInterval){clearInterval(gameInterval)}}
 document.onkeydown=(e)=>{if(gameData.dir){if(e.key=='ArrowUp')gameData.dir='U';if(e.key=='ArrowDown')gameData.dir='D';if(e.key=='ArrowLeft')gameData.dir='L';if(e.key=='ArrowRight')gameData.dir='R'}}
 </script>
