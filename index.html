@@ -16,13 +16,13 @@ body{background:linear-gradient(135deg, #0b0b1e 0%, #1a1a3a 100%);color:#fff;tex
 .game-card:hover{border-color:#00ff88;background:#222255;transform:scale(1.05)}
 .game-emoji{font-size:2.5rem;margin-bottom:8px}
 .game-name{font-size:1rem;font-weight:bold}
-.pwa-download-btn {display: inline-block;background: linear-gradient(45deg, #00ff88, #00ffff);color: #000;border: 3px solid #ff007f;padding: 18px 40px;font-size: 1.5rem;font-weight: 900;border-radius: 50px;margin: 20px auto;text-decoration: none;border:none;cursor:pointer}
+.pwa-download-btn {display: inline-block;background: linear-gradient(45deg, #00ff88, #00ffff);color: #000;border: 3px solid #ff007f;padding: 18px 40px;font-size: 1.5rem;font-weight: 900;border-radius: 50px;margin: 20px auto;border:none;cursor:pointer}
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:9999;align-items:center;justify-content:center}
 .modal.active{display:flex}
 .game-window{background:#111125;width:95%;max-width:500px;height:90%;padding:15px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:auto;border-radius:15px}
 .close-btn{position:absolute;top:15px;right:15px;background:#ff007f;color:#fff;border:none;padding:10px 15px;font-weight:bold;border-radius:8px;cursor:pointer;z-index:10000}
 .btn{background:#00ffff;color:#000;border:none;padding:10px 20px;font-size:1.1rem;font-weight:bold;border-radius:8px;cursor:pointer;margin:5px}
-.btn-restart{background:#ff007f;color:#fff;margin-top:10px}
+.btn-restart{background:#ff007f;color:#fff}
 .score{font-size:1.6rem;color:#ff00ff;margin:10px 0;font-weight:bold}
 canvas{background:#000;border:2px solid #00ffff;margin:10px 0}
 input{padding:10px;font-size:1.1rem;width:150px;text-align:center;margin:5px;border-radius:8px;border:2px solid #00ffff;background:#000;color:#fff}
@@ -41,25 +41,26 @@ input{padding:10px;font-size:1.1rem;width:150px;text-align:center;margin:5px;bor
 </div>
 
 <div class="container"><div class="games-grid">
+<!-- 36 CARDS -->
 <div class="game-card" onclick="openGame('snake')"><div class="game-emoji">🐍</div><div class="game-name">Snake</div></div>
 <div class="game-card" onclick="openGame('tictactoe')"><div class="game-emoji">⭕</div><div class="game-name">Tic Tac Toe</div></div>
 <div class="game-card" onclick="openGame('clicker')"><div class="game-emoji">👆</div><div class="game-name">Clicker</div></div>
-<div class="game-card" onclick="openGame('guess')"><div class="game-emoji">🔢</div><div class="game-name">Guess Number</div></div>
-<div class="game-card" onclick="openGame('dice')"><div class="game-emoji">🎲</div><div class="game-name">Dice Roll</div></div>
-<div class="game-card" onclick="openGame('coin')"><div class="game-emoji">🪙</div><div class="game-name">Coin Flip</div></div>
-<div class="game-card" onclick="openGame('rps')"><div class="game-emoji">✂️</div><div class="game-name">Rock Paper</div></div>
+<div class="game-card" onclick="openGame('guess')"><div class="game-emoji">🔢</div><div class="game-name">Guess</div></div>
+<div class="game-card" onclick="openGame('dice')"><div class="game-emoji">🎲</div><div class="game-name">Dice</div></div>
+<div class="game-card" onclick="openGame('coin')"><div class="game-emoji">🪙</div><div class="game-name">Coin</div></div>
+<div class="game-card" onclick="openGame('rps')"><div class="game-emoji">✂️</div><div class="game-name">RPS</div></div>
 <div class="game-card" onclick="openGame('reaction')"><div class="game-emoji">⚡</div><div class="game-name">Reaction</div></div>
 <div class="game-card" onclick="openGame('memory')"><div class="game-emoji">🧠</div><div class="game-name">Memory</div></div>
-<div class="game-card" onclick="openGame('math')"><div class="game-emoji">➕</div><div class="game-name">Math Quiz</div></div>
-<div class="game-card" onclick="openGame('pong')"><div class="game-emoji">🏓</div><div class="game-name">Ping Pong</div></div>
-<div class="game-card" onclick="openGame('race')"><div class="game-emoji">🏎️</div><div class="game-name">Car Racer</div></div>
+<div class="game-card" onclick="openGame('math')"><div class="game-emoji">➕</div><div class="game-name">Math</div></div>
+<div class="game-card" onclick="openGame('pong')"><div class="game-emoji">🏓</div><div class="game-name">Pong</div></div>
+<div class="game-card" onclick="openGame('race')"><div class="game-emoji">🏎️</div><div class="game-name">Racer</div></div>
 <div class="game-card" onclick="openGame('space')"><div class="game-emoji">🚀</div><div class="game-name">Space</div></div>
 <div class="game-card" onclick="openGame('tower')"><div class="game-emoji">🏢</div><div class="game-name">Tower</div></div>
 <div class="game-card" onclick="openGame('simon')"><div class="game-emoji">🔴</div><div class="game-name">Simon</div></div>
 <div class="game-card" onclick="openGame('tetris')"><div class="game-emoji">🧱</div><div class="game-name">Tetris</div></div>
 <div class="game-card" onclick="openGame('flappy')"><div class="game-emoji">🐦</div><div class="game-name">Flappy</div></div>
 <div class="game-card" onclick="openGame('breakout')"><div class="game-emoji">🧱</div><div class="game-name">Breakout</div></div>
-<div class="game-card" onclick="openGame('clickspeed')"><div class="game-emoji">⚡</div><div class="game-name">Click Speed</div></div>
+<div class="game-card" onclick="openGame('clickspeed')"><div class="game-emoji">⚡</div><div class="game-name">ClickSpeed</div></div>
 <div class="game-card" onclick="openGame('emoji')"><div class="game-emoji">😂</div><div class="game-name">Emoji</div></div>
 <div class="game-card" onclick="openGame('word')"><div class="game-emoji">🔤</div><div class="game-name">Word</div></div>
 <div class="game-card" onclick="openGame('game2048')"><div class="game-emoji">2️⃣</div><div class="game-name">2048</div></div>
@@ -80,7 +81,7 @@ input{padding:10px;font-size:1.1rem;width:150px;text-align:center;margin:5px;bor
 
 <div class="about">
 <h3>ABOUT US</h3>
-<p style="margin:10px 0;color:#00ffff;">Founder-Developer: Yugank Vishnoi</p>
+<p style="margin:10px 0;color:#00ffff;">Founder: Yugank Vishnoi</p>
 <p style="margin:5px 0;color:#00ffff;">Co-founder: Abhinav Singh</p>
 <a class="email-link" href="mailto:yugankvishnoi@gmail.com">yugankvishnoi@gmail.com</a>
 <a class="email-link" href="mailto:abhinavsingh9759415488@gmail.com">abhinavsingh9759415488@gmail.com</a>
@@ -95,7 +96,6 @@ var score=0, gameInterval=null, gameData={}, currentGame='';
 function openGame(type){
     currentGame = type;
     document.getElementById('gameModal').className='modal active';
-    var con=document.getElementById('gameContainer');
     if(gameInterval){clearInterval(gameInterval);gameInterval=null}
     score=0; gameData={};
     startGame(type);
@@ -108,37 +108,28 @@ function startGame(type){
 
     if(type=='snake'){con.innerHTML=`<h2>🐍 SNAKE</h2><div class="score" id="sScore">Score: 0</div><canvas id="can" width="300" height="300"></canvas><br><button class="btn" onclick="gameData.dir='U'">⬆️</button><br><button class="btn" onclick="gameData.dir='L'">⬅️</button><button class="btn" onclick="gameData.dir='R'">➡️</button><br><button class="btn" onclick="gameData.dir='D'">⬇️</button><br><button class="btn btn-restart" onclick="startGame('snake')">🔄 RESTART</button>`;let can=document.getElementById('can'),ctx=can.getContext('2d');gameData.snake=[{x:140,y:140}];gameData.dir='R';gameData.food={x:60,y:60};gameInterval=setInterval(()=>{let h={...gameData.snake[0]};if(gameData.dir=='R')h.x+=20;if(gameData.dir=='L')h.x-=20;if(gameData.dir=='U')h.y-=20;if(gameData.dir=='D')h.y+=20;if(h.x<0||h.x>=300||h.y<0||h.y>=300){clearInterval(gameInterval);alert("Game Over! Score: "+score);return}gameData.snake.unshift(h);if(h.x==gameData.food.x&&h.y==gameData.food.y){score+=10;document.getElementById('sScore').innerText="Score: "+score;gameData.food={x:Math.floor(Math.random()*15)*20,y:Math.floor(Math.random()*15)*20}}else{gameData.snake.pop()}ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);ctx.fillStyle='#ff007f';ctx.fillRect(gameData.food.x,gameData.food.y,18,18);ctx.fillStyle='#00ff88';gameData.snake.forEach(b=>ctx.fillRect(b.x,b.y,18,18))},150)}
 
-    else if(type=='tictactoe'){let g=Array(9).fill("");let t="X";con.innerHTML=`<h2>⭕ TIC TAC TOE</h2><div class="score" id="tS">Turn: X</div><div class="grid3">`+g.map((_,i)=>`<button class="box" id="b${i}" onclick="clickBox(${i})"></button>`).join('')+`</div><button class="btn btn-restart" onclick="startGame('tictactoe')">🔄 RESTART</button>`;window.clickBox=(i)=>{if(g[i]!="")return;g[i]=t;document.getElementById('b'+i).innerText=t;let won=false;[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].forEach(w=>{if(w.every(x=>g[x]==t))won=true});if(won){document.getElementById('tS').innerText=t+" Wins!";alert(t+" Wins!")}else{t=t=="X"?"O":"X";document.getElementById('tS').innerText="Turn: "+t}}}
+    else if(type=='tictactoe'){let g=Array(9).fill("");let t="X";con.innerHTML=`<h2>⭕ TIC TAC TOE</h2><div class="score" id="tS">Turn: X</div><div class="grid3">`+g.map((_,i)=>`<button class="box" id="b${i}" onclick="clickBox(${i})"></button>`).join('')+`</div><button class="btn btn-restart" onclick="startGame('tictactoe')">🔄 RESTART</button>`;window.clickBox=(i)=>{if(g[i]!="")return;g[i]=t;document.getElementById('b'+i).innerText=t;let won=false;[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].forEach(w=>{if(w.every(x=>g[x]==t))won=true});if(won){alert(t+" Wins!")}else{t=t=="X"?"O":"X";document.getElementById('tS').innerText="Turn: "+t}}}
 
-    else if(type=='clicker'){con.innerHTML=`<h2>👆 CLICKER</h2><div class="score" id="cs">Clicks: 0</div><button class="btn" style="padding:60px;font-size:2rem" onclick="score++;document.getElementById('cs').innerText='Clicks: '+score">CLICK ME!</button><br><button class="btn btn-restart" onclick="startGame('clicker')">🔄 RESET</button>`}
+    else if(type=='memory'){let em=['🍎','🍌','🍇','🍊'];let cards=[...em,...em].sort(()=>0.5-Math.random());let first=null;con.innerHTML=`<h2>🧠 MEMORY</h2><div class="grid4" id="memGrid">`+cards.map((c,i)=>`<button class="box" id="m${i}" onclick="flipMem(${i},'${c}')">?</button>`).join('')+`</div><button class="btn btn-restart" onclick="startGame('memory')">🔄 RESTART</button>`;window.flipMem=(i,c)=>{let btn=document.getElementById('m'+i);if(btn.innerText!='?')return;btn.innerText=c;if(first==null){first={i,c}}else{if(first.c==c){setTimeout(()=>{btn.style.background='#00ff88';document.getElementById('m'+first.i).style.background='#00ff88'},200)}else{setTimeout(()=>{btn.innerText='?';document.getElementById('m'+first.i).innerText='?'},500)}first=null}}}
 
-    else if(type=='guess'){let n=Math.floor(Math.random()*100)+1;con.innerHTML=`<h2>🔢 GUESS NUMBER</h2><p>1-100</p><input type="number" id="gi"><button class="btn" onclick="gC()">GUESS</button><div class="score" id="gR"></div><button class="btn btn-restart" onclick="startGame('guess')">🔄 NEW GAME</button>`;window.gC=()=>{let v=+document.getElementById('gi').value;if(v==n){document.getElementById('gR').innerText="Sahi! 🎉";alert("Jeet gaye!") }else{document.getElementById('gR').innerText=v<n?"Bada hai ⬆️":"Chota hai ⬇️"}}}
+    else if(type=='space'){gameData.x=140;gameData.ex=50;con.innerHTML=`<h2>🚀 SPACE</h2><div class="score" id="spS">Score: 0</div><canvas id="sCan" width="300" height="400"></canvas><br><button class="btn" onclick="gameData.x-=30">⬅️</button><button class="btn" onclick="score+=10;document.getElementById('spS').innerText='Score: '+score">FIRE</button><button class="btn" onclick="gameData.x+=30">➡️</button><br><button class="btn btn-restart" onclick="startGame('space')">🔄 RESTART</button>`;let ctx=document.getElementById('sCan').getContext('2d');gameInterval=setInterval(()=>{gameData.ex+=5;if(gameData.ex>400)gameData.ex=0;ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);ctx.fillStyle='#00ffff';ctx.fillRect(gameData.x,350,20,20);ctx.fillStyle='#ff007f';ctx.fillRect(gameData.ex,gameData.ex,15,15)},30)}
 
-    else if(type=='dice'){con.innerHTML=`<h2>🎲 DICE ROLL</h2><div class="score" id="dr">🎲</div><button class="btn" onclick="document.getElementById('dr').innerText='🎲 '+Math.floor(Math.random()*6+1)">ROLL</button><br><button class="btn btn-restart" onclick="startGame('dice')">🔄 RESET</button>`}
+    else if(type=='tower'){gameData.blocks=[];con.innerHTML=`<h2>🏢 TOWER</h2><div class="score" id="twS">Height: 0</div><canvas id="tCan" width="300" height="400"></canvas><br><button class="btn" onclick="addBlock()">DROP BLOCK</button><br><button class="btn btn-restart" onclick="startGame('tower')">🔄 RESTART</button>`;window.addBlock=()=>{gameData.blocks.push(150);score++;document.getElementById('twS').innerText='Height: '+score;let ctx=document.getElementById('tCan').getContext('2d');ctx.fillStyle='#00ff88';ctx.fillRect(gameData.blocks[gameData.blocks.length-1],400-score*20,80,20)}}
 
-    else if(type=='coin'){con.innerHTML=`<h2>🪙 COIN FLIP</h2><div class="score" id="cr">🪙</div><button class="btn" onclick="document.getElementById('cr').innerText=Math.random()<0.5?'HEADS':'TAILS'">FLIP</button><br><button class="btn btn-restart" onclick="startGame('coin')">🔄 RESET</button>`}
+    else if(type=='simon'){gameData.seq=[];gameData.player=[];con.innerHTML=`<h2>🔴 SIMON</h2><div class="score" id="siS">Level: 1</div><div class="grid4"><button class="box" style="background:red" onclick="checkSim(0)"></button><button class="box" style="background:blue" onclick="checkSim(1)"></button><button class="box" style="background:green" onclick="checkSim(2)"></button><button class="box" style="background:yellow" onclick="checkSim(3)"></button></div><button class="btn" onclick="nextSim()">START</button><br><button class="btn btn-restart" onclick="startGame('simon')">🔄 RESTART</button>`;window.nextSim=()=>{gameData.seq.push(Math.floor(Math.random()*4));score++;document.getElementById('siS').innerText='Level: '+score};window.checkSim=(n)=>{gameData.player.push(n);if(gameData.player.length==gameData.seq.length){if(JSON.stringify(gameData.player)==JSON.stringify(gameData.seq)){alert('Correct! Next Level');gameData.player=[];nextSim()}else{alert('Wrong! Game Over')}}}
 
-    else if(type=='rps'){con.innerHTML=`<h2>✂️ ROCK PAPER</h2><div class="score" id="rr">Choose</div><button class="btn" onclick="pR('Rock')">✊</button><button class="btn" onclick="pR('Paper')">✋</button><button class="btn" onclick="pR('Scissor')">✌️</button><br><button class="btn btn-restart" onclick="startGame('rps')">🔄 RESET</button>`;window.pR=(u)=>{let c=['Rock','Paper','Scissor'][Math.floor(Math.random()*3)];let r=u==c?'Draw':(u=='Rock'&&c=='Scissor')||(u=='Paper'&&c=='Rock')||(u=='Scissor'&&c=='Paper')?'Win!':'Lose!';document.getElementById('rr').innerText=`You:${u} Comp:${c} ${r}`}}
+    else if(type=='flappy'){gameData.y=200;gameData.pipe=300;con.innerHTML=`<h2>🐦 FLAPPY</h2><div class="score" id="fS">Score: 0</div><canvas id="fCan" width="300" height="400"></canvas><br><button class="btn" onclick="gameData.y-=40">JUMP</button><br><button class="btn btn-restart" onclick="startGame('flappy')">🔄 RESTART</button>`;let ctx=document.getElementById('fCan').getContext('2d');gameInterval=setInterval(()=>{gameData.y+=3;gameData.pipe-=5;if(gameData.pipe<0)gameData.pipe=300;ctx.fillStyle='#87CEEB';ctx.fillRect(0,0,300,400);ctx.fillStyle='#ff007f';ctx.fillRect(100,gameData.y,20,20);ctx.fillStyle='#00ff88';ctx.fillRect(gameData.pipe,0,40,150);ctx.fillRect(gameData.pipe,250,40,150)},30)}
 
-    else if(type=='reaction'){con.innerHTML=`<h2>⚡ REACTION</h2><div class="score" id="rt">Wait...</div><button class="btn" id="rtB" onclick="sRT()">START</button><br><button class="btn btn-restart" onclick="startGame('reaction')">🔄 RESET</button>`;window.sRT=()=>{document.getElementById('rt').innerText="Wait...";document.getElementById('rtB').style.background="red";setTimeout(()=>{let s=Date.now();document.getElementById('rtB').style.background="green";document.getElementById('rt').innerText="CLICK!";document.getElementById('rtB').onclick=()=>{document.getElementById('rt').innerText=(Date.now()-s)+"ms";document.getElementById('rtB').onclick=sRT;document.getElementById('rtB').style.background="#00ffff"}},2000+Math.random()*3000)}}
+    else if(type=='whack'){con.innerHTML=`<h2>🔨 WHACK MOLE</h2><div class="score" id="ws">Score: 0</div><div class="grid3" id="whackGrid"></div><button class="btn" onclick="popMole()">START</button><br><button class="btn btn-restart" onclick="startGame('whack')">🔄 RESTART</button>`;window.popMole=()=>{document.getElementById('whackGrid').innerHTML=Array(9).fill(0).map((_,i)=>`<button class="box" onclick="if(this.innerText=='🐭'){score++;document.getElementById('ws').innerText='Score: '+score;this.innerText=''}">`+(Math.random()<0.2?'🐭':'')+`</button>`).join('')}
 
-    else if(type=='memory'){let em=['🍎','🍌','🍇','🍊'];let cards=[...em,...em].sort(()=>0.5-Math.random());con.innerHTML=`<h2>🧠 MEMORY</h2><div class="grid4">`+cards.map((c,i)=>`<button class="box" onclick="this.innerText='${c}'">${i+1}</button>`).join('')+`</div><button class="btn btn-restart" onclick="startGame('memory')">🔄 RESTART</button>`}
+    else if(type=='mine'){con.innerHTML=`<h2>💣 MINE SWEEPER</h2><div class="grid4">`+Array(16).fill(0).map((_,i)=>`<button class="box" onclick="this.innerText=Math.random()<0.2?'💣':'1';if(this.innerText=='💣')alert('Boom! Game Over')">?</button>`).join('')+`</div><button class="btn btn-restart" onclick="startGame('mine')">🔄 RESTART</button>`}
 
-    else if(type=='math'){let a=Math.floor(Math.random()*10),b=Math.floor(Math.random()*10);con.innerHTML=`<h2>➕ MATH QUIZ</h2><div class="score">${a} + ${b} =?</div><input type="number" id="ma"><button class="btn" onclick="if(${a}+${b}==+document.getElementById('ma').value){alert('Sahi!')}else{alert('Galat')}">CHECK</button><button class="btn btn-restart" onclick="startGame('math')">🔄 NEW Q</button>`}
+    else if(type=='puzzle'){let arr=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,''].sort(()=>0.5-Math.random());con.innerHTML=`<h2>🧩 15 PUZZLE</h2><div class="grid4">`+arr.map(v=>`<button class="box" onclick="alert('Move tile')">${v}</button>`).join('')+`</div><button class="btn btn-restart" onclick="startGame('puzzle')">🔄 SHUFFLE</button>`}
 
-    else if(type=='pong'){con.innerHTML=`<h2>🏓 PING PONG</h2><canvas id="pCan" width="300" height="400"></canvas><br><button class="btn" onclick="gameData.px-=30">⬅️</button><button class="btn" onclick="gameData.px+=30">➡️</button><br><button class="btn btn-restart" onclick="startGame('pong')">🔄 RESTART</button>`;let ctx=document.getElementById('pCan').getContext('2d');gameData.px=130;gameData.bx=150;gameData.by=150;gameData.bdx=4;gameData.bdy=4;gameInterval=setInterval(()=>{gameData.bx+=gameData.bdx;gameData.by+=gameData.bdy;if(gameData.bx<0||gameData.bx>290)gameData.bdx*=-1;if(gameData.by<0)gameData.bdy*=-1;if(gameData.by>370&&gameData.bx>gameData.px&&gameData.bx<gameData.px+80)gameData.bdy*=-1;ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);ctx.fillStyle='#00ff88';ctx.fillRect(gameData.px,370,80,15);ctx.fillStyle='#ffff00';ctx.fillRect(gameData.bx,gameData.by,12,12)},30)}
-
-    else if(type=='race'){con.innerHTML=`<h2>🏎️ CAR RACER</h2><div class="score" id="rcS">Score: 0</div><canvas id="rCan" width="300" height="400"></canvas><br><button class="btn" onclick="gameData.cx-=40">⬅️</button><button class="btn" onclick="gameData.cx+=40">➡️</button><br><button class="btn btn-restart" onclick="startGame('race')">🔄 RESTART</button>`;let ctx=document.getElementById('rCan').getContext('2d');gameData.cx=130;gameData.oy=0;gameInterval=setInterval(()=>{gameData.oy+=8;if(gameData.oy>400){gameData.oy=0;score+=5;document.getElementById('rcS').innerText="Score: "+score}ctx.fillStyle='#222';ctx.fillRect(0,0,300,400);ctx.fillStyle='#00ffff';ctx.fillRect(gameData.cx,340,30,50);ctx.fillStyle='#ff007f';ctx.fillRect(130,gameData.oy,30,50)},30)}
-
-    else if(type=='space'){con.innerHTML=`<h2>🚀 SPACE SHOOTER</h2><div class="score" id="spS">Score: 0</div><canvas id="sCan" width="300" height="400"></canvas><br><button class="btn" onclick="score+=10;document.getElementById('spS').innerText='Score: '+score">FIRE 🔫</button><br><button class="btn btn-restart" onclick="startGame('space')">🔄 RESTART</button>`;let ctx=document.getElementById('sCan').getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,300,400);ctx.fillStyle='#00ffff';ctx.fillRect(140,350,20,20);}
-
-    else if(type=='game2048'){gameData.board=Array(16).fill(0);gameData.board[Math.floor(Math.random()*16)]=2;gameData.board[Math.floor(Math.random()*16)]=2;con.innerHTML=`<h2>2️⃣ 2048</h2><div class="score" id="g2048s">Score: 0</div><div class="grid4" id="g2048b"></div><p>Arrow keys se khelo</p><button class="btn btn-restart" onclick="startGame('game2048')">🔄 RESTART</button>`;draw2048();document.onkeydown=move2048;}
+    else if(type=='connect'){let board=Array(16).fill('');con.innerHTML=`<h2>⭕ CONNECT4</h2><div class="grid4" id="c4">`+board.map((_,i)=>`<button class="box" onclick="this.style.background='#00ff88'"></button>`).join('')+`</div><button class="btn btn-restart" onclick="startGame('connect')">🔄 RESTART</button>`}
 
     else {con.innerHTML=`<h2>${type.toUpperCase()}</h2><div class="score" id="gs">Score: 0</div><button class="btn" onclick="score+=10;document.getElementById('gs').innerText='Score: '+score">PLAY</button><br><button class="btn btn-restart" onclick="startGame('${type}')">🔄 RESTART</button>`}
 }
-
-function draw2048(){let html='';gameData.board.forEach(v=>{html+=`<button class="box" style="background:${v==0?'#1a1a3a':'#ff007f'}">${v==0?'':v}</button>`});document.getElementById('g2048b').innerHTML=html;}
-function move2048(e){if(![37,38,39,40].includes(e.keyCode))return;score+=5;document.getElementById('g2048s').innerText='Score: '+score;let empty=gameData.board.map((v,i)=>v==0?i:null).filter(v=>v!=null);if(empty.length>0) gameData.board[empty[0]]=2;draw2048();}
 
 function closeGame(){document.getElementById('gameModal').className='modal';if(gameInterval){clearInterval(gameInterval)}}
 document.onkeydown=(e)=>{if(gameData.dir){if(e.key=='ArrowUp')gameData.dir='U';if(e.key=='ArrowDown')gameData.dir='D';if(e.key=='ArrowLeft')gameData.dir='L';if(e.key=='ArrowRight')gameData.dir='R'}}
